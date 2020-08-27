@@ -12,7 +12,7 @@ A tool gives UNCG students the ability to view transferable classes that they ca
 - [WTCC Fall 2020 Course Schedule](https://webadvisor.waketech.edu/docs/2020FA_Schedule.pdf)
 - [GTCC Fall 2020 Course Schedule](https://www.gtcc.edu/_files/registration/gtcc_fall_2020_course_schedule.pdf)
 - [CAA Transfer course List](https://www.nccommunitycolleges.edu/sites/default/files/basic-pages/academic-programs/attachments/transfer_course_list_appendixg_2020.pdf)
-- [CAA General Info)(https://www.nccommunitycolleges.edu/academic-programs/college-transferarticulation-agreements/comprehensive-articulation-agreement-caa)
+- [CAA General Info](https://www.nccommunitycolleges.edu/academic-programs/college-transferarticulation-agreements/comprehensive-articulation-agreement-caa)
 - [UNC Online](https://www.gtcc.edu/_files/registration/gtcc_fall_2020_course_schedule.pdf) for online classes at another university
 
 Future Considerations:
