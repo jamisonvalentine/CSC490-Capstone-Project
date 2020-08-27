@@ -9,8 +9,8 @@ A tool gives UNCG students the ability to view transferable classes that they ca
 ## Resouces:
 - [UNCG Transfer Equivalencies](https://tes.collegesource.com/publicview/TES_publicview01.aspx?rid=200AB5D2-A95C-4895-9836-300D49A73FD1&aid=CFC487EB-2770-451B-8B5D-A20C08DB6323)
 - [UNC Online Equivalency Finder](https://online.northcarolina.edu/courses/equivs.php)
-- [WTCC Fall 2020 Course Schedule] (https://webadvisor.waketech.edu/docs/2020FA_Schedule.pdf)
-- [GTCC Fall 2020 Course Schedule] (https://www.gtcc.edu/_files/registration/gtcc_fall_2020_course_schedule.pdf)
+- [WTCC Fall 2020 Course Schedule](https://webadvisor.waketech.edu/docs/2020FA_Schedule.pdf)
+- [GTCC Fall 2020 Course Schedule](https://www.gtcc.edu/_files/registration/gtcc_fall_2020_course_schedule.pdf)
 - [UNC Online](https://www.gtcc.edu/_files/registration/gtcc_fall_2020_course_schedule.pdf) for online classes at another university
 
 Future Considerations:
