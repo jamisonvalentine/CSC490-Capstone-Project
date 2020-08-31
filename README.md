@@ -17,3 +17,7 @@ A tool that gives UNCG students the ability to view transferable classes that th
 
 Future Considerations:
 - Create a common application to be used at any of the community colleges (apply as visiting student)
+
+## Project Proposal
+
+https://docs.google.com/document/d/1IWOf410y59I2bMbVW4vWyZdeBoQwfgHsUXxvymNv-0Y/edit
