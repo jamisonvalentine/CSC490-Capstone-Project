@@ -20,6 +20,9 @@ A tool that gives UNCG students the ability to view transferable classes that th
 - Create a common application to be used at any of the community colleges (apply as visiting student)
 - Provide ability for users to check available seats in-app
 
-## Project Proposal
+## Documentation
+- [Project Proposal](https://docs.google.com/document/d/1IWOf410y59I2bMbVW4vWyZdeBoQwfgHsUXxvymNv-0Y/edit)
+- [Project Report](https://docs.google.com/document/d/1Y1EDR5n7cXMdC7oxlltVKkS5DQMsasxhROFsvEqygnI/edit?pli=1)
 
-https://docs.google.com/document/d/1IWOf410y59I2bMbVW4vWyZdeBoQwfgHsUXxvymNv-0Y/edit
+
+
