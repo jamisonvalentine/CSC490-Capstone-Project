@@ -16,7 +16,7 @@ A tool that gives UNCG students the ability to view transferable classes that th
 - [CAA General Info](https://www.nccommunitycolleges.edu/academic-programs/college-transferarticulation-agreements/comprehensive-articulation-agreement-caa)
 - [UNC Online](https://www.gtcc.edu/_files/registration/gtcc_fall_2020_course_schedule.pdf) for online classes at another university
 
-Future Considerations:
+## Future Considerations:
 - Create a common application to be used at any of the community colleges (apply as visiting student)
 - Provide ability for users to check available seats in-app
 
