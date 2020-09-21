@@ -4,6 +4,7 @@
 
 from bs4 import bs
 import requests
+import selenium
 
 ###############################
 # Self Service
@@ -37,4 +38,6 @@ import requests
 
 
 # interface either self service or webadvisor
+# pass 0 for self service
+# pass 1 for webadvisor
 def get_school_data(interface, url):
