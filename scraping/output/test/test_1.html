@@ -986,7 +986,7 @@
 <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="Spinner/_Spinner" src="/Student/Scripts/Components/Spinner/_Spinner.js?v=2.28.0.8"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ModalDialog/_ModalDialog" src="/Student/Scripts/Components/ModalDialog/_ModalDialog.js?v=2.28.0.8"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="text" src="/Student/Scripts/text.js?v=2.28.0.8"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="Message/_Message" src="/Student/Scripts/Components/Message/_Message.js?v=2.28.0.8"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="CollapsibleGroup/_CollapsibleGroup" src="/Student/Scripts/Components/CollapsibleGroup/_CollapsibleGroup.js?v=2.28.0.8"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="ModalSpinner/_ModalSpinner" src="/Student/Scripts/Components/ModalSpinner/_ModalSpinner.js?v=2.28.0.8"></script></head>
 <body>
     
-    <input name="__RequestVerificationToken" type="hidden" value="rCFjcmiR7KbZ8Lmt2MXTh6eft-McwgvuCSj33LgYiabfCcG6PyRHtknMmJOsmRYt_gyvMYotQ3lnV3_LD8mM8Hi2NfpyJz2fwvJGp3thGiE1">
+    <input name="__RequestVerificationToken" type="hidden" value="JLoGKIemQS0EiRF7lYZhze5As0YboO-3dsgD8NQ_hK1XUt6CorOx6wRxDgzLv-V3kh2cknftAqyHmhzxqbeLfD9-FHxa9Uxw8cdA6ciSm1A1">
 
     
     <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
@@ -5170,7 +5170,7 @@
                     <div class="esg-collapsible-group__tertiary-content" data-bind="visible: hasTertiaryContent, template: tertiaryContent " style="display: none;"></div>
                 </div>
                 <span class="esg-collapsible-group__icon esg-icon__container" aria-hidden="true">
-                    <svg class="esg-icon esg-icon--down" data-bind="css: arrowIconClass">
+                    <svg class="esg-icon esg-icon--up" data-bind="css: arrowIconClass">
                         <!-- need to switch between icon--up and icon--down (same with the dropdown component)-->
                         <use xlink:href="#icon-arrow"></use>
                     </svg>
@@ -5178,10 +5178,10 @@
             </button>
         </div>
     </div>
-    <div class="esg-collapsible-group__body esg-is-collapsed" role="tabpanel" data-bind="attr: { id: groupBodyId, 'aria-labelledby': groupHeaderId }, css: collapsibleClass" id="collapsible-view-available-sections-for-BUS-115-collapseBody" aria-labelledby="collapsible-view-available-sections-for-BUS-115-groupHeading">
+    <div class="esg-collapsible-group__body esg-is-open" role="tabpanel" data-bind="attr: { id: groupBodyId, 'aria-labelledby': groupHeaderId }, css: collapsibleClass" id="collapsible-view-available-sections-for-BUS-115-collapseBody" aria-labelledby="collapsible-view-available-sections-for-BUS-115-groupHeading">
         <!--ko template: {nodes: $componentTemplateNodes, data: $parent}-->
     <!-- Spinner for section loading -->
-    <spinner id="spinner" params="isVisible: isLoading(), message: Ellucian.Course.SearchResult.stringCourseSearchResultLoadingSectionsText"><div data-bind="visible: isVisible, css: wrapperClass" class="esg-spinner-container">
+    <spinner id="spinner" params="isVisible: isLoading(), message: Ellucian.Course.SearchResult.stringCourseSearchResultLoadingSectionsText"><div data-bind="visible: isVisible, css: wrapperClass" class="esg-spinner-container" style="display: none;">
     <div class="esg-spinner-wrapper">
         <div class="esg-spinner"></div>
     </div>
@@ -5190,8 +5190,115 @@
     <!-- /ko -->
 </div></spinner>
     <!-- * Each Section * -->
-    <!-- ko with: TermsAndSections --><!-- /ko -->
-    <div data-bind="foreach: TermsAndSections"></div>
+    <!-- ko with: TermsAndSections -->
+    <div data-bind="visible: $data.length == 0" style="display: none;">No sections match the current filters.</div>
+    <!-- /ko -->
+    <div data-bind="foreach: TermsAndSections">
+        <h4 data-bind="text: $data.Term.Description()">Fall 2020</h4>
+        <ul data-bind="foreach: Sections">
+            <li class="search-nestedaccordionitem">
+                <table class="esg-table esg-table--no-mobile esg-section--margin-bottom search-sectiontable">
+                    <caption class="search-sectionnamerow">
+                        <div class="esg-row">
+                            <div class="esg-col-xs-6">
+                                <a href="#" class="search-sectiondetailslink" data-bind="text: $data.Section.SectionNameDisplay(), click: function(data, event) { showSectionDetails({ course: $parents[1].Course, section: $data.Section, allowAdding: false, addTerms: null, addCallback: null, creditsOverride: null, studentId:null, canSkipWaitlist: false })}, attr: { 'aria-label': 'Details for ' + $parent.Term.Description() + ' ', id: 'section-'+$data.Section.Id() }" title="Show Section Details" aria-label="Details for Fall 2020 " id="section-25622">BUS-115-3D1</a>
+                                <!-- ko if: $data.Section.AdditionalFeesApply --><!-- /ko -->
+                                <!-- ko if: $data.Section.ShowSpecialIcon --><!-- /ko -->
+                                <section class="search-sectionnontermrow">
+                                    <span data-bind="text: $data.Section.SectionTitleDisplay(), attr: { id: 'section-title-'+$data.Section.Id()}" id="section-title-25622">Business Law I</span>
+                                </section>
+                                <section class="search-sectionnontermrow" data-bind="visible: $data.Section.IsNonTermOffering() || $data.Section.IsNonStandardDates()" style="display: none;">
+                                    <span data-bind="visible: $data.Section.IsNonTermOffering()" style="display: none;">Non-Term Section:</span>
+                                    <span data-bind="visible: $data.Section.IsNonTermOffering(), text: ' ' + $data.Section.StartDateDisplay() + ' - ' + $data.Section.EndDateDisplay()" style="display: none;"> 8/17/2020 - 12/16/2020</span>
+                                    <span data-bind="visible: !$data.Section.IsNonTermOffering() &amp;&amp; $data.Section.IsNonStandardDates(), text: 'Runs from ' + $data.Section.StartDateDisplay() + ' - ' + $data.Section.EndDateDisplay(), attr: { id: 'nonterm-section-'+$data.Section.Id()+'-runs-from-dates'}" id="nonterm-section-25622-runs-from-dates" style="display: none;">Runs from 8/17/2020 - 12/16/2020</span>
+                                </section>
+                            </div>
+                            <div class="esg-col-xs-6">
+                            </div>
+                        </div>
+                    </caption>
+                    <thead class="esg-table-head">
+                        <tr class="esg-table-head__row">
+                            <!-- ko if: $data.Section.ShowWaitlistInfo() === true --><!-- /ko -->
+                            <!-- ko if: $data.Section.ShowWaitlistInfo() === false -->
+                            <th class="esg-table-head__th search-sectiondetailsheader1">
+                                Seats
+                            </th>
+                            <!-- /ko -->
+
+                            <th class="esg-table-head__th search-sectiondetailsheader2">
+                                Times
+                            </th>
+                            <th class="esg-table-head__th search-sectiondetailsheader3">
+                                Locations
+                            </th>
+                            <th class="esg-table-head__th search-sectiondetailsheader4">
+                                Instructors
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="esg-table-body">
+                        <!-- ko foreach: $data.Section.FormattedMeetingTimes() -->
+                        <tr class="esg-table-body__row search-sectionrow">
+
+                            <!-- ko if: $index() == 0 -->
+                            <!-- Show seat count or waitlist count depending on if there is a waitlist -->
+                            <td class="esg-table-body__td search-seatscell" align="center" data-bind="css: $data.getSeatsClass, attr: { 'rowspan': $parent.Section.FormattedMeetingTimes().length}" rowspan="1">
+                                <!-- ko if: $parent.Section.ShowWaitlistInfo() === false -->
+                                <span class="search-seatsavailabletext" data-bind="visible: $parent.Section.Available() !== null &amp;&amp; $parent.Section.Capacity() !== null, text: $parent.Section.Available()">20</span><span class="search-seatsavailabletext" data-bind="visible: $parent.Section.Capacity() === null" style="display: none;">Unlimited</span>
+                                <!-- /ko -->
+                                <!-- ko if: $parent.Section.ShowWaitlistInfo() === true --><!-- /ko -->
+                            </td>
+                            <!-- /ko -->
+                            <td class="esg-table-body__td search-sectiondaystime">
+                                <div>
+                                    <span class="search-meetingtimestext" data-bind="text: $data.DaysOfWeekDisplay() + ' ', attr: { id: 'section-'+$parent.Section.Id()+'-meeting-days-'+$index()}" id="section-25622-meeting-days-0">M/T/W/Th/F/Sa/Su </span>
+                                    <span class="search-meetingtimestext" data-bind="text: $data.StartTimeDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-start-'+$index()}" id="section-25622-meeting-times-start-0"></span>
+                                    <span class="search-meetingtimestext" data-bind="visible: (!isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !isNullOrEmpty($data.EndTimeDisplay()))" style="display: none;">
+                                        -
+                                    </span>
+                                    <span class="search-meetingtimestext" data-bind="text: $data.EndTimeDisplay, attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-end-'+$index()}" id="section-25622-meeting-times-end-0"></span>
+                                    <span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.EndTimeDisplay()) &amp;&amp; isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !($data.IsOnline()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-TBD-'+$index()}" id="section-25622-meeting-times-TBD-0">TBD</span>
+                                </div>
+                                <div>
+                                    <span class="search-meetingtimestext" data-bind="text: $data.DatesDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-dates-'+$index()}" id="section-25622-meeting-dates-0">8/17/2020 - 12/16/2020</span>
+                                </div>
+                            </td>
+                            <td class="esg-table-body__td search-sectionlocations">
+                                <div>
+                                    <span class="search-meetingtimestext" data-bind="text: $parent.Section.LocationDisplay(), visible: !isNullOrEmpty($parent.Section.LocationDisplay()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-location-'+$index() }" id="section-25622-meeting-location-0">On-Line</span><span class="search-meetingtimestext" data-bind="text: ', ', visible: !isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; (!isNullOrEmpty($data.BuildingDisplay()) || !isNullOrEmpty($data.RoomDisplay()))">, </span><span class="search-meetingtimestext" data-bind="text: $data.BuildingDisplay(), visible: !isNullOrEmpty($data.BuildingDisplay())">Internet Or Online</span><span class="search-meetingtimestext" data-bind="text: ' ' + $data.RoomDisplay(), visible: !isNullOrEmpty($data.RoomDisplay())"> IN1</span><span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.RoomDisplay()) &amp;&amp; isNullOrEmpty($data.BuildingDisplay()) &amp;&amp; isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; !($data.IsOnline())" style="display: none;">TBD</span>
+                                </div>
+                                <div>
+                                    <span class="search-meetingtimestext" data-bind="text: $data.InstructionalMethodDisplay(), attr: { id: 'section-'+$parent.Section.Id+'-meeting-instructional-method-'+$index() }" id="section-function t(){return 0<arguments.length?(t.tb(t[v],arguments[0])&amp;&amp;(t.ga(),t[v]=arguments[0],t.fa()),this):(s.l.oc(t),t[v])}-meeting-instructional-method-0">Classroom Hours</span>
+                                </div>
+                            </td>
+                            <td class="esg-table-body__td search-sectioninstructors">
+                                <div>
+                                    <span class="search-meetingtimestext" data-bind="text: $parent.FacultyDisplay(), visible: $parent.FacultyDisplay().length > 0  &amp;&amp; $index() == 0, attr: { id: 'section-'+$parent.Section.Id()+'-faculty-name-'+$index() }" id="section-25622-faculty-name-0">Eze, J</span><span class="search-meetingtimestext" id="faculty-name-tbd" data-bind="visible: $parent.FacultyDisplay().length === 0" style="display: none;">TBD</span>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <!-- /ko -->
+                        <tr class="esg-table-body__row search-sectionrow" data-bind="visible: $data.Section.FormattedMeetingTimes().length === 0 || $data.Section.FormattedMeetingTimes() === null" style="display: none;">
+                            <td class="esg-table-body__td search-seatscell function(){if(!isNullOrEmpty(section))return t.Capacity!==null&amp;&amp;t.Available!==null&amp;&amp;t.Available===0?t.WaitlistAvailable===!0?&quot;search-sectionseatswaitlisted&quot;:&quot;search-sectionseatsnone&quot;:&quot;search-sectionseatsopen&quot;}" align="center" data-bind="css: $data.getSeatsClass, attr: {'rowspan':'1'}" rowspan="1">
+                                <!-- ko if: $data.Section.WaitlistAvailable() === false || $data.Section.Capacity() === null || $data.Section.Available() === null || $data.Section.Available() > 0 -->
+                                <span class="search-seatsavailabletext" data-bind="visible: $data.Section.Available() !== null &amp;&amp; $data.Section.Capacity() !== null, text: $data.Section.Available()">20</span><span class="search-seatsavailabletext" data-bind="visible: $data.Section.Capacity() === null" style="display: none;">Unlimited</span>
+                                <!-- /ko -->
+                                <!-- ko if: $data.Section.WaitlistAvailable() === true && $data.Section.Available() !== null && $data.Section.Capacity() !== null && $data.Section.Available() === 0 --><!-- /ko -->
+                            </td>
+                            <td class="esg-table-body__td search-sectiondaystime">
+                                Meeting Times TBD
+                            </td>
+                            <td class="esg-table-body__td search-sectionlocations"></td>
+                            <td class="esg-table-body__td search-sectioninstructors"></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+        </ul>
+    </div>
 <!--/ko-->
     </div>
 </div></collapsible-group>
@@ -5678,7 +5785,7 @@
                     <div class="esg-collapsible-group__tertiary-content" data-bind="visible: hasTertiaryContent, template: tertiaryContent " style="display: none;"></div>
                 </div>
                 <span class="esg-collapsible-group__icon esg-icon__container" aria-hidden="true">
-                    <svg class="esg-icon esg-icon--up" data-bind="css: arrowIconClass">
+                    <svg class="esg-icon esg-icon--down" data-bind="css: arrowIconClass">
                         <!-- need to switch between icon--up and icon--down (same with the dropdown component)-->
                         <use xlink:href="#icon-arrow"></use>
                     </svg>
@@ -5686,10 +5793,10 @@
             </button>
         </div>
     </div>
-    <div class="esg-collapsible-group__body esg-is-open" role="tabpanel" data-bind="attr: { id: groupBodyId, 'aria-labelledby': groupHeaderId }, css: collapsibleClass" id="collapsible-view-available-sections-for-CHM-131-collapseBody" aria-labelledby="collapsible-view-available-sections-for-CHM-131-groupHeading">
+    <div class="esg-collapsible-group__body esg-is-collapsed" role="tabpanel" data-bind="attr: { id: groupBodyId, 'aria-labelledby': groupHeaderId }, css: collapsibleClass" id="collapsible-view-available-sections-for-CHM-131-collapseBody" aria-labelledby="collapsible-view-available-sections-for-CHM-131-groupHeading">
         <!--ko template: {nodes: $componentTemplateNodes, data: $parent}-->
     <!-- Spinner for section loading -->
-    <spinner id="spinner" params="isVisible: isLoading(), message: Ellucian.Course.SearchResult.stringCourseSearchResultLoadingSectionsText"><div data-bind="visible: isVisible, css: wrapperClass" class="esg-spinner-container" style="display: none;">
+    <spinner id="spinner" params="isVisible: isLoading(), message: Ellucian.Course.SearchResult.stringCourseSearchResultLoadingSectionsText"><div data-bind="visible: isVisible, css: wrapperClass" class="esg-spinner-container">
     <div class="esg-spinner-wrapper">
         <div class="esg-spinner"></div>
     </div>
@@ -5698,115 +5805,8 @@
     <!-- /ko -->
 </div></spinner>
     <!-- * Each Section * -->
-    <!-- ko with: TermsAndSections -->
-    <div data-bind="visible: $data.length == 0" style="display: none;">No sections match the current filters.</div>
-    <!-- /ko -->
-    <div data-bind="foreach: TermsAndSections">
-        <h4 data-bind="text: $data.Term.Description()">Fall 2020</h4>
-        <ul data-bind="foreach: Sections">
-            <li class="search-nestedaccordionitem">
-                <table class="esg-table esg-table--no-mobile esg-section--margin-bottom search-sectiontable">
-                    <caption class="search-sectionnamerow">
-                        <div class="esg-row">
-                            <div class="esg-col-xs-6">
-                                <a href="#" class="search-sectiondetailslink" data-bind="text: $data.Section.SectionNameDisplay(), click: function(data, event) { showSectionDetails({ course: $parents[1].Course, section: $data.Section, allowAdding: false, addTerms: null, addCallback: null, creditsOverride: null, studentId:null, canSkipWaitlist: false })}, attr: { 'aria-label': 'Details for ' + $parent.Term.Description() + ' ', id: 'section-'+$data.Section.Id() }" title="Show Section Details" aria-label="Details for Fall 2020 " id="section-25626">CHM-131-3D1</a>
-                                <!-- ko if: $data.Section.AdditionalFeesApply --><!-- /ko -->
-                                <!-- ko if: $data.Section.ShowSpecialIcon --><!-- /ko -->
-                                <section class="search-sectionnontermrow">
-                                    <span data-bind="text: $data.Section.SectionTitleDisplay(), attr: { id: 'section-title-'+$data.Section.Id()}" id="section-title-25626">Introduction to Chemistry</span>
-                                </section>
-                                <section class="search-sectionnontermrow" data-bind="visible: $data.Section.IsNonTermOffering() || $data.Section.IsNonStandardDates()" style="display: none;">
-                                    <span data-bind="visible: $data.Section.IsNonTermOffering()" style="display: none;">Non-Term Section:</span>
-                                    <span data-bind="visible: $data.Section.IsNonTermOffering(), text: ' ' + $data.Section.StartDateDisplay() + ' - ' + $data.Section.EndDateDisplay()" style="display: none;"> 8/17/2020 - 12/16/2020</span>
-                                    <span data-bind="visible: !$data.Section.IsNonTermOffering() &amp;&amp; $data.Section.IsNonStandardDates(), text: 'Runs from ' + $data.Section.StartDateDisplay() + ' - ' + $data.Section.EndDateDisplay(), attr: { id: 'nonterm-section-'+$data.Section.Id()+'-runs-from-dates'}" id="nonterm-section-25626-runs-from-dates" style="display: none;">Runs from 8/17/2020 - 12/16/2020</span>
-                                </section>
-                            </div>
-                            <div class="esg-col-xs-6">
-                            </div>
-                        </div>
-                    </caption>
-                    <thead class="esg-table-head">
-                        <tr class="esg-table-head__row">
-                            <!-- ko if: $data.Section.ShowWaitlistInfo() === true --><!-- /ko -->
-                            <!-- ko if: $data.Section.ShowWaitlistInfo() === false -->
-                            <th class="esg-table-head__th search-sectiondetailsheader1">
-                                Seats
-                            </th>
-                            <!-- /ko -->
-
-                            <th class="esg-table-head__th search-sectiondetailsheader2">
-                                Times
-                            </th>
-                            <th class="esg-table-head__th search-sectiondetailsheader3">
-                                Locations
-                            </th>
-                            <th class="esg-table-head__th search-sectiondetailsheader4">
-                                Instructors
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="esg-table-body">
-                        <!-- ko foreach: $data.Section.FormattedMeetingTimes() -->
-                        <tr class="esg-table-body__row search-sectionrow">
-
-                            <!-- ko if: $index() == 0 -->
-                            <!-- Show seat count or waitlist count depending on if there is a waitlist -->
-                            <td class="esg-table-body__td search-seatscell" align="center" data-bind="css: $data.getSeatsClass, attr: { 'rowspan': $parent.Section.FormattedMeetingTimes().length}" rowspan="1">
-                                <!-- ko if: $parent.Section.ShowWaitlistInfo() === false -->
-                                <span class="search-seatsavailabletext" data-bind="visible: $parent.Section.Available() !== null &amp;&amp; $parent.Section.Capacity() !== null, text: $parent.Section.Available()">6</span><span class="search-seatsavailabletext" data-bind="visible: $parent.Section.Capacity() === null" style="display: none;">Unlimited</span>
-                                <!-- /ko -->
-                                <!-- ko if: $parent.Section.ShowWaitlistInfo() === true --><!-- /ko -->
-                            </td>
-                            <!-- /ko -->
-                            <td class="esg-table-body__td search-sectiondaystime">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.DaysOfWeekDisplay() + ' ', attr: { id: 'section-'+$parent.Section.Id()+'-meeting-days-'+$index()}" id="section-25626-meeting-days-0">M/T/W/Th/F/Sa/Su </span>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.StartTimeDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-start-'+$index()}" id="section-25626-meeting-times-start-0"></span>
-                                    <span class="search-meetingtimestext" data-bind="visible: (!isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !isNullOrEmpty($data.EndTimeDisplay()))" style="display: none;">
-                                        -
-                                    </span>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.EndTimeDisplay, attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-end-'+$index()}" id="section-25626-meeting-times-end-0"></span>
-                                    <span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.EndTimeDisplay()) &amp;&amp; isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !($data.IsOnline()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-TBD-'+$index()}" id="section-25626-meeting-times-TBD-0">TBD</span>
-                                </div>
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.DatesDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-dates-'+$index()}" id="section-25626-meeting-dates-0">8/17/2020 - 12/16/2020</span>
-                                </div>
-                            </td>
-                            <td class="esg-table-body__td search-sectionlocations">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $parent.Section.LocationDisplay(), visible: !isNullOrEmpty($parent.Section.LocationDisplay()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-location-'+$index() }" id="section-25626-meeting-location-0">On-Line</span><span class="search-meetingtimestext" data-bind="text: ', ', visible: !isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; (!isNullOrEmpty($data.BuildingDisplay()) || !isNullOrEmpty($data.RoomDisplay()))">, </span><span class="search-meetingtimestext" data-bind="text: $data.BuildingDisplay(), visible: !isNullOrEmpty($data.BuildingDisplay())">Internet Or Online</span><span class="search-meetingtimestext" data-bind="text: ' ' + $data.RoomDisplay(), visible: !isNullOrEmpty($data.RoomDisplay())"> IN1</span><span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.RoomDisplay()) &amp;&amp; isNullOrEmpty($data.BuildingDisplay()) &amp;&amp; isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; !($data.IsOnline())" style="display: none;">TBD</span>
-                                </div>
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.InstructionalMethodDisplay(), attr: { id: 'section-'+$parent.Section.Id+'-meeting-instructional-method-'+$index() }" id="section-function t(){return 0<arguments.length?(t.tb(t[v],arguments[0])&amp;&amp;(t.ga(),t[v]=arguments[0],t.fa()),this):(s.l.oc(t),t[v])}-meeting-instructional-method-0">Classroom Hours</span>
-                                </div>
-                            </td>
-                            <td class="esg-table-body__td search-sectioninstructors">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $parent.FacultyDisplay(), visible: $parent.FacultyDisplay().length > 0  &amp;&amp; $index() == 0, attr: { id: 'section-'+$parent.Section.Id()+'-faculty-name-'+$index() }" id="section-25626-faculty-name-0">Carlisle, A</span><span class="search-meetingtimestext" id="faculty-name-tbd" data-bind="visible: $parent.FacultyDisplay().length === 0" style="display: none;">TBD</span>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <!-- /ko -->
-                        <tr class="esg-table-body__row search-sectionrow" data-bind="visible: $data.Section.FormattedMeetingTimes().length === 0 || $data.Section.FormattedMeetingTimes() === null" style="display: none;">
-                            <td class="esg-table-body__td search-seatscell function(){if(!isNullOrEmpty(section))return t.Capacity!==null&amp;&amp;t.Available!==null&amp;&amp;t.Available===0?t.WaitlistAvailable===!0?&quot;search-sectionseatswaitlisted&quot;:&quot;search-sectionseatsnone&quot;:&quot;search-sectionseatsopen&quot;}" align="center" data-bind="css: $data.getSeatsClass, attr: {'rowspan':'1'}" rowspan="1">
-                                <!-- ko if: $data.Section.WaitlistAvailable() === false || $data.Section.Capacity() === null || $data.Section.Available() === null || $data.Section.Available() > 0 -->
-                                <span class="search-seatsavailabletext" data-bind="visible: $data.Section.Available() !== null &amp;&amp; $data.Section.Capacity() !== null, text: $data.Section.Available()">6</span><span class="search-seatsavailabletext" data-bind="visible: $data.Section.Capacity() === null" style="display: none;">Unlimited</span>
-                                <!-- /ko -->
-                                <!-- ko if: $data.Section.WaitlistAvailable() === true && $data.Section.Available() !== null && $data.Section.Capacity() !== null && $data.Section.Available() === 0 --><!-- /ko -->
-                            </td>
-                            <td class="esg-table-body__td search-sectiondaystime">
-                                Meeting Times TBD
-                            </td>
-                            <td class="esg-table-body__td search-sectionlocations"></td>
-                            <td class="esg-table-body__td search-sectioninstructors"></td>
-
-                        </tr>
-                    </tbody>
-                </table>
-            </li>
-        </ul>
-    </div>
+    <!-- ko with: TermsAndSections --><!-- /ko -->
+    <div data-bind="foreach: TermsAndSections"></div>
 <!--/ko-->
     </div>
 </div></collapsible-group>
@@ -6335,7 +6335,7 @@
                     <div class="esg-collapsible-group__tertiary-content" data-bind="visible: hasTertiaryContent, template: tertiaryContent " style="display: none;"></div>
                 </div>
                 <span class="esg-collapsible-group__icon esg-icon__container" aria-hidden="true">
-                    <svg class="esg-icon esg-icon--up" data-bind="css: arrowIconClass">
+                    <svg class="esg-icon esg-icon--down" data-bind="css: arrowIconClass">
                         <!-- need to switch between icon--up and icon--down (same with the dropdown component)-->
                         <use xlink:href="#icon-arrow"></use>
                     </svg>
@@ -6343,10 +6343,10 @@
             </button>
         </div>
     </div>
-    <div class="esg-collapsible-group__body esg-is-open" role="tabpanel" data-bind="attr: { id: groupBodyId, 'aria-labelledby': groupHeaderId }, css: collapsibleClass" id="collapsible-view-available-sections-for-CIS-110-collapseBody" aria-labelledby="collapsible-view-available-sections-for-CIS-110-groupHeading">
+    <div class="esg-collapsible-group__body esg-is-collapsed" role="tabpanel" data-bind="attr: { id: groupBodyId, 'aria-labelledby': groupHeaderId }, css: collapsibleClass" id="collapsible-view-available-sections-for-CIS-110-collapseBody" aria-labelledby="collapsible-view-available-sections-for-CIS-110-groupHeading">
         <!--ko template: {nodes: $componentTemplateNodes, data: $parent}-->
     <!-- Spinner for section loading -->
-    <spinner id="spinner" params="isVisible: isLoading(), message: Ellucian.Course.SearchResult.stringCourseSearchResultLoadingSectionsText"><div data-bind="visible: isVisible, css: wrapperClass" class="esg-spinner-container" style="display: none;">
+    <spinner id="spinner" params="isVisible: isLoading(), message: Ellucian.Course.SearchResult.stringCourseSearchResultLoadingSectionsText"><div data-bind="visible: isVisible, css: wrapperClass" class="esg-spinner-container">
     <div class="esg-spinner-wrapper">
         <div class="esg-spinner"></div>
     </div>
@@ -6355,283 +6355,8 @@
     <!-- /ko -->
 </div></spinner>
     <!-- * Each Section * -->
-    <!-- ko with: TermsAndSections -->
-    <div data-bind="visible: $data.length == 0" style="display: none;">No sections match the current filters.</div>
-    <!-- /ko -->
-    <div data-bind="foreach: TermsAndSections">
-        <h4 data-bind="text: $data.Term.Description()">Fall 2020</h4>
-        <ul data-bind="foreach: Sections">
-            <li class="search-nestedaccordionitem">
-                <table class="esg-table esg-table--no-mobile esg-section--margin-bottom search-sectiontable">
-                    <caption class="search-sectionnamerow">
-                        <div class="esg-row">
-                            <div class="esg-col-xs-6">
-                                <a href="#" class="search-sectiondetailslink" data-bind="text: $data.Section.SectionNameDisplay(), click: function(data, event) { showSectionDetails({ course: $parents[1].Course, section: $data.Section, allowAdding: false, addTerms: null, addCallback: null, creditsOverride: null, studentId:null, canSkipWaitlist: false })}, attr: { 'aria-label': 'Details for ' + $parent.Term.Description() + ' ', id: 'section-'+$data.Section.Id() }" title="Show Section Details" aria-label="Details for Fall 2020 " id="section-25631">CIS-110-3D3</a>
-                                <!-- ko if: $data.Section.AdditionalFeesApply --><!-- /ko -->
-                                <!-- ko if: $data.Section.ShowSpecialIcon --><!-- /ko -->
-                                <section class="search-sectionnontermrow">
-                                    <span data-bind="text: $data.Section.SectionTitleDisplay(), attr: { id: 'section-title-'+$data.Section.Id()}" id="section-title-25631">Introduction to Computers</span>
-                                </section>
-                                <section class="search-sectionnontermrow" data-bind="visible: $data.Section.IsNonTermOffering() || $data.Section.IsNonStandardDates()" style="display: none;">
-                                    <span data-bind="visible: $data.Section.IsNonTermOffering()" style="display: none;">Non-Term Section:</span>
-                                    <span data-bind="visible: $data.Section.IsNonTermOffering(), text: ' ' + $data.Section.StartDateDisplay() + ' - ' + $data.Section.EndDateDisplay()" style="display: none;"> 8/17/2020 - 12/16/2020</span>
-                                    <span data-bind="visible: !$data.Section.IsNonTermOffering() &amp;&amp; $data.Section.IsNonStandardDates(), text: 'Runs from ' + $data.Section.StartDateDisplay() + ' - ' + $data.Section.EndDateDisplay(), attr: { id: 'nonterm-section-'+$data.Section.Id()+'-runs-from-dates'}" id="nonterm-section-25631-runs-from-dates" style="display: none;">Runs from 8/17/2020 - 12/16/2020</span>
-                                </section>
-                            </div>
-                            <div class="esg-col-xs-6">
-                            </div>
-                        </div>
-                    </caption>
-                    <thead class="esg-table-head">
-                        <tr class="esg-table-head__row">
-                            <!-- ko if: $data.Section.ShowWaitlistInfo() === true --><!-- /ko -->
-                            <!-- ko if: $data.Section.ShowWaitlistInfo() === false -->
-                            <th class="esg-table-head__th search-sectiondetailsheader1">
-                                Seats
-                            </th>
-                            <!-- /ko -->
-
-                            <th class="esg-table-head__th search-sectiondetailsheader2">
-                                Times
-                            </th>
-                            <th class="esg-table-head__th search-sectiondetailsheader3">
-                                Locations
-                            </th>
-                            <th class="esg-table-head__th search-sectiondetailsheader4">
-                                Instructors
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="esg-table-body">
-                        <!-- ko foreach: $data.Section.FormattedMeetingTimes() -->
-                        <tr class="esg-table-body__row search-sectionrow">
-
-                            <!-- ko if: $index() == 0 -->
-                            <!-- Show seat count or waitlist count depending on if there is a waitlist -->
-                            <td class="esg-table-body__td search-seatscell" align="center" data-bind="css: $data.getSeatsClass, attr: { 'rowspan': $parent.Section.FormattedMeetingTimes().length}" rowspan="2">
-                                <!-- ko if: $parent.Section.ShowWaitlistInfo() === false -->
-                                <span class="search-seatsavailabletext" data-bind="visible: $parent.Section.Available() !== null &amp;&amp; $parent.Section.Capacity() !== null, text: $parent.Section.Available()">4</span><span class="search-seatsavailabletext" data-bind="visible: $parent.Section.Capacity() === null" style="display: none;">Unlimited</span>
-                                <!-- /ko -->
-                                <!-- ko if: $parent.Section.ShowWaitlistInfo() === true --><!-- /ko -->
-                            </td>
-                            <!-- /ko -->
-                            <td class="esg-table-body__td search-sectiondaystime">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.DaysOfWeekDisplay() + ' ', attr: { id: 'section-'+$parent.Section.Id()+'-meeting-days-'+$index()}" id="section-25631-meeting-days-0">M/T/W/Th/F/Sa/Su </span>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.StartTimeDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-start-'+$index()}" id="section-25631-meeting-times-start-0"></span>
-                                    <span class="search-meetingtimestext" data-bind="visible: (!isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !isNullOrEmpty($data.EndTimeDisplay()))" style="display: none;">
-                                        -
-                                    </span>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.EndTimeDisplay, attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-end-'+$index()}" id="section-25631-meeting-times-end-0"></span>
-                                    <span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.EndTimeDisplay()) &amp;&amp; isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !($data.IsOnline()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-TBD-'+$index()}" id="section-25631-meeting-times-TBD-0">TBD</span>
-                                </div>
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.DatesDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-dates-'+$index()}" id="section-25631-meeting-dates-0">8/17/2020 - 12/16/2020</span>
-                                </div>
-                            </td>
-                            <td class="esg-table-body__td search-sectionlocations">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $parent.Section.LocationDisplay(), visible: !isNullOrEmpty($parent.Section.LocationDisplay()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-location-'+$index() }" id="section-25631-meeting-location-0">On-Line</span><span class="search-meetingtimestext" data-bind="text: ', ', visible: !isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; (!isNullOrEmpty($data.BuildingDisplay()) || !isNullOrEmpty($data.RoomDisplay()))">, </span><span class="search-meetingtimestext" data-bind="text: $data.BuildingDisplay(), visible: !isNullOrEmpty($data.BuildingDisplay())">Internet Or Online</span><span class="search-meetingtimestext" data-bind="text: ' ' + $data.RoomDisplay(), visible: !isNullOrEmpty($data.RoomDisplay())"> IN1</span><span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.RoomDisplay()) &amp;&amp; isNullOrEmpty($data.BuildingDisplay()) &amp;&amp; isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; !($data.IsOnline())" style="display: none;">TBD</span>
-                                </div>
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.InstructionalMethodDisplay(), attr: { id: 'section-'+$parent.Section.Id+'-meeting-instructional-method-'+$index() }" id="section-function t(){return 0<arguments.length?(t.tb(t[v],arguments[0])&amp;&amp;(t.ga(),t[v]=arguments[0],t.fa()),this):(s.l.oc(t),t[v])}-meeting-instructional-method-0">Classroom Hours</span>
-                                </div>
-                            </td>
-                            <td class="esg-table-body__td search-sectioninstructors">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $parent.FacultyDisplay(), visible: $parent.FacultyDisplay().length > 0  &amp;&amp; $index() == 0, attr: { id: 'section-'+$parent.Section.Id()+'-faculty-name-'+$index() }" id="section-25631-faculty-name-0">Lashley, T</span><span class="search-meetingtimestext" id="faculty-name-tbd" data-bind="visible: $parent.FacultyDisplay().length === 0" style="display: none;">TBD</span>
-                                </div>
-                            </td>
-
-                        </tr>
-                        
-                        <tr class="esg-table-body__row search-sectionrow">
-
-                            <!-- ko if: $index() == 0 --><!-- /ko -->
-                            <td class="esg-table-body__td search-sectiondaystime">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.DaysOfWeekDisplay() + ' ', attr: { id: 'section-'+$parent.Section.Id()+'-meeting-days-'+$index()}" id="section-25631-meeting-days-1">M/T/W/Th/F/Sa/Su </span>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.StartTimeDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-start-'+$index()}" id="section-25631-meeting-times-start-1"></span>
-                                    <span class="search-meetingtimestext" data-bind="visible: (!isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !isNullOrEmpty($data.EndTimeDisplay()))" style="display: none;">
-                                        -
-                                    </span>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.EndTimeDisplay, attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-end-'+$index()}" id="section-25631-meeting-times-end-1"></span>
-                                    <span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.EndTimeDisplay()) &amp;&amp; isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !($data.IsOnline()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-TBD-'+$index()}" id="section-25631-meeting-times-TBD-1">TBD</span>
-                                </div>
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.DatesDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-dates-'+$index()}" id="section-25631-meeting-dates-1">8/17/2020 - 12/16/2020</span>
-                                </div>
-                            </td>
-                            <td class="esg-table-body__td search-sectionlocations">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $parent.Section.LocationDisplay(), visible: !isNullOrEmpty($parent.Section.LocationDisplay()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-location-'+$index() }" id="section-25631-meeting-location-1">On-Line</span><span class="search-meetingtimestext" data-bind="text: ', ', visible: !isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; (!isNullOrEmpty($data.BuildingDisplay()) || !isNullOrEmpty($data.RoomDisplay()))">, </span><span class="search-meetingtimestext" data-bind="text: $data.BuildingDisplay(), visible: !isNullOrEmpty($data.BuildingDisplay())">Internet Or Online</span><span class="search-meetingtimestext" data-bind="text: ' ' + $data.RoomDisplay(), visible: !isNullOrEmpty($data.RoomDisplay())"> IN1</span><span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.RoomDisplay()) &amp;&amp; isNullOrEmpty($data.BuildingDisplay()) &amp;&amp; isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; !($data.IsOnline())" style="display: none;">TBD</span>
-                                </div>
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.InstructionalMethodDisplay(), attr: { id: 'section-'+$parent.Section.Id+'-meeting-instructional-method-'+$index() }" id="section-function t(){return 0<arguments.length?(t.tb(t[v],arguments[0])&amp;&amp;(t.ga(),t[v]=arguments[0],t.fa()),this):(s.l.oc(t),t[v])}-meeting-instructional-method-1">Lab/Shop Hours</span>
-                                </div>
-                            </td>
-                            <td class="esg-table-body__td search-sectioninstructors">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $parent.FacultyDisplay(), visible: $parent.FacultyDisplay().length > 0  &amp;&amp; $index() == 0, attr: { id: 'section-'+$parent.Section.Id()+'-faculty-name-'+$index() }" id="section-25631-faculty-name-1" style="display: none;">Lashley, T</span><span class="search-meetingtimestext" id="faculty-name-tbd" data-bind="visible: $parent.FacultyDisplay().length === 0" style="display: none;">TBD</span>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <!-- /ko -->
-                        <tr class="esg-table-body__row search-sectionrow" data-bind="visible: $data.Section.FormattedMeetingTimes().length === 0 || $data.Section.FormattedMeetingTimes() === null" style="display: none;">
-                            <td class="esg-table-body__td search-seatscell function(){if(!isNullOrEmpty(section))return t.Capacity!==null&amp;&amp;t.Available!==null&amp;&amp;t.Available===0?t.WaitlistAvailable===!0?&quot;search-sectionseatswaitlisted&quot;:&quot;search-sectionseatsnone&quot;:&quot;search-sectionseatsopen&quot;}" align="center" data-bind="css: $data.getSeatsClass, attr: {'rowspan':'1'}" rowspan="1">
-                                <!-- ko if: $data.Section.WaitlistAvailable() === false || $data.Section.Capacity() === null || $data.Section.Available() === null || $data.Section.Available() > 0 -->
-                                <span class="search-seatsavailabletext" data-bind="visible: $data.Section.Available() !== null &amp;&amp; $data.Section.Capacity() !== null, text: $data.Section.Available()">4</span><span class="search-seatsavailabletext" data-bind="visible: $data.Section.Capacity() === null" style="display: none;">Unlimited</span>
-                                <!-- /ko -->
-                                <!-- ko if: $data.Section.WaitlistAvailable() === true && $data.Section.Available() !== null && $data.Section.Capacity() !== null && $data.Section.Available() === 0 --><!-- /ko -->
-                            </td>
-                            <td class="esg-table-body__td search-sectiondaystime">
-                                Meeting Times TBD
-                            </td>
-                            <td class="esg-table-body__td search-sectionlocations"></td>
-                            <td class="esg-table-body__td search-sectioninstructors"></td>
-
-                        </tr>
-                    </tbody>
-                </table>
-            </li>
-        
-            <li class="search-nestedaccordionitem">
-                <table class="esg-table esg-table--no-mobile esg-section--margin-bottom search-sectiontable">
-                    <caption class="search-sectionnamerow">
-                        <div class="esg-row">
-                            <div class="esg-col-xs-6">
-                                <a href="#" class="search-sectiondetailslink" data-bind="text: $data.Section.SectionNameDisplay(), click: function(data, event) { showSectionDetails({ course: $parents[1].Course, section: $data.Section, allowAdding: false, addTerms: null, addCallback: null, creditsOverride: null, studentId:null, canSkipWaitlist: false })}, attr: { 'aria-label': 'Details for ' + $parent.Term.Description() + ' ', id: 'section-'+$data.Section.Id() }" title="Show Section Details" aria-label="Details for Fall 2020 " id="section-25632">CIS-110-3D4</a>
-                                <!-- ko if: $data.Section.AdditionalFeesApply --><!-- /ko -->
-                                <!-- ko if: $data.Section.ShowSpecialIcon --><!-- /ko -->
-                                <section class="search-sectionnontermrow">
-                                    <span data-bind="text: $data.Section.SectionTitleDisplay(), attr: { id: 'section-title-'+$data.Section.Id()}" id="section-title-25632">Introduction to Computers</span>
-                                </section>
-                                <section class="search-sectionnontermrow" data-bind="visible: $data.Section.IsNonTermOffering() || $data.Section.IsNonStandardDates()" style="display: none;">
-                                    <span data-bind="visible: $data.Section.IsNonTermOffering()" style="display: none;">Non-Term Section:</span>
-                                    <span data-bind="visible: $data.Section.IsNonTermOffering(), text: ' ' + $data.Section.StartDateDisplay() + ' - ' + $data.Section.EndDateDisplay()" style="display: none;"> 8/17/2020 - 12/16/2020</span>
-                                    <span data-bind="visible: !$data.Section.IsNonTermOffering() &amp;&amp; $data.Section.IsNonStandardDates(), text: 'Runs from ' + $data.Section.StartDateDisplay() + ' - ' + $data.Section.EndDateDisplay(), attr: { id: 'nonterm-section-'+$data.Section.Id()+'-runs-from-dates'}" id="nonterm-section-25632-runs-from-dates" style="display: none;">Runs from 8/17/2020 - 12/16/2020</span>
-                                </section>
-                            </div>
-                            <div class="esg-col-xs-6">
-                            </div>
-                        </div>
-                    </caption>
-                    <thead class="esg-table-head">
-                        <tr class="esg-table-head__row">
-                            <!-- ko if: $data.Section.ShowWaitlistInfo() === true --><!-- /ko -->
-                            <!-- ko if: $data.Section.ShowWaitlistInfo() === false -->
-                            <th class="esg-table-head__th search-sectiondetailsheader1">
-                                Seats
-                            </th>
-                            <!-- /ko -->
-
-                            <th class="esg-table-head__th search-sectiondetailsheader2">
-                                Times
-                            </th>
-                            <th class="esg-table-head__th search-sectiondetailsheader3">
-                                Locations
-                            </th>
-                            <th class="esg-table-head__th search-sectiondetailsheader4">
-                                Instructors
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="esg-table-body">
-                        <!-- ko foreach: $data.Section.FormattedMeetingTimes() -->
-                        <tr class="esg-table-body__row search-sectionrow">
-
-                            <!-- ko if: $index() == 0 -->
-                            <!-- Show seat count or waitlist count depending on if there is a waitlist -->
-                            <td class="esg-table-body__td search-seatscell" align="center" data-bind="css: $data.getSeatsClass, attr: { 'rowspan': $parent.Section.FormattedMeetingTimes().length}" rowspan="2">
-                                <!-- ko if: $parent.Section.ShowWaitlistInfo() === false -->
-                                <span class="search-seatsavailabletext" data-bind="visible: $parent.Section.Available() !== null &amp;&amp; $parent.Section.Capacity() !== null, text: $parent.Section.Available()">5</span><span class="search-seatsavailabletext" data-bind="visible: $parent.Section.Capacity() === null" style="display: none;">Unlimited</span>
-                                <!-- /ko -->
-                                <!-- ko if: $parent.Section.ShowWaitlistInfo() === true --><!-- /ko -->
-                            </td>
-                            <!-- /ko -->
-                            <td class="esg-table-body__td search-sectiondaystime">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.DaysOfWeekDisplay() + ' ', attr: { id: 'section-'+$parent.Section.Id()+'-meeting-days-'+$index()}" id="section-25632-meeting-days-0">M/T/W/Th/F/Sa/Su </span>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.StartTimeDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-start-'+$index()}" id="section-25632-meeting-times-start-0"></span>
-                                    <span class="search-meetingtimestext" data-bind="visible: (!isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !isNullOrEmpty($data.EndTimeDisplay()))" style="display: none;">
-                                        -
-                                    </span>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.EndTimeDisplay, attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-end-'+$index()}" id="section-25632-meeting-times-end-0"></span>
-                                    <span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.EndTimeDisplay()) &amp;&amp; isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !($data.IsOnline()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-TBD-'+$index()}" id="section-25632-meeting-times-TBD-0">TBD</span>
-                                </div>
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.DatesDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-dates-'+$index()}" id="section-25632-meeting-dates-0">8/17/2020 - 12/16/2020</span>
-                                </div>
-                            </td>
-                            <td class="esg-table-body__td search-sectionlocations">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $parent.Section.LocationDisplay(), visible: !isNullOrEmpty($parent.Section.LocationDisplay()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-location-'+$index() }" id="section-25632-meeting-location-0">On-Line</span><span class="search-meetingtimestext" data-bind="text: ', ', visible: !isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; (!isNullOrEmpty($data.BuildingDisplay()) || !isNullOrEmpty($data.RoomDisplay()))">, </span><span class="search-meetingtimestext" data-bind="text: $data.BuildingDisplay(), visible: !isNullOrEmpty($data.BuildingDisplay())">Internet Or Online</span><span class="search-meetingtimestext" data-bind="text: ' ' + $data.RoomDisplay(), visible: !isNullOrEmpty($data.RoomDisplay())"> IN1</span><span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.RoomDisplay()) &amp;&amp; isNullOrEmpty($data.BuildingDisplay()) &amp;&amp; isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; !($data.IsOnline())" style="display: none;">TBD</span>
-                                </div>
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.InstructionalMethodDisplay(), attr: { id: 'section-'+$parent.Section.Id+'-meeting-instructional-method-'+$index() }" id="section-function t(){return 0<arguments.length?(t.tb(t[v],arguments[0])&amp;&amp;(t.ga(),t[v]=arguments[0],t.fa()),this):(s.l.oc(t),t[v])}-meeting-instructional-method-0">Classroom Hours</span>
-                                </div>
-                            </td>
-                            <td class="esg-table-body__td search-sectioninstructors">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $parent.FacultyDisplay(), visible: $parent.FacultyDisplay().length > 0  &amp;&amp; $index() == 0, attr: { id: 'section-'+$parent.Section.Id()+'-faculty-name-'+$index() }" id="section-25632-faculty-name-0">Lashley, T</span><span class="search-meetingtimestext" id="faculty-name-tbd" data-bind="visible: $parent.FacultyDisplay().length === 0" style="display: none;">TBD</span>
-                                </div>
-                            </td>
-
-                        </tr>
-                        
-                        <tr class="esg-table-body__row search-sectionrow">
-
-                            <!-- ko if: $index() == 0 --><!-- /ko -->
-                            <td class="esg-table-body__td search-sectiondaystime">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.DaysOfWeekDisplay() + ' ', attr: { id: 'section-'+$parent.Section.Id()+'-meeting-days-'+$index()}" id="section-25632-meeting-days-1">M/T/W/Th/F/Sa/Su </span>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.StartTimeDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-start-'+$index()}" id="section-25632-meeting-times-start-1"></span>
-                                    <span class="search-meetingtimestext" data-bind="visible: (!isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !isNullOrEmpty($data.EndTimeDisplay()))" style="display: none;">
-                                        -
-                                    </span>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.EndTimeDisplay, attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-end-'+$index()}" id="section-25632-meeting-times-end-1"></span>
-                                    <span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.EndTimeDisplay()) &amp;&amp; isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !($data.IsOnline()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-TBD-'+$index()}" id="section-25632-meeting-times-TBD-1">TBD</span>
-                                </div>
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.DatesDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-dates-'+$index()}" id="section-25632-meeting-dates-1">8/17/2020 - 12/16/2020</span>
-                                </div>
-                            </td>
-                            <td class="esg-table-body__td search-sectionlocations">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $parent.Section.LocationDisplay(), visible: !isNullOrEmpty($parent.Section.LocationDisplay()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-location-'+$index() }" id="section-25632-meeting-location-1">On-Line</span><span class="search-meetingtimestext" data-bind="text: ', ', visible: !isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; (!isNullOrEmpty($data.BuildingDisplay()) || !isNullOrEmpty($data.RoomDisplay()))">, </span><span class="search-meetingtimestext" data-bind="text: $data.BuildingDisplay(), visible: !isNullOrEmpty($data.BuildingDisplay())">Internet Or Online</span><span class="search-meetingtimestext" data-bind="text: ' ' + $data.RoomDisplay(), visible: !isNullOrEmpty($data.RoomDisplay())"> IN1</span><span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.RoomDisplay()) &amp;&amp; isNullOrEmpty($data.BuildingDisplay()) &amp;&amp; isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; !($data.IsOnline())" style="display: none;">TBD</span>
-                                </div>
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.InstructionalMethodDisplay(), attr: { id: 'section-'+$parent.Section.Id+'-meeting-instructional-method-'+$index() }" id="section-function t(){return 0<arguments.length?(t.tb(t[v],arguments[0])&amp;&amp;(t.ga(),t[v]=arguments[0],t.fa()),this):(s.l.oc(t),t[v])}-meeting-instructional-method-1">Lab/Shop Hours</span>
-                                </div>
-                            </td>
-                            <td class="esg-table-body__td search-sectioninstructors">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $parent.FacultyDisplay(), visible: $parent.FacultyDisplay().length > 0  &amp;&amp; $index() == 0, attr: { id: 'section-'+$parent.Section.Id()+'-faculty-name-'+$index() }" id="section-25632-faculty-name-1" style="display: none;">Lashley, T</span><span class="search-meetingtimestext" id="faculty-name-tbd" data-bind="visible: $parent.FacultyDisplay().length === 0" style="display: none;">TBD</span>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <!-- /ko -->
-                        <tr class="esg-table-body__row search-sectionrow" data-bind="visible: $data.Section.FormattedMeetingTimes().length === 0 || $data.Section.FormattedMeetingTimes() === null" style="display: none;">
-                            <td class="esg-table-body__td search-seatscell function(){if(!isNullOrEmpty(section))return t.Capacity!==null&amp;&amp;t.Available!==null&amp;&amp;t.Available===0?t.WaitlistAvailable===!0?&quot;search-sectionseatswaitlisted&quot;:&quot;search-sectionseatsnone&quot;:&quot;search-sectionseatsopen&quot;}" align="center" data-bind="css: $data.getSeatsClass, attr: {'rowspan':'1'}" rowspan="1">
-                                <!-- ko if: $data.Section.WaitlistAvailable() === false || $data.Section.Capacity() === null || $data.Section.Available() === null || $data.Section.Available() > 0 -->
-                                <span class="search-seatsavailabletext" data-bind="visible: $data.Section.Available() !== null &amp;&amp; $data.Section.Capacity() !== null, text: $data.Section.Available()">5</span><span class="search-seatsavailabletext" data-bind="visible: $data.Section.Capacity() === null" style="display: none;">Unlimited</span>
-                                <!-- /ko -->
-                                <!-- ko if: $data.Section.WaitlistAvailable() === true && $data.Section.Available() !== null && $data.Section.Capacity() !== null && $data.Section.Available() === 0 --><!-- /ko -->
-                            </td>
-                            <td class="esg-table-body__td search-sectiondaystime">
-                                Meeting Times TBD
-                            </td>
-                            <td class="esg-table-body__td search-sectionlocations"></td>
-                            <td class="esg-table-body__td search-sectioninstructors"></td>
-
-                        </tr>
-                    </tbody>
-                </table>
-            </li>
-        </ul>
-    </div>
+    <!-- ko with: TermsAndSections --><!-- /ko -->
+    <div data-bind="foreach: TermsAndSections"></div>
 <!--/ko-->
     </div>
 </div></collapsible-group>
@@ -7554,7 +7279,7 @@
                     <div class="esg-collapsible-group__tertiary-content" data-bind="visible: hasTertiaryContent, template: tertiaryContent " style="display: none;"></div>
                 </div>
                 <span class="esg-collapsible-group__icon esg-icon__container" aria-hidden="true">
-                    <svg class="esg-icon esg-icon--up" data-bind="css: arrowIconClass">
+                    <svg class="esg-icon esg-icon--down" data-bind="css: arrowIconClass">
                         <!-- need to switch between icon--up and icon--down (same with the dropdown component)-->
                         <use xlink:href="#icon-arrow"></use>
                     </svg>
@@ -7562,10 +7287,10 @@
             </button>
         </div>
     </div>
-    <div class="esg-collapsible-group__body esg-is-open" role="tabpanel" data-bind="attr: { id: groupBodyId, 'aria-labelledby': groupHeaderId }, css: collapsibleClass" id="collapsible-view-available-sections-for-COM-231-collapseBody" aria-labelledby="collapsible-view-available-sections-for-COM-231-groupHeading">
+    <div class="esg-collapsible-group__body esg-is-collapsed" role="tabpanel" data-bind="attr: { id: groupBodyId, 'aria-labelledby': groupHeaderId }, css: collapsibleClass" id="collapsible-view-available-sections-for-COM-231-collapseBody" aria-labelledby="collapsible-view-available-sections-for-COM-231-groupHeading">
         <!--ko template: {nodes: $componentTemplateNodes, data: $parent}-->
     <!-- Spinner for section loading -->
-    <spinner id="spinner" params="isVisible: isLoading(), message: Ellucian.Course.SearchResult.stringCourseSearchResultLoadingSectionsText"><div data-bind="visible: isVisible, css: wrapperClass" class="esg-spinner-container" style="display: none;">
+    <spinner id="spinner" params="isVisible: isLoading(), message: Ellucian.Course.SearchResult.stringCourseSearchResultLoadingSectionsText"><div data-bind="visible: isVisible, css: wrapperClass" class="esg-spinner-container">
     <div class="esg-spinner-wrapper">
         <div class="esg-spinner"></div>
     </div>
@@ -7574,319 +7299,8 @@
     <!-- /ko -->
 </div></spinner>
     <!-- * Each Section * -->
-    <!-- ko with: TermsAndSections -->
-    <div data-bind="visible: $data.length == 0" style="display: none;">No sections match the current filters.</div>
-    <!-- /ko -->
-    <div data-bind="foreach: TermsAndSections">
-        <h4 data-bind="text: $data.Term.Description()">Fall 2020</h4>
-        <ul data-bind="foreach: Sections">
-            <li class="search-nestedaccordionitem">
-                <table class="esg-table esg-table--no-mobile esg-section--margin-bottom search-sectiontable">
-                    <caption class="search-sectionnamerow">
-                        <div class="esg-row">
-                            <div class="esg-col-xs-6">
-                                <a href="#" class="search-sectiondetailslink" data-bind="text: $data.Section.SectionNameDisplay(), click: function(data, event) { showSectionDetails({ course: $parents[1].Course, section: $data.Section, allowAdding: false, addTerms: null, addCallback: null, creditsOverride: null, studentId:null, canSkipWaitlist: false })}, attr: { 'aria-label': 'Details for ' + $parent.Term.Description() + ' ', id: 'section-'+$data.Section.Id() }" title="Show Section Details" aria-label="Details for Fall 2020 " id="section-25641">COM-231-3D3</a>
-                                <!-- ko if: $data.Section.AdditionalFeesApply --><!-- /ko -->
-                                <!-- ko if: $data.Section.ShowSpecialIcon --><!-- /ko -->
-                                <section class="search-sectionnontermrow">
-                                    <span data-bind="text: $data.Section.SectionTitleDisplay(), attr: { id: 'section-title-'+$data.Section.Id()}" id="section-title-25641">Public Speaking</span>
-                                </section>
-                                <section class="search-sectionnontermrow" data-bind="visible: $data.Section.IsNonTermOffering() || $data.Section.IsNonStandardDates()" style="display: none;">
-                                    <span data-bind="visible: $data.Section.IsNonTermOffering()" style="display: none;">Non-Term Section:</span>
-                                    <span data-bind="visible: $data.Section.IsNonTermOffering(), text: ' ' + $data.Section.StartDateDisplay() + ' - ' + $data.Section.EndDateDisplay()" style="display: none;"> 8/17/2020 - 12/16/2020</span>
-                                    <span data-bind="visible: !$data.Section.IsNonTermOffering() &amp;&amp; $data.Section.IsNonStandardDates(), text: 'Runs from ' + $data.Section.StartDateDisplay() + ' - ' + $data.Section.EndDateDisplay(), attr: { id: 'nonterm-section-'+$data.Section.Id()+'-runs-from-dates'}" id="nonterm-section-25641-runs-from-dates" style="display: none;">Runs from 8/17/2020 - 12/16/2020</span>
-                                </section>
-                            </div>
-                            <div class="esg-col-xs-6">
-                            </div>
-                        </div>
-                    </caption>
-                    <thead class="esg-table-head">
-                        <tr class="esg-table-head__row">
-                            <!-- ko if: $data.Section.ShowWaitlistInfo() === true --><!-- /ko -->
-                            <!-- ko if: $data.Section.ShowWaitlistInfo() === false -->
-                            <th class="esg-table-head__th search-sectiondetailsheader1">
-                                Seats
-                            </th>
-                            <!-- /ko -->
-
-                            <th class="esg-table-head__th search-sectiondetailsheader2">
-                                Times
-                            </th>
-                            <th class="esg-table-head__th search-sectiondetailsheader3">
-                                Locations
-                            </th>
-                            <th class="esg-table-head__th search-sectiondetailsheader4">
-                                Instructors
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="esg-table-body">
-                        <!-- ko foreach: $data.Section.FormattedMeetingTimes() -->
-                        <tr class="esg-table-body__row search-sectionrow">
-
-                            <!-- ko if: $index() == 0 -->
-                            <!-- Show seat count or waitlist count depending on if there is a waitlist -->
-                            <td class="esg-table-body__td search-seatscell" align="center" data-bind="css: $data.getSeatsClass, attr: { 'rowspan': $parent.Section.FormattedMeetingTimes().length}" rowspan="1">
-                                <!-- ko if: $parent.Section.ShowWaitlistInfo() === false -->
-                                <span class="search-seatsavailabletext" data-bind="visible: $parent.Section.Available() !== null &amp;&amp; $parent.Section.Capacity() !== null, text: $parent.Section.Available()">5</span><span class="search-seatsavailabletext" data-bind="visible: $parent.Section.Capacity() === null" style="display: none;">Unlimited</span>
-                                <!-- /ko -->
-                                <!-- ko if: $parent.Section.ShowWaitlistInfo() === true --><!-- /ko -->
-                            </td>
-                            <!-- /ko -->
-                            <td class="esg-table-body__td search-sectiondaystime">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.DaysOfWeekDisplay() + ' ', attr: { id: 'section-'+$parent.Section.Id()+'-meeting-days-'+$index()}" id="section-25641-meeting-days-0">M/T/W/Th/F/Sa/Su </span>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.StartTimeDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-start-'+$index()}" id="section-25641-meeting-times-start-0"></span>
-                                    <span class="search-meetingtimestext" data-bind="visible: (!isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !isNullOrEmpty($data.EndTimeDisplay()))" style="display: none;">
-                                        -
-                                    </span>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.EndTimeDisplay, attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-end-'+$index()}" id="section-25641-meeting-times-end-0"></span>
-                                    <span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.EndTimeDisplay()) &amp;&amp; isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !($data.IsOnline()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-TBD-'+$index()}" id="section-25641-meeting-times-TBD-0">TBD</span>
-                                </div>
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.DatesDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-dates-'+$index()}" id="section-25641-meeting-dates-0">8/17/2020 - 12/16/2020</span>
-                                </div>
-                            </td>
-                            <td class="esg-table-body__td search-sectionlocations">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $parent.Section.LocationDisplay(), visible: !isNullOrEmpty($parent.Section.LocationDisplay()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-location-'+$index() }" id="section-25641-meeting-location-0">On-Line</span><span class="search-meetingtimestext" data-bind="text: ', ', visible: !isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; (!isNullOrEmpty($data.BuildingDisplay()) || !isNullOrEmpty($data.RoomDisplay()))">, </span><span class="search-meetingtimestext" data-bind="text: $data.BuildingDisplay(), visible: !isNullOrEmpty($data.BuildingDisplay())">Internet Or Online</span><span class="search-meetingtimestext" data-bind="text: ' ' + $data.RoomDisplay(), visible: !isNullOrEmpty($data.RoomDisplay())"> IN1</span><span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.RoomDisplay()) &amp;&amp; isNullOrEmpty($data.BuildingDisplay()) &amp;&amp; isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; !($data.IsOnline())" style="display: none;">TBD</span>
-                                </div>
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.InstructionalMethodDisplay(), attr: { id: 'section-'+$parent.Section.Id+'-meeting-instructional-method-'+$index() }" id="section-function t(){return 0<arguments.length?(t.tb(t[v],arguments[0])&amp;&amp;(t.ga(),t[v]=arguments[0],t.fa()),this):(s.l.oc(t),t[v])}-meeting-instructional-method-0">Classroom Hours</span>
-                                </div>
-                            </td>
-                            <td class="esg-table-body__td search-sectioninstructors">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $parent.FacultyDisplay(), visible: $parent.FacultyDisplay().length > 0  &amp;&amp; $index() == 0, attr: { id: 'section-'+$parent.Section.Id()+'-faculty-name-'+$index() }" id="section-25641-faculty-name-0">Stephens, R</span><span class="search-meetingtimestext" id="faculty-name-tbd" data-bind="visible: $parent.FacultyDisplay().length === 0" style="display: none;">TBD</span>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <!-- /ko -->
-                        <tr class="esg-table-body__row search-sectionrow" data-bind="visible: $data.Section.FormattedMeetingTimes().length === 0 || $data.Section.FormattedMeetingTimes() === null" style="display: none;">
-                            <td class="esg-table-body__td search-seatscell function(){if(!isNullOrEmpty(section))return t.Capacity!==null&amp;&amp;t.Available!==null&amp;&amp;t.Available===0?t.WaitlistAvailable===!0?&quot;search-sectionseatswaitlisted&quot;:&quot;search-sectionseatsnone&quot;:&quot;search-sectionseatsopen&quot;}" align="center" data-bind="css: $data.getSeatsClass, attr: {'rowspan':'1'}" rowspan="1">
-                                <!-- ko if: $data.Section.WaitlistAvailable() === false || $data.Section.Capacity() === null || $data.Section.Available() === null || $data.Section.Available() > 0 -->
-                                <span class="search-seatsavailabletext" data-bind="visible: $data.Section.Available() !== null &amp;&amp; $data.Section.Capacity() !== null, text: $data.Section.Available()">5</span><span class="search-seatsavailabletext" data-bind="visible: $data.Section.Capacity() === null" style="display: none;">Unlimited</span>
-                                <!-- /ko -->
-                                <!-- ko if: $data.Section.WaitlistAvailable() === true && $data.Section.Available() !== null && $data.Section.Capacity() !== null && $data.Section.Available() === 0 --><!-- /ko -->
-                            </td>
-                            <td class="esg-table-body__td search-sectiondaystime">
-                                Meeting Times TBD
-                            </td>
-                            <td class="esg-table-body__td search-sectionlocations"></td>
-                            <td class="esg-table-body__td search-sectioninstructors"></td>
-
-                        </tr>
-                    </tbody>
-                </table>
-            </li>
-        
-            <li class="search-nestedaccordionitem">
-                <table class="esg-table esg-table--no-mobile esg-section--margin-bottom search-sectiontable">
-                    <caption class="search-sectionnamerow">
-                        <div class="esg-row">
-                            <div class="esg-col-xs-6">
-                                <a href="#" class="search-sectiondetailslink" data-bind="text: $data.Section.SectionNameDisplay(), click: function(data, event) { showSectionDetails({ course: $parents[1].Course, section: $data.Section, allowAdding: false, addTerms: null, addCallback: null, creditsOverride: null, studentId:null, canSkipWaitlist: false })}, attr: { 'aria-label': 'Details for ' + $parent.Term.Description() + ' ', id: 'section-'+$data.Section.Id() }" title="Show Section Details" aria-label="Details for Fall 2020 " id="section-25642">COM-231-3D4</a>
-                                <!-- ko if: $data.Section.AdditionalFeesApply --><!-- /ko -->
-                                <!-- ko if: $data.Section.ShowSpecialIcon --><!-- /ko -->
-                                <section class="search-sectionnontermrow">
-                                    <span data-bind="text: $data.Section.SectionTitleDisplay(), attr: { id: 'section-title-'+$data.Section.Id()}" id="section-title-25642">Public Speaking</span>
-                                </section>
-                                <section class="search-sectionnontermrow" data-bind="visible: $data.Section.IsNonTermOffering() || $data.Section.IsNonStandardDates()" style="display: none;">
-                                    <span data-bind="visible: $data.Section.IsNonTermOffering()" style="display: none;">Non-Term Section:</span>
-                                    <span data-bind="visible: $data.Section.IsNonTermOffering(), text: ' ' + $data.Section.StartDateDisplay() + ' - ' + $data.Section.EndDateDisplay()" style="display: none;"> 8/17/2020 - 12/16/2020</span>
-                                    <span data-bind="visible: !$data.Section.IsNonTermOffering() &amp;&amp; $data.Section.IsNonStandardDates(), text: 'Runs from ' + $data.Section.StartDateDisplay() + ' - ' + $data.Section.EndDateDisplay(), attr: { id: 'nonterm-section-'+$data.Section.Id()+'-runs-from-dates'}" id="nonterm-section-25642-runs-from-dates" style="display: none;">Runs from 8/17/2020 - 12/16/2020</span>
-                                </section>
-                            </div>
-                            <div class="esg-col-xs-6">
-                            </div>
-                        </div>
-                    </caption>
-                    <thead class="esg-table-head">
-                        <tr class="esg-table-head__row">
-                            <!-- ko if: $data.Section.ShowWaitlistInfo() === true --><!-- /ko -->
-                            <!-- ko if: $data.Section.ShowWaitlistInfo() === false -->
-                            <th class="esg-table-head__th search-sectiondetailsheader1">
-                                Seats
-                            </th>
-                            <!-- /ko -->
-
-                            <th class="esg-table-head__th search-sectiondetailsheader2">
-                                Times
-                            </th>
-                            <th class="esg-table-head__th search-sectiondetailsheader3">
-                                Locations
-                            </th>
-                            <th class="esg-table-head__th search-sectiondetailsheader4">
-                                Instructors
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="esg-table-body">
-                        <!-- ko foreach: $data.Section.FormattedMeetingTimes() -->
-                        <tr class="esg-table-body__row search-sectionrow">
-
-                            <!-- ko if: $index() == 0 -->
-                            <!-- Show seat count or waitlist count depending on if there is a waitlist -->
-                            <td class="esg-table-body__td search-seatscell" align="center" data-bind="css: $data.getSeatsClass, attr: { 'rowspan': $parent.Section.FormattedMeetingTimes().length}" rowspan="1">
-                                <!-- ko if: $parent.Section.ShowWaitlistInfo() === false -->
-                                <span class="search-seatsavailabletext" data-bind="visible: $parent.Section.Available() !== null &amp;&amp; $parent.Section.Capacity() !== null, text: $parent.Section.Available()">2</span><span class="search-seatsavailabletext" data-bind="visible: $parent.Section.Capacity() === null" style="display: none;">Unlimited</span>
-                                <!-- /ko -->
-                                <!-- ko if: $parent.Section.ShowWaitlistInfo() === true --><!-- /ko -->
-                            </td>
-                            <!-- /ko -->
-                            <td class="esg-table-body__td search-sectiondaystime">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.DaysOfWeekDisplay() + ' ', attr: { id: 'section-'+$parent.Section.Id()+'-meeting-days-'+$index()}" id="section-25642-meeting-days-0">M/T/W/Th/F/Sa/Su </span>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.StartTimeDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-start-'+$index()}" id="section-25642-meeting-times-start-0"></span>
-                                    <span class="search-meetingtimestext" data-bind="visible: (!isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !isNullOrEmpty($data.EndTimeDisplay()))" style="display: none;">
-                                        -
-                                    </span>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.EndTimeDisplay, attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-end-'+$index()}" id="section-25642-meeting-times-end-0"></span>
-                                    <span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.EndTimeDisplay()) &amp;&amp; isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !($data.IsOnline()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-TBD-'+$index()}" id="section-25642-meeting-times-TBD-0">TBD</span>
-                                </div>
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.DatesDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-dates-'+$index()}" id="section-25642-meeting-dates-0">8/17/2020 - 12/16/2020</span>
-                                </div>
-                            </td>
-                            <td class="esg-table-body__td search-sectionlocations">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $parent.Section.LocationDisplay(), visible: !isNullOrEmpty($parent.Section.LocationDisplay()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-location-'+$index() }" id="section-25642-meeting-location-0">On-Line</span><span class="search-meetingtimestext" data-bind="text: ', ', visible: !isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; (!isNullOrEmpty($data.BuildingDisplay()) || !isNullOrEmpty($data.RoomDisplay()))">, </span><span class="search-meetingtimestext" data-bind="text: $data.BuildingDisplay(), visible: !isNullOrEmpty($data.BuildingDisplay())">Internet Or Online</span><span class="search-meetingtimestext" data-bind="text: ' ' + $data.RoomDisplay(), visible: !isNullOrEmpty($data.RoomDisplay())"> IN1</span><span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.RoomDisplay()) &amp;&amp; isNullOrEmpty($data.BuildingDisplay()) &amp;&amp; isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; !($data.IsOnline())" style="display: none;">TBD</span>
-                                </div>
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.InstructionalMethodDisplay(), attr: { id: 'section-'+$parent.Section.Id+'-meeting-instructional-method-'+$index() }" id="section-function t(){return 0<arguments.length?(t.tb(t[v],arguments[0])&amp;&amp;(t.ga(),t[v]=arguments[0],t.fa()),this):(s.l.oc(t),t[v])}-meeting-instructional-method-0">Classroom Hours</span>
-                                </div>
-                            </td>
-                            <td class="esg-table-body__td search-sectioninstructors">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $parent.FacultyDisplay(), visible: $parent.FacultyDisplay().length > 0  &amp;&amp; $index() == 0, attr: { id: 'section-'+$parent.Section.Id()+'-faculty-name-'+$index() }" id="section-25642-faculty-name-0">Lamont, C</span><span class="search-meetingtimestext" id="faculty-name-tbd" data-bind="visible: $parent.FacultyDisplay().length === 0" style="display: none;">TBD</span>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <!-- /ko -->
-                        <tr class="esg-table-body__row search-sectionrow" data-bind="visible: $data.Section.FormattedMeetingTimes().length === 0 || $data.Section.FormattedMeetingTimes() === null" style="display: none;">
-                            <td class="esg-table-body__td search-seatscell function(){if(!isNullOrEmpty(section))return t.Capacity!==null&amp;&amp;t.Available!==null&amp;&amp;t.Available===0?t.WaitlistAvailable===!0?&quot;search-sectionseatswaitlisted&quot;:&quot;search-sectionseatsnone&quot;:&quot;search-sectionseatsopen&quot;}" align="center" data-bind="css: $data.getSeatsClass, attr: {'rowspan':'1'}" rowspan="1">
-                                <!-- ko if: $data.Section.WaitlistAvailable() === false || $data.Section.Capacity() === null || $data.Section.Available() === null || $data.Section.Available() > 0 -->
-                                <span class="search-seatsavailabletext" data-bind="visible: $data.Section.Available() !== null &amp;&amp; $data.Section.Capacity() !== null, text: $data.Section.Available()">2</span><span class="search-seatsavailabletext" data-bind="visible: $data.Section.Capacity() === null" style="display: none;">Unlimited</span>
-                                <!-- /ko -->
-                                <!-- ko if: $data.Section.WaitlistAvailable() === true && $data.Section.Available() !== null && $data.Section.Capacity() !== null && $data.Section.Available() === 0 --><!-- /ko -->
-                            </td>
-                            <td class="esg-table-body__td search-sectiondaystime">
-                                Meeting Times TBD
-                            </td>
-                            <td class="esg-table-body__td search-sectionlocations"></td>
-                            <td class="esg-table-body__td search-sectioninstructors"></td>
-
-                        </tr>
-                    </tbody>
-                </table>
-            </li>
-        
-            <li class="search-nestedaccordionitem">
-                <table class="esg-table esg-table--no-mobile esg-section--margin-bottom search-sectiontable">
-                    <caption class="search-sectionnamerow">
-                        <div class="esg-row">
-                            <div class="esg-col-xs-6">
-                                <a href="#" class="search-sectiondetailslink" data-bind="text: $data.Section.SectionNameDisplay(), click: function(data, event) { showSectionDetails({ course: $parents[1].Course, section: $data.Section, allowAdding: false, addTerms: null, addCallback: null, creditsOverride: null, studentId:null, canSkipWaitlist: false })}, attr: { 'aria-label': 'Details for ' + $parent.Term.Description() + ' ', id: 'section-'+$data.Section.Id() }" title="Show Section Details" aria-label="Details for Fall 2020 " id="section-25910">COM-231-3D5</a>
-                                <!-- ko if: $data.Section.AdditionalFeesApply --><!-- /ko -->
-                                <!-- ko if: $data.Section.ShowSpecialIcon --><!-- /ko -->
-                                <section class="search-sectionnontermrow">
-                                    <span data-bind="text: $data.Section.SectionTitleDisplay(), attr: { id: 'section-title-'+$data.Section.Id()}" id="section-title-25910">Public Speaking</span>
-                                </section>
-                                <section class="search-sectionnontermrow" data-bind="visible: $data.Section.IsNonTermOffering() || $data.Section.IsNonStandardDates()" style="display: none;">
-                                    <span data-bind="visible: $data.Section.IsNonTermOffering()" style="display: none;">Non-Term Section:</span>
-                                    <span data-bind="visible: $data.Section.IsNonTermOffering(), text: ' ' + $data.Section.StartDateDisplay() + ' - ' + $data.Section.EndDateDisplay()" style="display: none;"> 8/17/2020 - 12/16/2020</span>
-                                    <span data-bind="visible: !$data.Section.IsNonTermOffering() &amp;&amp; $data.Section.IsNonStandardDates(), text: 'Runs from ' + $data.Section.StartDateDisplay() + ' - ' + $data.Section.EndDateDisplay(), attr: { id: 'nonterm-section-'+$data.Section.Id()+'-runs-from-dates'}" id="nonterm-section-25910-runs-from-dates" style="display: none;">Runs from 8/17/2020 - 12/16/2020</span>
-                                </section>
-                            </div>
-                            <div class="esg-col-xs-6">
-                            </div>
-                        </div>
-                    </caption>
-                    <thead class="esg-table-head">
-                        <tr class="esg-table-head__row">
-                            <!-- ko if: $data.Section.ShowWaitlistInfo() === true --><!-- /ko -->
-                            <!-- ko if: $data.Section.ShowWaitlistInfo() === false -->
-                            <th class="esg-table-head__th search-sectiondetailsheader1">
-                                Seats
-                            </th>
-                            <!-- /ko -->
-
-                            <th class="esg-table-head__th search-sectiondetailsheader2">
-                                Times
-                            </th>
-                            <th class="esg-table-head__th search-sectiondetailsheader3">
-                                Locations
-                            </th>
-                            <th class="esg-table-head__th search-sectiondetailsheader4">
-                                Instructors
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="esg-table-body">
-                        <!-- ko foreach: $data.Section.FormattedMeetingTimes() -->
-                        <tr class="esg-table-body__row search-sectionrow">
-
-                            <!-- ko if: $index() == 0 -->
-                            <!-- Show seat count or waitlist count depending on if there is a waitlist -->
-                            <td class="esg-table-body__td search-seatscell" align="center" data-bind="css: $data.getSeatsClass, attr: { 'rowspan': $parent.Section.FormattedMeetingTimes().length}" rowspan="1">
-                                <!-- ko if: $parent.Section.ShowWaitlistInfo() === false -->
-                                <span class="search-seatsavailabletext" data-bind="visible: $parent.Section.Available() !== null &amp;&amp; $parent.Section.Capacity() !== null, text: $parent.Section.Available()">2</span><span class="search-seatsavailabletext" data-bind="visible: $parent.Section.Capacity() === null" style="display: none;">Unlimited</span>
-                                <!-- /ko -->
-                                <!-- ko if: $parent.Section.ShowWaitlistInfo() === true --><!-- /ko -->
-                            </td>
-                            <!-- /ko -->
-                            <td class="esg-table-body__td search-sectiondaystime">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.DaysOfWeekDisplay() + ' ', attr: { id: 'section-'+$parent.Section.Id()+'-meeting-days-'+$index()}" id="section-25910-meeting-days-0">M/T/W/Th/F/Sa/Su </span>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.StartTimeDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-start-'+$index()}" id="section-25910-meeting-times-start-0"></span>
-                                    <span class="search-meetingtimestext" data-bind="visible: (!isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !isNullOrEmpty($data.EndTimeDisplay()))" style="display: none;">
-                                        -
-                                    </span>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.EndTimeDisplay, attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-end-'+$index()}" id="section-25910-meeting-times-end-0"></span>
-                                    <span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.EndTimeDisplay()) &amp;&amp; isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !($data.IsOnline()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-TBD-'+$index()}" id="section-25910-meeting-times-TBD-0">TBD</span>
-                                </div>
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.DatesDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-dates-'+$index()}" id="section-25910-meeting-dates-0">8/17/2020 - 12/16/2020</span>
-                                </div>
-                            </td>
-                            <td class="esg-table-body__td search-sectionlocations">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $parent.Section.LocationDisplay(), visible: !isNullOrEmpty($parent.Section.LocationDisplay()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-location-'+$index() }" id="section-25910-meeting-location-0">On-Line</span><span class="search-meetingtimestext" data-bind="text: ', ', visible: !isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; (!isNullOrEmpty($data.BuildingDisplay()) || !isNullOrEmpty($data.RoomDisplay()))">, </span><span class="search-meetingtimestext" data-bind="text: $data.BuildingDisplay(), visible: !isNullOrEmpty($data.BuildingDisplay())">Internet Or Online</span><span class="search-meetingtimestext" data-bind="text: ' ' + $data.RoomDisplay(), visible: !isNullOrEmpty($data.RoomDisplay())"> IN1</span><span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.RoomDisplay()) &amp;&amp; isNullOrEmpty($data.BuildingDisplay()) &amp;&amp; isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; !($data.IsOnline())" style="display: none;">TBD</span>
-                                </div>
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.InstructionalMethodDisplay(), attr: { id: 'section-'+$parent.Section.Id+'-meeting-instructional-method-'+$index() }" id="section-function t(){return 0<arguments.length?(t.tb(t[v],arguments[0])&amp;&amp;(t.ga(),t[v]=arguments[0],t.fa()),this):(s.l.oc(t),t[v])}-meeting-instructional-method-0">Classroom Hours</span>
-                                </div>
-                            </td>
-                            <td class="esg-table-body__td search-sectioninstructors">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $parent.FacultyDisplay(), visible: $parent.FacultyDisplay().length > 0  &amp;&amp; $index() == 0, attr: { id: 'section-'+$parent.Section.Id()+'-faculty-name-'+$index() }" id="section-25910-faculty-name-0">Lamont, C</span><span class="search-meetingtimestext" id="faculty-name-tbd" data-bind="visible: $parent.FacultyDisplay().length === 0" style="display: none;">TBD</span>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <!-- /ko -->
-                        <tr class="esg-table-body__row search-sectionrow" data-bind="visible: $data.Section.FormattedMeetingTimes().length === 0 || $data.Section.FormattedMeetingTimes() === null" style="display: none;">
-                            <td class="esg-table-body__td search-seatscell function(){if(!isNullOrEmpty(section))return t.Capacity!==null&amp;&amp;t.Available!==null&amp;&amp;t.Available===0?t.WaitlistAvailable===!0?&quot;search-sectionseatswaitlisted&quot;:&quot;search-sectionseatsnone&quot;:&quot;search-sectionseatsopen&quot;}" align="center" data-bind="css: $data.getSeatsClass, attr: {'rowspan':'1'}" rowspan="1">
-                                <!-- ko if: $data.Section.WaitlistAvailable() === false || $data.Section.Capacity() === null || $data.Section.Available() === null || $data.Section.Available() > 0 -->
-                                <span class="search-seatsavailabletext" data-bind="visible: $data.Section.Available() !== null &amp;&amp; $data.Section.Capacity() !== null, text: $data.Section.Available()">2</span><span class="search-seatsavailabletext" data-bind="visible: $data.Section.Capacity() === null" style="display: none;">Unlimited</span>
-                                <!-- /ko -->
-                                <!-- ko if: $data.Section.WaitlistAvailable() === true && $data.Section.Available() !== null && $data.Section.Capacity() !== null && $data.Section.Available() === 0 --><!-- /ko -->
-                            </td>
-                            <td class="esg-table-body__td search-sectiondaystime">
-                                Meeting Times TBD
-                            </td>
-                            <td class="esg-table-body__td search-sectionlocations"></td>
-                            <td class="esg-table-body__td search-sectioninstructors"></td>
-
-                        </tr>
-                    </tbody>
-                </table>
-            </li>
-        </ul>
-    </div>
+    <!-- ko with: TermsAndSections --><!-- /ko -->
+    <div data-bind="foreach: TermsAndSections"></div>
 <!--/ko-->
     </div>
 </div></collapsible-group>
@@ -8639,7 +8053,7 @@
                     <div class="esg-collapsible-group__tertiary-content" data-bind="visible: hasTertiaryContent, template: tertiaryContent " style="display: none;"></div>
                 </div>
                 <span class="esg-collapsible-group__icon esg-icon__container" aria-hidden="true">
-                    <svg class="esg-icon esg-icon--down" data-bind="css: arrowIconClass">
+                    <svg class="esg-icon esg-icon--up" data-bind="css: arrowIconClass">
                         <!-- need to switch between icon--up and icon--down (same with the dropdown component)-->
                         <use xlink:href="#icon-arrow"></use>
                     </svg>
@@ -8647,10 +8061,10 @@
             </button>
         </div>
     </div>
-    <div class="esg-collapsible-group__body esg-is-collapsed" role="tabpanel" data-bind="attr: { id: groupBodyId, 'aria-labelledby': groupHeaderId }, css: collapsibleClass" id="collapsible-view-available-sections-for-CTS-285-collapseBody" aria-labelledby="collapsible-view-available-sections-for-CTS-285-groupHeading">
+    <div class="esg-collapsible-group__body esg-is-open" role="tabpanel" data-bind="attr: { id: groupBodyId, 'aria-labelledby': groupHeaderId }, css: collapsibleClass" id="collapsible-view-available-sections-for-CTS-285-collapseBody" aria-labelledby="collapsible-view-available-sections-for-CTS-285-groupHeading">
         <!--ko template: {nodes: $componentTemplateNodes, data: $parent}-->
     <!-- Spinner for section loading -->
-    <spinner id="spinner" params="isVisible: isLoading(), message: Ellucian.Course.SearchResult.stringCourseSearchResultLoadingSectionsText"><div data-bind="visible: isVisible, css: wrapperClass" class="esg-spinner-container">
+    <spinner id="spinner" params="isVisible: isLoading(), message: Ellucian.Course.SearchResult.stringCourseSearchResultLoadingSectionsText"><div data-bind="visible: isVisible, css: wrapperClass" class="esg-spinner-container" style="display: none;">
     <div class="esg-spinner-wrapper">
         <div class="esg-spinner"></div>
     </div>
@@ -8659,8 +8073,115 @@
     <!-- /ko -->
 </div></spinner>
     <!-- * Each Section * -->
-    <!-- ko with: TermsAndSections --><!-- /ko -->
-    <div data-bind="foreach: TermsAndSections"></div>
+    <!-- ko with: TermsAndSections -->
+    <div data-bind="visible: $data.length == 0" style="display: none;">No sections match the current filters.</div>
+    <!-- /ko -->
+    <div data-bind="foreach: TermsAndSections">
+        <h4 data-bind="text: $data.Term.Description()">Fall 2020</h4>
+        <ul data-bind="foreach: Sections">
+            <li class="search-nestedaccordionitem">
+                <table class="esg-table esg-table--no-mobile esg-section--margin-bottom search-sectiontable">
+                    <caption class="search-sectionnamerow">
+                        <div class="esg-row">
+                            <div class="esg-col-xs-6">
+                                <a href="#" class="search-sectiondetailslink" data-bind="text: $data.Section.SectionNameDisplay(), click: function(data, event) { showSectionDetails({ course: $parents[1].Course, section: $data.Section, allowAdding: false, addTerms: null, addCallback: null, creditsOverride: null, studentId:null, canSkipWaitlist: false })}, attr: { 'aria-label': 'Details for ' + $parent.Term.Description() + ' ', id: 'section-'+$data.Section.Id() }" title="Show Section Details" aria-label="Details for Fall 2020 " id="section-25654">CTS-285-3D1</a>
+                                <!-- ko if: $data.Section.AdditionalFeesApply --><!-- /ko -->
+                                <!-- ko if: $data.Section.ShowSpecialIcon --><!-- /ko -->
+                                <section class="search-sectionnontermrow">
+                                    <span data-bind="text: $data.Section.SectionTitleDisplay(), attr: { id: 'section-title-'+$data.Section.Id()}" id="section-title-25654">Systems Analysis &amp; Design</span>
+                                </section>
+                                <section class="search-sectionnontermrow" data-bind="visible: $data.Section.IsNonTermOffering() || $data.Section.IsNonStandardDates()" style="display: none;">
+                                    <span data-bind="visible: $data.Section.IsNonTermOffering()" style="display: none;">Non-Term Section:</span>
+                                    <span data-bind="visible: $data.Section.IsNonTermOffering(), text: ' ' + $data.Section.StartDateDisplay() + ' - ' + $data.Section.EndDateDisplay()" style="display: none;"> 8/17/2020 - 12/16/2020</span>
+                                    <span data-bind="visible: !$data.Section.IsNonTermOffering() &amp;&amp; $data.Section.IsNonStandardDates(), text: 'Runs from ' + $data.Section.StartDateDisplay() + ' - ' + $data.Section.EndDateDisplay(), attr: { id: 'nonterm-section-'+$data.Section.Id()+'-runs-from-dates'}" id="nonterm-section-25654-runs-from-dates" style="display: none;">Runs from 8/17/2020 - 12/16/2020</span>
+                                </section>
+                            </div>
+                            <div class="esg-col-xs-6">
+                            </div>
+                        </div>
+                    </caption>
+                    <thead class="esg-table-head">
+                        <tr class="esg-table-head__row">
+                            <!-- ko if: $data.Section.ShowWaitlistInfo() === true --><!-- /ko -->
+                            <!-- ko if: $data.Section.ShowWaitlistInfo() === false -->
+                            <th class="esg-table-head__th search-sectiondetailsheader1">
+                                Seats
+                            </th>
+                            <!-- /ko -->
+
+                            <th class="esg-table-head__th search-sectiondetailsheader2">
+                                Times
+                            </th>
+                            <th class="esg-table-head__th search-sectiondetailsheader3">
+                                Locations
+                            </th>
+                            <th class="esg-table-head__th search-sectiondetailsheader4">
+                                Instructors
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="esg-table-body">
+                        <!-- ko foreach: $data.Section.FormattedMeetingTimes() -->
+                        <tr class="esg-table-body__row search-sectionrow">
+
+                            <!-- ko if: $index() == 0 -->
+                            <!-- Show seat count or waitlist count depending on if there is a waitlist -->
+                            <td class="esg-table-body__td search-seatscell" align="center" data-bind="css: $data.getSeatsClass, attr: { 'rowspan': $parent.Section.FormattedMeetingTimes().length}" rowspan="1">
+                                <!-- ko if: $parent.Section.ShowWaitlistInfo() === false -->
+                                <span class="search-seatsavailabletext" data-bind="visible: $parent.Section.Available() !== null &amp;&amp; $parent.Section.Capacity() !== null, text: $parent.Section.Available()">6</span><span class="search-seatsavailabletext" data-bind="visible: $parent.Section.Capacity() === null" style="display: none;">Unlimited</span>
+                                <!-- /ko -->
+                                <!-- ko if: $parent.Section.ShowWaitlistInfo() === true --><!-- /ko -->
+                            </td>
+                            <!-- /ko -->
+                            <td class="esg-table-body__td search-sectiondaystime">
+                                <div>
+                                    <span class="search-meetingtimestext" data-bind="text: $data.DaysOfWeekDisplay() + ' ', attr: { id: 'section-'+$parent.Section.Id()+'-meeting-days-'+$index()}" id="section-25654-meeting-days-0">M/T/W/Th/F/Sa/Su </span>
+                                    <span class="search-meetingtimestext" data-bind="text: $data.StartTimeDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-start-'+$index()}" id="section-25654-meeting-times-start-0"></span>
+                                    <span class="search-meetingtimestext" data-bind="visible: (!isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !isNullOrEmpty($data.EndTimeDisplay()))" style="display: none;">
+                                        -
+                                    </span>
+                                    <span class="search-meetingtimestext" data-bind="text: $data.EndTimeDisplay, attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-end-'+$index()}" id="section-25654-meeting-times-end-0"></span>
+                                    <span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.EndTimeDisplay()) &amp;&amp; isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !($data.IsOnline()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-TBD-'+$index()}" id="section-25654-meeting-times-TBD-0">TBD</span>
+                                </div>
+                                <div>
+                                    <span class="search-meetingtimestext" data-bind="text: $data.DatesDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-dates-'+$index()}" id="section-25654-meeting-dates-0">8/17/2020 - 12/16/2020</span>
+                                </div>
+                            </td>
+                            <td class="esg-table-body__td search-sectionlocations">
+                                <div>
+                                    <span class="search-meetingtimestext" data-bind="text: $parent.Section.LocationDisplay(), visible: !isNullOrEmpty($parent.Section.LocationDisplay()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-location-'+$index() }" id="section-25654-meeting-location-0">On-Line</span><span class="search-meetingtimestext" data-bind="text: ', ', visible: !isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; (!isNullOrEmpty($data.BuildingDisplay()) || !isNullOrEmpty($data.RoomDisplay()))">, </span><span class="search-meetingtimestext" data-bind="text: $data.BuildingDisplay(), visible: !isNullOrEmpty($data.BuildingDisplay())">Internet Or Online</span><span class="search-meetingtimestext" data-bind="text: ' ' + $data.RoomDisplay(), visible: !isNullOrEmpty($data.RoomDisplay())"> IN1</span><span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.RoomDisplay()) &amp;&amp; isNullOrEmpty($data.BuildingDisplay()) &amp;&amp; isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; !($data.IsOnline())" style="display: none;">TBD</span>
+                                </div>
+                                <div>
+                                    <span class="search-meetingtimestext" data-bind="text: $data.InstructionalMethodDisplay(), attr: { id: 'section-'+$parent.Section.Id+'-meeting-instructional-method-'+$index() }" id="section-function t(){return 0<arguments.length?(t.tb(t[v],arguments[0])&amp;&amp;(t.ga(),t[v]=arguments[0],t.fa()),this):(s.l.oc(t),t[v])}-meeting-instructional-method-0">Classroom Hours</span>
+                                </div>
+                            </td>
+                            <td class="esg-table-body__td search-sectioninstructors">
+                                <div>
+                                    <span class="search-meetingtimestext" data-bind="text: $parent.FacultyDisplay(), visible: $parent.FacultyDisplay().length > 0  &amp;&amp; $index() == 0, attr: { id: 'section-'+$parent.Section.Id()+'-faculty-name-'+$index() }" id="section-25654-faculty-name-0">Dickens, D</span><span class="search-meetingtimestext" id="faculty-name-tbd" data-bind="visible: $parent.FacultyDisplay().length === 0" style="display: none;">TBD</span>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <!-- /ko -->
+                        <tr class="esg-table-body__row search-sectionrow" data-bind="visible: $data.Section.FormattedMeetingTimes().length === 0 || $data.Section.FormattedMeetingTimes() === null" style="display: none;">
+                            <td class="esg-table-body__td search-seatscell function(){if(!isNullOrEmpty(section))return t.Capacity!==null&amp;&amp;t.Available!==null&amp;&amp;t.Available===0?t.WaitlistAvailable===!0?&quot;search-sectionseatswaitlisted&quot;:&quot;search-sectionseatsnone&quot;:&quot;search-sectionseatsopen&quot;}" align="center" data-bind="css: $data.getSeatsClass, attr: {'rowspan':'1'}" rowspan="1">
+                                <!-- ko if: $data.Section.WaitlistAvailable() === false || $data.Section.Capacity() === null || $data.Section.Available() === null || $data.Section.Available() > 0 -->
+                                <span class="search-seatsavailabletext" data-bind="visible: $data.Section.Available() !== null &amp;&amp; $data.Section.Capacity() !== null, text: $data.Section.Available()">6</span><span class="search-seatsavailabletext" data-bind="visible: $data.Section.Capacity() === null" style="display: none;">Unlimited</span>
+                                <!-- /ko -->
+                                <!-- ko if: $data.Section.WaitlistAvailable() === true && $data.Section.Available() !== null && $data.Section.Capacity() !== null && $data.Section.Available() === 0 --><!-- /ko -->
+                            </td>
+                            <td class="esg-table-body__td search-sectiondaystime">
+                                Meeting Times TBD
+                            </td>
+                            <td class="esg-table-body__td search-sectionlocations"></td>
+                            <td class="esg-table-body__td search-sectioninstructors"></td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+        </ul>
+    </div>
 <!--/ko-->
     </div>
 </div></collapsible-group>
@@ -9183,7 +8704,7 @@
                     <div class="esg-collapsible-group__tertiary-content" data-bind="visible: hasTertiaryContent, template: tertiaryContent " style="display: none;"></div>
                 </div>
                 <span class="esg-collapsible-group__icon esg-icon__container" aria-hidden="true">
-                    <svg class="esg-icon esg-icon--up" data-bind="css: arrowIconClass">
+                    <svg class="esg-icon esg-icon--down" data-bind="css: arrowIconClass">
                         <!-- need to switch between icon--up and icon--down (same with the dropdown component)-->
                         <use xlink:href="#icon-arrow"></use>
                     </svg>
@@ -9191,10 +8712,10 @@
             </button>
         </div>
     </div>
-    <div class="esg-collapsible-group__body esg-is-open" role="tabpanel" data-bind="attr: { id: groupBodyId, 'aria-labelledby': groupHeaderId }, css: collapsibleClass" id="collapsible-view-available-sections-for-ECO-252-collapseBody" aria-labelledby="collapsible-view-available-sections-for-ECO-252-groupHeading">
+    <div class="esg-collapsible-group__body esg-is-collapsed" role="tabpanel" data-bind="attr: { id: groupBodyId, 'aria-labelledby': groupHeaderId }, css: collapsibleClass" id="collapsible-view-available-sections-for-ECO-252-collapseBody" aria-labelledby="collapsible-view-available-sections-for-ECO-252-groupHeading">
         <!--ko template: {nodes: $componentTemplateNodes, data: $parent}-->
     <!-- Spinner for section loading -->
-    <spinner id="spinner" params="isVisible: isLoading(), message: Ellucian.Course.SearchResult.stringCourseSearchResultLoadingSectionsText"><div data-bind="visible: isVisible, css: wrapperClass" class="esg-spinner-container" style="display: none;">
+    <spinner id="spinner" params="isVisible: isLoading(), message: Ellucian.Course.SearchResult.stringCourseSearchResultLoadingSectionsText"><div data-bind="visible: isVisible, css: wrapperClass" class="esg-spinner-container">
     <div class="esg-spinner-wrapper">
         <div class="esg-spinner"></div>
     </div>
@@ -9203,115 +8724,8 @@
     <!-- /ko -->
 </div></spinner>
     <!-- * Each Section * -->
-    <!-- ko with: TermsAndSections -->
-    <div data-bind="visible: $data.length == 0" style="display: none;">No sections match the current filters.</div>
-    <!-- /ko -->
-    <div data-bind="foreach: TermsAndSections">
-        <h4 data-bind="text: $data.Term.Description()">Fall 2020</h4>
-        <ul data-bind="foreach: Sections">
-            <li class="search-nestedaccordionitem">
-                <table class="esg-table esg-table--no-mobile esg-section--margin-bottom search-sectiontable">
-                    <caption class="search-sectionnamerow">
-                        <div class="esg-row">
-                            <div class="esg-col-xs-6">
-                                <a href="#" class="search-sectiondetailslink" data-bind="text: $data.Section.SectionNameDisplay(), click: function(data, event) { showSectionDetails({ course: $parents[1].Course, section: $data.Section, allowAdding: false, addTerms: null, addCallback: null, creditsOverride: null, studentId:null, canSkipWaitlist: false })}, attr: { 'aria-label': 'Details for ' + $parent.Term.Description() + ' ', id: 'section-'+$data.Section.Id() }" title="Show Section Details" aria-label="Details for Fall 2020 " id="section-25667">ECO-252-32D1</a>
-                                <!-- ko if: $data.Section.AdditionalFeesApply --><!-- /ko -->
-                                <!-- ko if: $data.Section.ShowSpecialIcon --><!-- /ko -->
-                                <section class="search-sectionnontermrow">
-                                    <span data-bind="text: $data.Section.SectionTitleDisplay(), attr: { id: 'section-title-'+$data.Section.Id()}" id="section-title-25667">Prin of Macroeconomics</span>
-                                </section>
-                                <section class="search-sectionnontermrow" data-bind="visible: $data.Section.IsNonTermOffering() || $data.Section.IsNonStandardDates()">
-                                    <span data-bind="visible: $data.Section.IsNonTermOffering()" style="display: none;">Non-Term Section:</span>
-                                    <span data-bind="visible: $data.Section.IsNonTermOffering(), text: ' ' + $data.Section.StartDateDisplay() + ' - ' + $data.Section.EndDateDisplay()" style="display: none;"> 10/14/2020 - 12/16/2020</span>
-                                    <span data-bind="visible: !$data.Section.IsNonTermOffering() &amp;&amp; $data.Section.IsNonStandardDates(), text: 'Runs from ' + $data.Section.StartDateDisplay() + ' - ' + $data.Section.EndDateDisplay(), attr: { id: 'nonterm-section-'+$data.Section.Id()+'-runs-from-dates'}" id="nonterm-section-25667-runs-from-dates">Runs from 10/14/2020 - 12/16/2020</span>
-                                </section>
-                            </div>
-                            <div class="esg-col-xs-6">
-                            </div>
-                        </div>
-                    </caption>
-                    <thead class="esg-table-head">
-                        <tr class="esg-table-head__row">
-                            <!-- ko if: $data.Section.ShowWaitlistInfo() === true --><!-- /ko -->
-                            <!-- ko if: $data.Section.ShowWaitlistInfo() === false -->
-                            <th class="esg-table-head__th search-sectiondetailsheader1">
-                                Seats
-                            </th>
-                            <!-- /ko -->
-
-                            <th class="esg-table-head__th search-sectiondetailsheader2">
-                                Times
-                            </th>
-                            <th class="esg-table-head__th search-sectiondetailsheader3">
-                                Locations
-                            </th>
-                            <th class="esg-table-head__th search-sectiondetailsheader4">
-                                Instructors
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody class="esg-table-body">
-                        <!-- ko foreach: $data.Section.FormattedMeetingTimes() -->
-                        <tr class="esg-table-body__row search-sectionrow">
-
-                            <!-- ko if: $index() == 0 -->
-                            <!-- Show seat count or waitlist count depending on if there is a waitlist -->
-                            <td class="esg-table-body__td search-seatscell" align="center" data-bind="css: $data.getSeatsClass, attr: { 'rowspan': $parent.Section.FormattedMeetingTimes().length}" rowspan="1">
-                                <!-- ko if: $parent.Section.ShowWaitlistInfo() === false -->
-                                <span class="search-seatsavailabletext" data-bind="visible: $parent.Section.Available() !== null &amp;&amp; $parent.Section.Capacity() !== null, text: $parent.Section.Available()">25</span><span class="search-seatsavailabletext" data-bind="visible: $parent.Section.Capacity() === null" style="display: none;">Unlimited</span>
-                                <!-- /ko -->
-                                <!-- ko if: $parent.Section.ShowWaitlistInfo() === true --><!-- /ko -->
-                            </td>
-                            <!-- /ko -->
-                            <td class="esg-table-body__td search-sectiondaystime">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.DaysOfWeekDisplay() + ' ', attr: { id: 'section-'+$parent.Section.Id()+'-meeting-days-'+$index()}" id="section-25667-meeting-days-0">M/T/W/Th/F/Sa/Su </span>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.StartTimeDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-start-'+$index()}" id="section-25667-meeting-times-start-0"></span>
-                                    <span class="search-meetingtimestext" data-bind="visible: (!isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !isNullOrEmpty($data.EndTimeDisplay()))" style="display: none;">
-                                        -
-                                    </span>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.EndTimeDisplay, attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-end-'+$index()}" id="section-25667-meeting-times-end-0"></span>
-                                    <span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.EndTimeDisplay()) &amp;&amp; isNullOrEmpty($data.StartTimeDisplay()) &amp;&amp; !($data.IsOnline()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-times-TBD-'+$index()}" id="section-25667-meeting-times-TBD-0">TBD</span>
-                                </div>
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.DatesDisplay(), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-dates-'+$index()}" id="section-25667-meeting-dates-0">10/14/2020 - 12/16/2020</span>
-                                </div>
-                            </td>
-                            <td class="esg-table-body__td search-sectionlocations">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $parent.Section.LocationDisplay(), visible: !isNullOrEmpty($parent.Section.LocationDisplay()), attr: { id: 'section-'+$parent.Section.Id()+'-meeting-location-'+$index() }" id="section-25667-meeting-location-0">On-Line</span><span class="search-meetingtimestext" data-bind="text: ', ', visible: !isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; (!isNullOrEmpty($data.BuildingDisplay()) || !isNullOrEmpty($data.RoomDisplay()))">, </span><span class="search-meetingtimestext" data-bind="text: $data.BuildingDisplay(), visible: !isNullOrEmpty($data.BuildingDisplay())">Internet Or Online</span><span class="search-meetingtimestext" data-bind="text: ' ' + $data.RoomDisplay(), visible: !isNullOrEmpty($data.RoomDisplay())"> IN1</span><span class="search-meetingtimestext" data-bind="visible: isNullOrEmpty($data.RoomDisplay()) &amp;&amp; isNullOrEmpty($data.BuildingDisplay()) &amp;&amp; isNullOrEmpty($parent.Section.LocationDisplay()) &amp;&amp; !($data.IsOnline())" style="display: none;">TBD</span>
-                                </div>
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $data.InstructionalMethodDisplay(), attr: { id: 'section-'+$parent.Section.Id+'-meeting-instructional-method-'+$index() }" id="section-function t(){return 0<arguments.length?(t.tb(t[v],arguments[0])&amp;&amp;(t.ga(),t[v]=arguments[0],t.fa()),this):(s.l.oc(t),t[v])}-meeting-instructional-method-0">Classroom Hours</span>
-                                </div>
-                            </td>
-                            <td class="esg-table-body__td search-sectioninstructors">
-                                <div>
-                                    <span class="search-meetingtimestext" data-bind="text: $parent.FacultyDisplay(), visible: $parent.FacultyDisplay().length > 0  &amp;&amp; $index() == 0, attr: { id: 'section-'+$parent.Section.Id()+'-faculty-name-'+$index() }" id="section-25667-faculty-name-0">Eze, J</span><span class="search-meetingtimestext" id="faculty-name-tbd" data-bind="visible: $parent.FacultyDisplay().length === 0" style="display: none;">TBD</span>
-                                </div>
-                            </td>
-
-                        </tr>
-                        <!-- /ko -->
-                        <tr class="esg-table-body__row search-sectionrow" data-bind="visible: $data.Section.FormattedMeetingTimes().length === 0 || $data.Section.FormattedMeetingTimes() === null" style="display: none;">
-                            <td class="esg-table-body__td search-seatscell function(){if(!isNullOrEmpty(section))return t.Capacity!==null&amp;&amp;t.Available!==null&amp;&amp;t.Available===0?t.WaitlistAvailable===!0?&quot;search-sectionseatswaitlisted&quot;:&quot;search-sectionseatsnone&quot;:&quot;search-sectionseatsopen&quot;}" align="center" data-bind="css: $data.getSeatsClass, attr: {'rowspan':'1'}" rowspan="1">
-                                <!-- ko if: $data.Section.WaitlistAvailable() === false || $data.Section.Capacity() === null || $data.Section.Available() === null || $data.Section.Available() > 0 -->
-                                <span class="search-seatsavailabletext" data-bind="visible: $data.Section.Available() !== null &amp;&amp; $data.Section.Capacity() !== null, text: $data.Section.Available()">25</span><span class="search-seatsavailabletext" data-bind="visible: $data.Section.Capacity() === null" style="display: none;">Unlimited</span>
-                                <!-- /ko -->
-                                <!-- ko if: $data.Section.WaitlistAvailable() === true && $data.Section.Available() !== null && $data.Section.Capacity() !== null && $data.Section.Available() === 0 --><!-- /ko -->
-                            </td>
-                            <td class="esg-table-body__td search-sectiondaystime">
-                                Meeting Times TBD
-                            </td>
-                            <td class="esg-table-body__td search-sectionlocations"></td>
-                            <td class="esg-table-body__td search-sectioninstructors"></td>
-
-                        </tr>
-                    </tbody>
-                </table>
-            </li>
-        </ul>
-    </div>
+    <!-- ko with: TermsAndSections --><!-- /ko -->
+    <div data-bind="foreach: TermsAndSections"></div>
 <!--/ko-->
     </div>
 </div></collapsible-group>

@@ -49,7 +49,7 @@ def next_page():
 
 def click_course_bnts(_courselist):
     collapsed = _courselist.find_elements_by_css_selector('button[class="esg-collapsible-group__toggle text-align-left"]')
-    print("# of courses: ", len(collapsed))
+    # print("# of courses: ", len(collapsed))
     for button in collapsed:
         button.click()
 
@@ -80,8 +80,9 @@ def get_school_data(url):
     # Extract Course and Section information from pages
     ######################
     last = int(get_total_pages())
-    for i in range(1,last):
-
+    print('total pages: ', last)
+    for i in range(1,last+1):
+        print('current page: ', i)
         # click all buttons on page
         courselist = driver.find_element_by_id("course-resultul")
         click_course_bnts(courselist)
@@ -93,7 +94,7 @@ def get_school_data(url):
             file.write(driver.page_source)
             if i != last:
                 next_page()
-                time.sleep(4)
+                time.sleep(2)
 
         # parse page
         #esg-section--margin-top esg-section--border
