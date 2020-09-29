@@ -87,12 +87,12 @@ def get_ss_school_data(dir_name, url, filt):
         time.sleep(8)
         html = driver.page_source
 
-        dir = "output/ss/" + dir_name
+        dir_ = "output/ss/" + dir_name
 
-        if not os.path.isdir(dir):
-            os.makedirs(dir)
+        if not os.path.isdir(dir_):
+            os.makedirs(dir_)
 
-        with open(dir + "/source_" + str(i) + ".html", "wb") as file:
+        with open(dir_ + "/source_" + str(i) + ".html", "wb") as file:
             file.write(html.encode('utf-8'))
             if i != last:
                 next_page()
