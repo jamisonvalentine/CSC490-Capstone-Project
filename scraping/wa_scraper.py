@@ -18,30 +18,37 @@ driver = webdriver.Chrome(PATH)
 
 
 def get_total_pages():
-    return driver.find_elements_by_css_select("//*[contains(text(), 'My Button')]")
+    box = driver.find_element_by_css_selector('td[align="right"]')
+    string = box.get_attribute("innerText").split(" ")
+    return string[3]
 
 def next_page():
-    next_btn = driver.find_elements_by_css_select('input[value="NEXT"]')
+    next_btn = driver.find_element_by_css_selector('input[value="NEXT"]')
     next_btn.click()
 
-def get_school_data(dir_name, url):
+def get_wa_school_data(dir_name, url, filt):
     driver.get(url)
     time.sleep(1)
 
-    tab = driver.find_elements_by_xpath("//span[contains(text(), 'Search for Sections')]")
+    tab = driver.find_element_by_xpath("//span[contains(text(), 'Search for Sections')]")
     tab.click()
     time.sleep(1)
 
     term = Select(driver.find_element_by_id("VAR1"))
     term.select_by_value("2020FA")
 
+    # loc = driver.find_element_by_css_selector("option[value='" + filt + "']")
+    loc = Select(driver.find_element_by_id("VAR6"))
+    loc.select_by_value(filt)
+    
+
     search_btn = driver.find_element_by_css_selector("input[value='SUBMIT']")
     search_btn.click()
-    time.sleep(10)
+    time.sleep(5)
 
+    ####################
+    ## Extract HTML
     #####################
-    # Extract HTML
-    ######################
     last = int(get_total_pages())
     print('total pages: ', last)
     for i in range(1, last+1):
@@ -51,7 +58,7 @@ def get_school_data(dir_name, url):
         time.sleep(3)
         html = driver.page_source
 
-        dir = "output/ww/" + dir_name
+        dir = "output/wa/" + dir_name
 
         if not os.path.isdir(dir):
             os.makedirs(dir)

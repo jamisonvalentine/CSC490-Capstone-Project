@@ -47,7 +47,7 @@ def click_course_bnts(_courselist):
 # interface either self service or webadvisor
 # pass 0 for self service
 # pass 1 for webadvisor
-def get_school_data(dir_name, url):
+def get_ss_school_data(dir_name, url, filt):
     driver.get(url)
     time.sleep(1)
 
@@ -58,8 +58,6 @@ def get_school_data(dir_name, url):
     term = Select(driver.find_elements_by_id("term-label-id")[1])
     term.select_by_value("2020FA")
 
-
-
     search_btn = driver.find_element_by_css_selector("input[value='Search']")
     search_btn.click()
     time.sleep(10)
@@ -68,7 +66,7 @@ def get_school_data(dir_name, url):
     # for filt in filters:
     #     print("id: ", filt.get_attribute("id"))
 
-    online_filter = driver.find_element_by_css_selector('label[for="STATIConlineCategoryOnline"]')
+    online_filter = driver.find_element_by_css_selector('label[for="' + filt + '"]')
     online_filter.click()
     time.sleep(2)
 
