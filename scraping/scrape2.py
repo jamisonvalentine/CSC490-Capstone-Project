@@ -28,19 +28,6 @@ driver = webdriver.Chrome(PATH)
 #		for each course:
 
 
-###############################
-# WedAdvisor
-###############################
-
-# get average number of pages per college
-# get total online classes per college
-
-# General process
-# 1) go to site
-# 2) click "Advanced Search" tab
-# 3) click "Location" dropdown/select
-# 4) Click "Internet Based Course" option
-
 def get_total_pages():
     return driver.find_element_by_css_selector("span[data-bind='text:TotalPages']").text
 
@@ -102,7 +89,7 @@ def get_school_data(dir_name, url):
         time.sleep(8)
         html = driver.page_source
 
-        dir = "output/" + dir_name
+        dir = "output/ss/" + dir_name
 
         if not os.path.isdir(dir):
             os.makedirs(dir)
