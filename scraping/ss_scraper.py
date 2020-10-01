@@ -42,6 +42,13 @@ def click_course_bnts(_courselist):
     for button in collapsed:
         button.click()
 
+def click_term_btns(_courselist):
+    collapsed = _courselist.find_elements_by_css_selector(
+        "div[class='esg-collapsible-group__body esg-is-open']")
+    time.sleep(2)
+    for button in collapsed:
+        button.click()
+
 
 
 # interface either self service or webadvisor
@@ -68,7 +75,7 @@ def get_ss_school_data(dir_name, url, filt):
 
     online_filter = driver.find_element_by_css_selector('label[for="' + filt + '"]')
     online_filter.click()
-    time.sleep(2)
+    time.sleep(5)
 
     #####################
     # Extract Course and Section information from pages
@@ -81,6 +88,9 @@ def get_ss_school_data(dir_name, url, filt):
         courselist = driver.find_element_by_id("course-resultul")
         time.sleep(2)
         click_course_bnts(courselist)
+
+        if url == "https://selfserve.waketech.edu/Student/Courses":
+            click_term_btns(courselist)
 
 
         # wait
@@ -96,7 +106,7 @@ def get_ss_school_data(dir_name, url, filt):
             file.write(html.encode('utf-8'))
             if i != last:
                 next_page()
-                time.sleep(2)
+                time.sleep(5)
 
         # parse page
         #esg-section--margin-top esg-section--border
