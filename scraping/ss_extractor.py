@@ -3,7 +3,7 @@ import pandas as pd
 import os
 
 
-courses = pd.DataFrame(columns=['college', 'section', 'seats', 'instructor'])
+courses = pd.DataFrame(columns=['college', 'section', 'seats', 'instructor', 'dates'])
 
 for root, dirs, files in os.walk("output/ss", topdown=False):
 #    print(len(files))
@@ -26,7 +26,7 @@ for root, dirs, files in os.walk("output/ss", topdown=False):
             instructor = i[0].select("div")[0].select("span")[0].get_text()
             row = college + "\t" + section + "\t" + seats + "\t" + dates + "\t" + instructor
             print(row)
-            row = {'college': college, "section": section, "seats": seats, "instructor":instructor}
+            row = {'college': college, "section": section, "seats": seats, "instructor":instructor, "dates": dates}
             courses = courses.append(row, ignore_index=True)
 
 

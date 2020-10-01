@@ -3,30 +3,40 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import os
 
-courses = pd.DataFrame(columns = ['college', 'section', 'seats', 'instructor'])
+courses = pd.DataFrame(columns = ['college', 'section', 'seats', 'instructor', 'dates'])
+soup = BeautifulSoup(open(
+    "output/wa/Caldwell Community College and Technical Institute/source_3.html"), 'html.parser')
 
-soup = BeautifulSoup(open("output/ss/Haywood Community College/source_3.html"), 'html.parser')
-# section_blocks = list(soup.select("li.search-nestedaccordionitem"))
+table = soup.find(summary="Sections")
+body = table.tbody
+a = {}
+rows = body.find_all("tr")
+header = rows[1]
+hcells = header.find_all("th")[:]
+print(len(hcells))
+for i, h in enumerate(hcells):
+    h = h.get_text()
+    if "Title" in h:
+        a["title"] = i
+    if "Credit" in h:
+        a["credits"] = i
+    if "Location" in h:
+        a["location"] = i
+    if "Faculty" in h:
+        a["instructor"] = i
+    if "Available" in h:
+        a["seats"] = i
+    if "Meeting" in h:
+        a["dates"] = i
 
-blocks = list(soup.select(
-    "table.esg-table.esg-table--no-mobile.esg-section--margin-bottom.search-sectiontable"))
-# print(list(blocks[0].tbody.contents[3]))
-college = "test"
-for b in blocks:
-    section = b.select('a')[0].get_text()
-    seats = b.select("span.search-seatsavailabletext")[0].get_text()
-    dates = b.select(
-        "td.search-sectiondaystime")[0].select("div")[1].span.get_text()
-    i = b.select("td.search-sectioninstructors")
-    instructor = i[0].select("div")[0].select("span")[0].get_text()
-    row = college + "\t" + section + "\t" + \
-        seats + "\t" + dates + "\t" + instructor
-    print(row)
-    row = {'college': college, "section": section,
-           "seats": seats, "instructor": instructor}
-    courses = courses.append(row, ignore_index=True)
+for row in rows[2:]:
+    cells = row.find_all("td")
+    section = cells[a["title"]].get_text().strip()
+    loc = cells[a["location"]].get_text().strip()
+    dates = cells[a["dates"]].get_text().strip()
+    instructor = cells[a["instructor"]].get_text().strip()
+    seats = cells[a["seats"]].get_text().strip()
+    credit = cells[a["credits"]].get_text().strip()
 
-courses.to_csv("courses.csv")
-print('# of courses: ', len(courses))
+    entry = {'college': college, "section": section,"seats": seats, "instructor": instructor, "dates": dates}
 
-print(courses)
