@@ -54,5 +54,5 @@ for root, dirs, files in os.walk("output/wa", topdown=False):
 
 
 
-courses.to_csv("wa_courses.csv")
+# courses.to_csv("wa_courses.csv")
 print('# of courses: ', len(courses))
