@@ -24,11 +24,12 @@ for root, dirs, files in os.walk("output/ss", topdown=False):
             dates = b.select("td.search-sectiondaystime")[0].select("div")[1].span.get_text()
             i = b.select("td.search-sectioninstructors")
             instructor = i[0].select("div")[0].select("span")[0].get_text()
+            location = b.select("td.search-sectionlocations").get_text()
             row = college + "\t" + section + "\t" + seats + "\t" + dates + "\t" + instructor
             print(row)
-            row = {'college': college, "section": section, "seats": seats, "instructor":instructor, "dates": dates}
+            row = {'college': college, "section": section, "location:": location, "instructor":instructor, "dates": dates}
             courses = courses.append(row, ignore_index=True)
 
 
-# courses.to_csv("courses.csv")
+courses.to_csv("ss_courses.csv")
 print('# of courses: ', len(courses))

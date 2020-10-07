@@ -73,9 +73,9 @@ def get_ss_school_data(dir_name, url, filt):
     # for filt in filters:
     #     print("id: ", filt.get_attribute("id"))
 
-    online_filter = driver.find_element_by_css_selector('label[for="' + filt + '"]')
-    online_filter.click()
-    time.sleep(5)
+    # online_filter = driver.find_element_by_css_selector('label[for="' + filt + '"]')
+    # online_filter.click()
+    # time.sleep(5)
 
     #####################
     # Extract Course and Section information from pages

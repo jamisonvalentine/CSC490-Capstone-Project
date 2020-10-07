@@ -18,12 +18,15 @@ driver = webdriver.Chrome(PATH)
 
 
 def get_total_pages():
-    box = driver.find_element_by_css_selector('td[align="right"]')
+    box = driver.find_element_by_xpath("//*[contains(text(), 'Page 1')]")
     string = box.get_attribute("innerText").split(" ")
     return string[3]
 
 def next_page():
-    next_btn = driver.find_element_by_css_selector('input[value="NEXT"]')
+    try:
+        next_btn = driver.find_element_by_css_selector('input[value="NEXT"]')
+    except:
+        next_btn = driver.find_element_by_xpath("//button[contains(text(), 'Next')]")
     next_btn.click()
 
 def get_wa_school_data(dir_name, url, filt):
@@ -35,16 +38,24 @@ def get_wa_school_data(dir_name, url, filt):
     time.sleep(1)
 
     term = Select(driver.find_element_by_id("VAR1"))
-    term.select_by_value("2020FA")
 
-    # loc = driver.find_element_by_css_selector("option[value='" + filt + "']")
-    loc = Select(driver.find_element_by_id("VAR6"))
-    loc.select_by_value(filt)
+    try:
+        term.select_by_value("2020FA")
+    except:
+        term.select_by_value("20/FA")
+
+
+    try:
+        # loc = driver.find_element_by_css_selector("option[value='" + filt + "']")
+        loc = Select(driver.find_element_by_id("VAR21"))
+        loc.select_by_value("CU")
+    except:
+        print("no CU value")
     
 
     search_btn = driver.find_element_by_css_selector("input[value='SUBMIT']")
     search_btn.click()
-    time.sleep(5)
+    time.sleep(30)
 
     ####################
     ## Extract HTML
@@ -68,7 +79,7 @@ def get_wa_school_data(dir_name, url, filt):
 
             if i != last:
                 next_page()
-                time.sleep(2)
+                time.sleep(1)
 
 
 
