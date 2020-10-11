@@ -1,8 +1,8 @@
 const router = require('express').Router();
-let Course = require('../models/uncgClass.model');
+let UncgCourse = require('../models/uncgClass.model');
 
 router.route('/').get((req, res) => {
-    Course.find()
+    UncgCourse.find()
       .then(course => res.json(course))
       .catch(err => res.status(400).json('Error: ' + err));
   });
@@ -11,7 +11,7 @@ router.route('/add').post((req, res) => {
     const uncgCourseID = req.body.uncgCourseID;
     const ccCourseID = req.body.ccCourseID;
   
-    const course = new Course({
+    const course = new UncgCourse({
       uncgCourseID, 
       ccCourseID
     });
@@ -22,7 +22,7 @@ router.route('/add').post((req, res) => {
   });
 
 router.route('/find').get((req, res) => {
-    Course.find({uncgCourseID: req.body.uncgCourseID})
+    UncgCourse.find({uncgCourseID: req.body.uncgCourseID})
       .then(course => res.json(course))
       .catch(err => res.status(400).json('Error: ' + err));
   });

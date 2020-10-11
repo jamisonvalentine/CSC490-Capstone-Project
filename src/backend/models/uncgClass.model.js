@@ -6,4 +6,4 @@ const uncgCourseSchema = new Schema({
     ccCourseID: {type: String, required:true}
 });
 
-module.exports = mongoose.model('Course', uncgCourseSchema);
+module.exports = mongoose.model('UncgCourse', uncgCourseSchema);
