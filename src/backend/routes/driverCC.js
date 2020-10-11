@@ -1,22 +1,20 @@
 const router = require('express').Router();
-let User = require('../models/user.model');
+let ComColCourse = require('../models/ccClass.model.js');
 
+// handle HTTP get requests on /course/ URL 
 router.route('/').get((req, res) => {
-  User.find()
-    .then(users => res.json(users))
+  ComColCourse.find()
+    .then(course => res.json(course))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/add').post((req, res) => {
-  const username = req.body.username;
 
-  const newUser = new User({username});
+// handles get request for /courses/find/ URL path
+router.route('/find').get((req, res) => {
 
+  ComColCourse.find({ComColCourseID: req.body.ComColCourse})
+      .then(course => res.json(course))
+      .catch(err => res.status(400).json('Error: ' + err));
+  });
 
-  newUser.save()
-    .then(() => res.json('User added!'))
-    .catch(err => res.status(400).json('Error: ' + err));
-
-});
-
-module.exports = router;
+  module.exports = router;
