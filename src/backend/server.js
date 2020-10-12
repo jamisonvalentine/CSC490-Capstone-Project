@@ -18,10 +18,12 @@ connection.once('open', () => {
   console.log("Connected to MongoDB");
 })
 
-const uncgCourseRouter = require('./test_routes/driverUNCG');
+const uncgCourseRouter = require('./routes/uncgRoute');
+const ccCourseRouter = require('./routes/ccRoute');
 
 
 app.use('/uncgcourse', uncgCourseRouter);
+app.use('/cccourse', ccCourseRouter);
 
 
 app.listen(port, () => {

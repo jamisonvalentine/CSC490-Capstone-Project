@@ -2,8 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const uncgCourseSchema = new Schema({
-    uncgCourseID: {type:String, requried:true},
-    ccCourseID: {type: String, required:true}
+    uncgCourseSubject: {type:String, request:true},
+    uncgClassID: {type:String, requried:true},
+    ccCourseSubject: {type:String, request:true},
+    ccClassID: {type: String, required:true}
 });
 
 module.exports = mongoose.model('UncgCourse', uncgCourseSchema);
