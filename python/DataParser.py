@@ -240,4 +240,4 @@ if __name__ == '__main__':
          })
 
     # save to CSV
-    newDF.to_csv("Output.csv")
+    newDF.to_csv("Parsed Wa Courses.csv")
