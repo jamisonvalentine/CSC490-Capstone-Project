@@ -225,16 +225,16 @@ if __name__ == '__main__':
     # construct new dataframe from old CSV and extracted values
     newDF = pd.DataFrame(
         {'College': collegeName,
-         'Credits:': collegeCredits,
+         'Credits': collegeCredits,
          'Instructor': collegeInstructor,
-         'Course Subject': globalSubject,
-         'Class ID': globalClassID,
-         'Section Number': globalSectionNumber,
-         'Course Name': globalCourseName,
-         'Time of Course': globalTimeOfCourse,
-         'Course Building': globalCourseBuilding,
-         'Course Room': globalRoom,
-         'Class Days': globalClassDays,
+         'CourseSubject': globalSubject,
+         'ClassID': globalClassID,
+         'SectionNumber': globalSectionNumber,
+         'CourseName': globalCourseName,
+         'TimeOfCourse': globalTimeOfCourse,
+         'CourseBuilding': globalCourseBuilding,
+         'CourseRoom': globalRoom,
+         'ClassDays': globalClassDays,
          'Dates': globalDateRange,
          'Location': globalLocations
          })
