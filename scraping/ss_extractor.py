@@ -31,5 +31,5 @@ for root, dirs, files in os.walk("output/ss", topdown=False):
             courses = courses.append(row, ignore_index=True)
 
 
-courses.to_csv("ss_courses.csv")
+# courses.to_csv("ss_courses.csv")
 print('# of courses: ', len(courses))

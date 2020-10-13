@@ -65,5 +65,5 @@ for root, dirs, files in os.walk("output/wa", topdown=False):
                     "credits": credit, "instructor": instructor, "dates": dates, "location": loc}
             courses = courses.append(entry, ignore_index=True)
 
-courses.to_csv("wa_courses.csv")
+# courses.to_csv("wa_courses.csv")
 print('# of courses: ', len(courses))
