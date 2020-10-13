@@ -1,4 +1,4 @@
-# Using 1 Self-service website and 1 Webadvisor site to test script
+# Examples of different interfaces
 # Self-Service: https://selfsvc.blueridge.edu/Student/courses
 # Webadvisor: https://online.blueridge.edu/WA/WebAdvisor?TOKENIDX=5857985298&SS=1&APP=ST&CONSTITUENCY=WBST
 
@@ -22,11 +22,13 @@ driver = webdriver.Chrome(PATH)
 # 1) go to site
 # 2) click "Advanced Search" tab
 # 3) click "Term" dropdown/select
-# 4) click "Location" dropdown/select
-# 5) Click "Internet Based /';Course" option
-#	for each page:
-#		for each course:
-
+# 4) select Fall 2020 option
+# 5) click Search
+# 6) get total pages
+# 7) click all collapsible buttons
+# 8) save html
+# 9) click next page
+# 10) repeat for all pages
 
 def get_total_pages():
     return driver.find_element_by_css_selector("span[data-bind='text:TotalPages']").text
@@ -50,10 +52,6 @@ def click_term_btns(_courselist):
         button.click()
 
 
-
-# interface either self service or webadvisor
-# pass 0 for self service
-# pass 1 for webadvisor
 def get_ss_school_data(dir_name, url, filt):
     driver.get(url)
     time.sleep(1)
@@ -108,32 +106,7 @@ def get_ss_school_data(dir_name, url, filt):
                 next_page()
                 time.sleep(5)
 
-        # parse page
-        #esg-section--margin-top esg-section--border
-        # courses = courselist.find_elements_by_tag_name("li")
 
-        # for each course
-        # for course in courses:
-        #     sections = course.find_elements_by_css_selector('ul[data-bind="foreach: Sections"]')
-
-        # for each section
-
-        # write to file
-
-
-        # if not last page -> next page
-
-
-
-# courses = <ul id=course-resultul" ... >
-# -> course = <li>
-# -> -> sections = <ul data-bind="foreach: Sections">
-# -> -> -> section = <li class="search-nestedaccordionitem">
-# -> -> -> ->
-
-
-# Total pages
-# total_pages = driver.find_element_by_css_selector("span[data-bind='text:TotalPages']").
 
 
 
