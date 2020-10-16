@@ -214,7 +214,7 @@ def extractSemesterLength(iterator):
     firstDate = datetime.strptime(firstDate, "%m-%d-%Y")
     secondDate = datetime.strptime(secondDate, "%m-%d-%Y")
 
-    # get time difference between days and divid by 7 to get weeks
+    # get time difference between days and divide by 7 to get weeks
     difference = abs((secondDate - firstDate).days) / 7
 
     # add rounded result to global list
