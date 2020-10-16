@@ -1,5 +1,6 @@
 import pandas as pd
 import re
+from datetime import datetime
 
 globalSubject = []
 globalClassID = []
@@ -11,19 +12,24 @@ globalRoom = []
 globalClassDays = []
 globalDateRange = []
 globalLocations = []
+globalSemesterWeeks = []
+globalTerm = []
 
 
-def printResults(counter):
-    print("Subject is: " + globalSubject[counter])
-    print("Class ID is: " + globalClassID[counter])
-    print("Section Number is: " + globalSectionNumber[counter])
-    print("Course Name is: " + globalCourseName[counter])
-    print("Time of Course is: " + globalTimeOfCourse[counter])
-    print("Building is: " + globalCourseBuilding[counter])
-    print("Course Room is: " + globalRoom[counter])
-    print("Class days are:  " + globalClassDays[counter])
-    print("Class date range is:  " + globalDateRange[counter])
-    print("Class location is:  " + globalLocations[counter])
+def printResults(iterator):
+    print("Subject is: " + globalSubject[iterator])
+    print("Class ID is: " + globalClassID[iterator])
+    print("Section Number is: " + globalSectionNumber[iterator])
+    print("Course Name is: " + globalCourseName[iterator])
+    print("Time of Course is: " + globalTimeOfCourse[iterator])
+    print("Building is: " + globalCourseBuilding[iterator])
+    print("Course Room is: " + globalRoom[iterator])
+    print("Class days are:  " + globalClassDays[iterator])
+    print("Class date range is:  " + globalDateRange[iterator])
+    print("Number of weeks in semester: ") + globalSemesterWeeks[iterator]
+    print("Class term is ") + globalTerm[iterator]
+    print("Class location is:  " + globalLocations[iterator])
+
 
     print("\n")
 
@@ -102,10 +108,6 @@ def extractCourseName(iterator):
 
     globalCourseName.append(nameOfCourse)
 
-
-def splitSection(iterator):
-    extractSubIDandNum(iterator)
-    extractCourseName(iterator)
 
 
 def extractTime(iterator):
@@ -194,8 +196,49 @@ def extractRoom(iterator):
     globalRoom.append(room)
 
 
+def extractSemesterLength(iterator):
+    dates = df.iloc[iterator, 5]
+
+    # extract left side after split on space to get date range
+    dateRange = dates.split()[0].strip()
+
+    dateSplit = dateRange.split("-")
+
+    # get date on left side
+    firstDate = dateSplit[0].replace("/", "-")
+
+    # get date on right side
+    secondDate = dateSplit[1].replace("/", "-")
+
+    # format with datetime module
+    firstDate = datetime.strptime(firstDate, "%m-%d-%Y")
+    secondDate = datetime.strptime(secondDate, "%m-%d-%Y")
+
+    # get time difference between days and divid by 7 to get weeks
+    difference = abs((secondDate - firstDate).days) / 7
+
+    # add rounded result to global list
+    globalSemesterWeeks.append(round(difference))
+
+
+def extractSemester():
+
+    globalTerm.append("Fall 2020")
+
+
+
+def splitSection(iterator):
+    extractSubIDandNum(iterator)
+    extractCourseName(iterator)
+
+
+
 def splitDates(iterator):
     extractDateRange(iterator)
+
+    extractSemester()
+
+    extractSemesterLength(iterator)
 
     extractDays(iterator)
 
@@ -236,6 +279,8 @@ if __name__ == '__main__':
          'CourseRoom': globalRoom,
          'ClassDays': globalClassDays,
          'Dates': globalDateRange,
+         'WeeksInSemester': globalSemesterWeeks,
+         'SemesterTerm': globalTerm,
          'Location': globalLocations
          })
 
