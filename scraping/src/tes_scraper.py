@@ -53,15 +53,20 @@ for index in df.index:
 
     # get pages
     pages = driver.find_element_by_css_selector("tr.pagination-tes")
-    pg_nums = pages.find_elements_by_tag_name("td")
+    pg_nums = pages.find_elements_by_tag_name("a")
     last = int(pg_nums[len(pg_nums) - 1].text)
     
     for i in range(last):
+        pages = driver.find_element_by_css_selector("tr.pagination-tes")
+        pg_nums = pages.find_elements_by_tag_name("a")
+
         print('current page: ', i+1)
+        print('last: ', last)
 
         # get html and save
 
         html = driver.page_source
+        print('source scraped')
 
         dir_ = "../output/tes/" + index
 
@@ -71,8 +76,10 @@ for index in df.index:
         with open(dir_ + "/source_" + str(i) + ".html", "wb") as file:
             file.write(html.encode('utf-8'))
         
-        if i != last:
-            pg_nums[i+1].click()
+        print('written')
+        if i != last-1:
+            time.sleep(2)
+            pg_nums[i].click()
             time.sleep(5)        
 
         # if not last → click next
