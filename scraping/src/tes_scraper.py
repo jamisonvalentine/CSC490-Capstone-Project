@@ -6,7 +6,7 @@ import os
 import time
 
 
-PATH = "../../selenium/chromedriver.exe"
+PATH = "../selenium/chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
 
