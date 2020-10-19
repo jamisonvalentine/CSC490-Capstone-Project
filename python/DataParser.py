@@ -13,7 +13,8 @@ globalClassDays = []
 globalDateRange = []
 globalLocations = []
 globalSemesterWeeks = []
-globalTerm = []
+globalSemester = []
+globalYear = []
 
 
 def printResults(iterator):
@@ -26,10 +27,10 @@ def printResults(iterator):
     print("Course Room is: " + globalRoom[iterator])
     print("Class days are:  " + globalClassDays[iterator])
     print("Class date range is:  " + globalDateRange[iterator])
-    print("Number of weeks in semester: ") + globalSemesterWeeks[iterator]
-    print("Class term is ") + globalTerm[iterator]
+    print("Number of weeks in semester: " + str(globalSemesterWeeks[iterator]))
+    print("Class semester is: " + globalSemester[iterator])
+    print("Class year is: " + globalYear[iterator])
     print("Class location is:  " + globalLocations[iterator])
-
 
     print("\n")
 
@@ -107,7 +108,6 @@ def extractCourseName(iterator):
         print("")
 
     globalCourseName.append(nameOfCourse)
-
 
 
 def extractTime(iterator):
@@ -214,7 +214,7 @@ def extractSemesterLength(iterator):
     firstDate = datetime.strptime(firstDate, "%m-%d-%Y")
     secondDate = datetime.strptime(secondDate, "%m-%d-%Y")
 
-    # get time difference between days and divide by 7 to get weeks
+    # get time difference between days and divid by 7 to get weeks
     difference = abs((secondDate - firstDate).days) / 7
 
     # add rounded result to global list
@@ -222,9 +222,11 @@ def extractSemesterLength(iterator):
 
 
 def extractSemester():
+    globalSemester.append("Fall")
 
-    globalTerm.append("Fall 2020")
 
+def extractYear():
+    globalYear.append("2020")
 
 
 def splitSection(iterator):
@@ -232,11 +234,12 @@ def splitSection(iterator):
     extractCourseName(iterator)
 
 
-
 def splitDates(iterator):
     extractDateRange(iterator)
 
     extractSemester()
+
+    extractYear()
 
     extractSemesterLength(iterator)
 
@@ -280,7 +283,8 @@ if __name__ == '__main__':
          'ClassDays': globalClassDays,
          'Dates': globalDateRange,
          'WeeksInSemester': globalSemesterWeeks,
-         'SemesterTerm': globalTerm,
+         'Semester': globalSemester,
+         'Year': globalYear,
          'Location': globalLocations
          })
 
