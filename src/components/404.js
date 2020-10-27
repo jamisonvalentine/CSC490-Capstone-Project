@@ -1,6 +1,4 @@
 import React from 'react';
-import Header from './lib/Header';
-import Footer from './lib/Footer';
 
 const Error = () => {
 
