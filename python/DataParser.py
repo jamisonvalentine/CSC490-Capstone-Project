@@ -18,6 +18,7 @@ globalSemesterWeeks = []
 globalSemester = []
 globalYear = []
 globalWebsite = []
+globalCost = []
 
 
 def printResults(iterator):
@@ -35,6 +36,7 @@ def printResults(iterator):
     print("Class year is: " + globalYear[iterator])
     print("Class location is:  " + globalLocations[iterator])
     print("Class website is:  " + globalWebsite[iterator])
+    print("Class cost is:  " + globalCost[iterator])
 
     print("\n")
 
@@ -271,6 +273,14 @@ def extractSemesterLength(iterator):
     globalSemesterWeeks.append(round(difference))
 
 
+def calculateCost(iterator):
+
+    credits = collegeCredits[iterator]
+    cost = int(credits * 76)
+
+    globalCost.append("$" + str(cost))
+
+
 def extractSemester():
     globalSemester.append("Fall")
 
@@ -317,6 +327,7 @@ if __name__ == '__main__':
         splitDates(i)
         standardizeOnline(i)
         addWebsite(i)
+        calculateCost(i)
         printResults(i)
 
     # construct new dataframe from old CSV and extracted values
@@ -328,6 +339,7 @@ if __name__ == '__main__':
          'ClassID': globalClassID,
          'SectionNumber': globalSectionNumber,
          'CourseName': globalCourseName,
+         'Cost': globalCost,
          'TimeOfCourse': globalTimeOfCourse,
          'CourseBuilding': globalCourseBuilding,
          'CourseRoom': globalRoom,
