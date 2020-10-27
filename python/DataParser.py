@@ -2,6 +2,8 @@ import pandas as pd
 import re
 from datetime import datetime
 
+
+
 globalSubject = []
 globalClassID = []
 globalSectionNumber = []
@@ -15,6 +17,7 @@ globalLocations = []
 globalSemesterWeeks = []
 globalSemester = []
 globalYear = []
+globalWebsite = []
 
 
 def printResults(iterator):
@@ -31,6 +34,7 @@ def printResults(iterator):
     print("Class semester is: " + globalSemester[iterator])
     print("Class year is: " + globalYear[iterator])
     print("Class location is:  " + globalLocations[iterator])
+    print("Class website is:  " + globalWebsite[iterator])
 
     print("\n")
 
@@ -68,6 +72,52 @@ def standardizeOnline(iterator):
         location = standardOnline
 
     globalLocations.append(location)
+
+
+def addWebsite(iterator):
+
+    website = ""
+
+    if "Alamance Community College" in collegeName[iterator] :
+        website = "https://www.alamancecc.edu/"
+    if "Blue Ridge Community College" in collegeName[iterator] :
+        website = "https://www.blueridge.edu/"
+    if "Caldwell Community College and Technical Institute" in collegeName[iterator] :
+        website = "https://www.cccti.edu/"
+    if "Cape Fear Community College" in collegeName[iterator] :
+        website = "https://cfcc.edu/"
+    if "Central Carolina Community College" in collegeName[iterator] :
+        website = "https://www.cccc.edu/"
+    if "Cleveland Community College" in collegeName[iterator]:
+        website = "https://clevelandcc.edu/"
+    if "College of the Albemarle" in collegeName[iterator]:
+        website = "https://www.albemarle.edu/"
+    if "Craven Community College" in collegeName[iterator]:
+        website = "https://cravencc.edu/"
+    if "Davidson County Community College" in collegeName[iterator]:
+        website = "https://www.davidsonccc.edu/"
+    if "Durham Technical Community College" in collegeName[iterator]:
+        website = "https://www.durhamtech.edu/"
+    if "Edgecombe Community College" in collegeName[iterator]:
+        website = "https://www.edgecombe.edu/"
+    if "Gaston College" in collegeName[iterator]:
+        website = "https://www.gaston.edu/"
+    if "Guilford Technical Community College" in collegeName[iterator]:
+        website = "https://www.gtcc.edu/"
+    if "Johnston Community College" in collegeName[iterator]:
+        website = "https://www.johnstoncc.edu/"
+    if "Lenoir Community College" in collegeName[iterator]:
+        website = "https://www.lenoircc.edu/"
+    if "Nash Community College" in collegeName[iterator]:
+        website = "https://www.nashcc.edu/"
+    if "Sandhills Community College" in collegeName[iterator]:
+        website = "https://www.sandhills.edu/"
+    if "Wayne Community College" in collegeName[iterator]:
+        website = "https://www.waynecc.edu/"
+
+
+    globalWebsite.append(website)
+
 
 
 def extractSubIDandNum(iterator):
@@ -266,6 +316,7 @@ if __name__ == '__main__':
         splitSection(i)
         splitDates(i)
         standardizeOnline(i)
+        addWebsite(i)
         printResults(i)
 
     # construct new dataframe from old CSV and extracted values
@@ -285,7 +336,8 @@ if __name__ == '__main__':
          'WeeksInSemester': globalSemesterWeeks,
          'Semester': globalSemester,
          'Year': globalYear,
-         'Location': globalLocations
+         'Location': globalLocations,
+         'Website': globalWebsite
          })
 
     # save to CSV
