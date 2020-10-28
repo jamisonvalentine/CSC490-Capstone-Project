@@ -80,41 +80,42 @@ def addWebsite(iterator):
 
     website = ""
 
+    
     if "Alamance Community College" in collegeName[iterator] :
         website = "https://www.alamancecc.edu/"
-    if "Blue Ridge Community College" in collegeName[iterator] :
+    elif "Blue Ridge Community College" in collegeName[iterator] :
         website = "https://www.blueridge.edu/"
-    if "Caldwell Community College and Technical Institute" in collegeName[iterator] :
+    elif "Caldwell Community College and Technical Institute" in collegeName[iterator] :
         website = "https://www.cccti.edu/"
-    if "Cape Fear Community College" in collegeName[iterator] :
+    elif "Cape Fear Community College" in collegeName[iterator] :
         website = "https://cfcc.edu/"
-    if "Central Carolina Community College" in collegeName[iterator] :
+    elif "Central Carolina Community College" in collegeName[iterator] :
         website = "https://www.cccc.edu/"
-    if "Cleveland Community College" in collegeName[iterator]:
+    elif "Cleveland Community College" in collegeName[iterator]:
         website = "https://clevelandcc.edu/"
-    if "College of the Albemarle" in collegeName[iterator]:
+    elif "College of the Albemarle" in collegeName[iterator]:
         website = "https://www.albemarle.edu/"
-    if "Craven Community College" in collegeName[iterator]:
+    elif "Craven Community College" in collegeName[iterator]:
         website = "https://cravencc.edu/"
-    if "Davidson County Community College" in collegeName[iterator]:
+    elif "Davidson County Community College" in collegeName[iterator]:
         website = "https://www.davidsonccc.edu/"
-    if "Durham Technical Community College" in collegeName[iterator]:
+    elif "Durham Technical Community College" in collegeName[iterator]:
         website = "https://www.durhamtech.edu/"
-    if "Edgecombe Community College" in collegeName[iterator]:
+    elif "Edgecombe Community College" in collegeName[iterator]:
         website = "https://www.edgecombe.edu/"
-    if "Gaston College" in collegeName[iterator]:
+    elif "Gaston College" in collegeName[iterator]:
         website = "https://www.gaston.edu/"
-    if "Guilford Technical Community College" in collegeName[iterator]:
+    elif "Guilford Technical Community College" in collegeName[iterator]:
         website = "https://www.gtcc.edu/"
-    if "Johnston Community College" in collegeName[iterator]:
+    elif "Johnston Community College" in collegeName[iterator]:
         website = "https://www.johnstoncc.edu/"
-    if "Lenoir Community College" in collegeName[iterator]:
+    elif "Lenoir Community College" in collegeName[iterator]:
         website = "https://www.lenoircc.edu/"
-    if "Nash Community College" in collegeName[iterator]:
+    elif "Nash Community College" in collegeName[iterator]:
         website = "https://www.nashcc.edu/"
-    if "Sandhills Community College" in collegeName[iterator]:
+    elif "Sandhills Community College" in collegeName[iterator]:
         website = "https://www.sandhills.edu/"
-    if "Wayne Community College" in collegeName[iterator]:
+    elif "Wayne Community College" in collegeName[iterator]:
         website = "https://www.waynecc.edu/"
 
 
