@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Modal({selectedCollege}) {
-    console.log(selectedCollege);
     return (
         <>
             {selectedCollege && (

@@ -19,7 +19,7 @@ router.route('/college').get((req, res) => {
 // handles get request for /courses/find/ URL path
 router.route('/find').get((req, res) => {
   let classType = req.query.classType;
-  let location = classType && classType === "All" ? {$exists : true} : classType;
+  let location = classType && classType === "All" ? {$in: ["Online", "Ofline"]} : classType;
 
   let searchQuery = {
     CourseSubject: req.query.CourseSubject, 

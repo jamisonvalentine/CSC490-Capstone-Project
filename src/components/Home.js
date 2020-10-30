@@ -18,11 +18,10 @@ const Home = () => {
     // Fetching data
     useEffect(() => {
         if(resultPage){
-            let course = searchQuery.id.toUpperCase().split(' ');
-            console.log(course)
+            let course = searchQuery.id.toUpperCase();
             axios.get("http://localhost:3000/cccourse/find",{
                 params : {
-                    "CourseSubject" : course[0],
+                    "CourseSubject" : course,
                     "classType" : searchQuery.type,
                     "year" : searchQuery.year,
                     "semester" : searchQuery.semester
@@ -30,7 +29,6 @@ const Home = () => {
             })
                 .then(res => {
                     setSearchData(res.data);
-                    console.log(res.data)
                 })
                 .catch(err => {
                     console.log(err)
