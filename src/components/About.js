@@ -20,10 +20,13 @@ const About = () => {
 
             <div className="container px-2 px-sm-5 py-5">
                 <p className="text-center">
-                    If you find a couse you need, you can sign up at the NC community college offering it and have the credits transferred to yout community colege or university. Contact your advisor before you register for courses at another college
+                    If you find a course you need, you can sign up at the NC community college offering it and have the credits transferred to your community colege or university. Contact your advisor before you register for courses at another college
                 </p>
 
-                <h5 className="text-center mb-3 font-weight-bold">List of Community college</h5>
+                <h4 style={{color: 'red'}}>Include CAA information here</h4>
+
+                <h5 className="text-center mb-3 font-weight-bold">List of Community Colleges</h5>
+
 
                 <div className="community_college_list list-group w-75 mx-auto">
                     {
@@ -33,7 +36,7 @@ const About = () => {
                             )
                         } ):
                         (
-                            <p>No college Found</p>
+                            <p>No Colleges Found</p>
                         )
                     }
                 </div>
