@@ -5,25 +5,19 @@ import pandas as pd
 import os
 import time
 
-# WORKFLOW:
-# for each college in index
-    # search college name in TES
-    # click correponding link
-    # change to 200 results
-    # get total pages
-    # for each page → get html
-    # build eq table
-
-# for each eq table
-    # for each remaining
-        # if in eq
-            # print college & eq row
 
 PATH = "../selenium/chromedriver.exe"
 driver = webdriver.Chrome(PATH)
 
+
+
+# ref for search box
+
 # Get list of schools
 df = pd.read_excel("../../data/input/list_of_colleges.xlsx", index_col = 'School')
+
+# import remaining
+
 
 # test workflow for one school
 for index in df.index:
@@ -90,4 +84,22 @@ for index in df.index:
 
         # if not last → click next
 
+
+
+
+
+
+
+# for each college in index
+    # search college name in TES
+    # click correponding link
+    # change to 200 results
+    # get total pages
+    # for each page → get html
+    # build eq table
+
+# for each eq table
+    # for each remaining
+        # if in eq
+            # print college & eq row
 

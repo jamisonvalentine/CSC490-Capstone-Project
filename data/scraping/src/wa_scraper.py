@@ -82,3 +82,25 @@ def get_wa_school_data(dir_name, url, filt):
                 time.sleep(1)
 
 
+
+
+
+
+
+
+
+
+
+
+# parse page
+#esg-section--margin-top esg-section--border
+# courses = courselist.find_elements_by_tag_name("li")
+
+# for each course
+# for course in courses:
+#     sections = course.find_elements_by_css_selector('ul[data-bind="foreach: Sections"]')
+
+# for each section
+
+
+
