@@ -2,8 +2,7 @@ import React from 'react';
 import Home from './components/Home';
 import {
   Switch,
-  Route,
-  match
+  Route
 } from "react-router-dom";
 import About from './components/About';
 import Error from './components/404';
