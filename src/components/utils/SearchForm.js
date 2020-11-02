@@ -25,7 +25,7 @@ function SearchForm(props) {
             <div className="d-flex flex-column justify-content-center align-items-center px-2 px-sm-5">
 
                 <h2 className="text-center font-weight-bold">
-                    Search available course from NC community colleges
+                    Search available courses from NC community colleges
                 </h2>
 
                 <h5 className="text-center mb-3">Please enter the following information to get started</h5>
