@@ -38,13 +38,13 @@ function SearchForm(props) {
                 </div>
 
                 <div className="form-group row w-75">
-                    <label htmlFor="academicYear" className="col-sm-4 col-form-label">Academic year</label>
+                    <label htmlFor="academicYear" className="col-sm-4 col-form-label">Academic Year</label>
                     <div className="col-sm-8">
                         <select id="academicYear" name="year" className="form-control" value={searchQuery.year} onChange={handleChange}>
                             <option value="2020">2020</option>
-                            <option value="2019">2019</option>
-                            <option value="2018">2018</option>
-                            <option value="2017">2017</option>
+                            <option value="2019">2021</option>
+                            <option value="2018">2022</option>
+                           
                         </select>
                     </div>
                 </div>
@@ -54,7 +54,7 @@ function SearchForm(props) {
                     <div className="col-sm-8">
                         <select id="semester" name="semester" className="form-control" value={searchQuery.semester} onChange={handleChange}>
                             <option value="Summer">Summer</option>
-                            <option value="Sall">Fall</option>
+                            <option value="Fall">Fall</option>
                             <option value="Winter">Winter</option>
                         </select>
                     </div>
@@ -64,8 +64,9 @@ function SearchForm(props) {
                     <label htmlFor="courseType" className="col-sm-4 col-form-label">Type of course</label>
                     <div className="col-sm-8">
                         <select id="courseType" name="type" className="form-control" value={searchQuery.type} onChange={handleChange}>
+                            <option value="All">All</option>
                             <option value="Online">Online</option>
-                            <option value="Ofline">Ofline</option>
+                            <option value="Ofline">On Campus</option>
                         </select>
                     </div>
                 </div>
