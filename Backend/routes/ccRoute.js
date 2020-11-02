@@ -8,12 +8,21 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// handle HTTP get requests on /course/college URL
+router.route('/college').get((req, res) => {
+  ComColCourse.find().distinct('College')
+    .then(course => res.json(course))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 
 // handles get request for /courses/find/ URL path
 router.route('/find').get((req, res) => {
-  ComColCourse.find({ClassID: req.body.ClassID, CourseSubject: req.body.CourseSubject})
+  let date = req.query.date;
+  ComColCourse.find({ClassID: req.query.ClassID, CourseSubject: req.query.CourseSubject, CourseRoom : req.query.classType})
       .then(course => res.json(course))
       .catch(err => res.status(400).json('Error: ' + err));
-  });
+  }
+);
 
-  module.exports = router;
+module.exports = router;
