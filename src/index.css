@@ -38,6 +38,19 @@ footer a {
     overflow-y: scroll;
 }
 
+<<<<<<< HEAD
 .table {
     background-color: rgb(209, 207, 207);
 }
+=======
+.search-result-table{
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+
+.table {
+    background-color: rgb(209, 207, 207);
+}
+
+>>>>>>> 34ff2340b7ef029e73cb5be892db303f445e77ad
