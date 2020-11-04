@@ -1,0 +1,613 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" class="wf-proximanova-n7-active wf-proximanova-i7-active wf-proximanova-n8-active wf-proximanova-n6-active wf-proximanova-i6-active wf-proximanova-n4-active wf-proximanova-i4-active wf-proximanova-n5-active wf-active"><head><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"><meta charset="iso-8859-1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>TES: Public View Management 01</title><link rel="shortcut icon" href="../img/favicons/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="../img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" href="../img/favicons/favicon-32x32.png" sizes="32x32"><link rel="icon" type="image/png" href="../img/favicons/favicon-16x16.png" sizes="16x16"><link rel="manifest" href="../img/favicons/manifest.json"><link rel="mask-icon" href="../img/favicons/safari-pinned-tab.svg"><meta name="theme-color" content="#ffffff"><link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"><link rel="stylesheet" type="text/css" href="../css/tes_modified_bootstrap.css">
+
+
+    <script type="text/javascript">
+        function validateTextBox() {
+            if (document.getElementById('tbxSearchTransferCollege').value.trim() == "") {
+                alert("Please enter search criteria into text box.");
+                document.getElementById('tbxSearchTransferCollege').focus();
+                    return false;
+                }
+            }
+    </script>
+
+
+    <script type="text/javascript">
+        function toggleHeaderCheckAll(objRef) {
+            $("#gdvCourseEQ input[name$='cbxRowsSelect']").each(function () {
+                $(this).prop('checked', objRef.checked);
+            });
+        }
+
+        function toggleRowsCheck() {
+            if ($("#gdvCourseEQ input[name$='cbxRowsSelect']").length == $("#gdvCourseEQ input[name$='cbxRowsSelect']:checked").length) {
+                $("#gdvCourseEQ input[name$='cbxHeaderCheckAll']").first().prop('checked', true);
+            }
+            else {
+                $("#gdvCourseEQ input[name$='cbxHeaderCheckAll']").first().prop('checked', false);
+            }
+        }
+    </script>
+
+    
+    <style type="text/css">
+        .reveal a:link {color: white;}
+        .reveal a:active, .reveal a:focus {color:#434343; border-collapse:collapse; border-color:white;}
+    </style><style type="text/css">.tk-proxima-nova{font-family:"proxima-nova",sans-serif;}</style><style type="text/css">@font-face{font-family:tk-proxima-nova-n7;src:url(https://use.typekit.net/af/86cd00/00000000000000003b9aec1f/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3) format("woff2"),url(https://use.typekit.net/af/86cd00/00000000000000003b9aec1f/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3) format("woff"),url(https://use.typekit.net/af/86cd00/00000000000000003b9aec1f/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3) format("opentype");font-weight:700;font-style:normal;font-display:auto;}@font-face{font-family:tk-proxima-nova-i7;src:url(https://use.typekit.net/af/ff2186/00000000000000003b9aec20/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3) format("woff2"),url(https://use.typekit.net/af/ff2186/00000000000000003b9aec20/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3) format("woff"),url(https://use.typekit.net/af/ff2186/00000000000000003b9aec20/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3) format("opentype");font-weight:700;font-style:italic;font-display:auto;}@font-face{font-family:tk-proxima-nova-n8;src:url(https://use.typekit.net/af/a1bc14/00000000000000003b9aec21/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n8&v=3) format("woff2"),url(https://use.typekit.net/af/a1bc14/00000000000000003b9aec21/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n8&v=3) format("woff"),url(https://use.typekit.net/af/a1bc14/00000000000000003b9aec21/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n8&v=3) format("opentype");font-weight:800;font-style:normal;font-display:auto;}@font-face{font-family:tk-proxima-nova-n6;src:url(https://use.typekit.net/af/05ec1c/00000000000000003b9aec29/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3) format("woff2"),url(https://use.typekit.net/af/05ec1c/00000000000000003b9aec29/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3) format("woff"),url(https://use.typekit.net/af/05ec1c/00000000000000003b9aec29/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3) format("opentype");font-weight:600;font-style:normal;font-display:auto;}@font-face{font-family:tk-proxima-nova-i6;src:url(https://use.typekit.net/af/b3b101/00000000000000003b9aec2a/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i6&v=3) format("woff2"),url(https://use.typekit.net/af/b3b101/00000000000000003b9aec2a/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i6&v=3) format("woff"),url(https://use.typekit.net/af/b3b101/00000000000000003b9aec2a/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i6&v=3) format("opentype");font-weight:600;font-style:italic;font-display:auto;}@font-face{font-family:tk-proxima-nova-n4;src:url(https://use.typekit.net/af/702309/00000000000000003b9aec27/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3) format("woff2"),url(https://use.typekit.net/af/702309/00000000000000003b9aec27/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3) format("woff"),url(https://use.typekit.net/af/702309/00000000000000003b9aec27/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3) format("opentype");font-weight:400;font-style:normal;font-display:auto;}@font-face{font-family:tk-proxima-nova-i4;src:url(https://use.typekit.net/af/59753e/00000000000000003b9aec28/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("woff2"),url(https://use.typekit.net/af/59753e/00000000000000003b9aec28/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("woff"),url(https://use.typekit.net/af/59753e/00000000000000003b9aec28/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("opentype");font-weight:400;font-style:italic;font-display:auto;}@font-face{font-family:tk-proxima-nova-n5;src:url(https://use.typekit.net/af/d9ceed/00000000000000003b9aec25/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3) format("woff2"),url(https://use.typekit.net/af/d9ceed/00000000000000003b9aec25/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3) format("woff"),url(https://use.typekit.net/af/d9ceed/00000000000000003b9aec25/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3) format("opentype");font-weight:500;font-style:normal;font-display:auto;}</style><style type="text/css">@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/86cd00/00000000000000003b9aec1f/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3) format("woff2"),url(https://use.typekit.net/af/86cd00/00000000000000003b9aec1f/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3) format("woff"),url(https://use.typekit.net/af/86cd00/00000000000000003b9aec1f/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3) format("opentype");font-weight:700;font-style:normal;font-display:auto;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/ff2186/00000000000000003b9aec20/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3) format("woff2"),url(https://use.typekit.net/af/ff2186/00000000000000003b9aec20/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3) format("woff"),url(https://use.typekit.net/af/ff2186/00000000000000003b9aec20/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3) format("opentype");font-weight:700;font-style:italic;font-display:auto;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/a1bc14/00000000000000003b9aec21/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n8&v=3) format("woff2"),url(https://use.typekit.net/af/a1bc14/00000000000000003b9aec21/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n8&v=3) format("woff"),url(https://use.typekit.net/af/a1bc14/00000000000000003b9aec21/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n8&v=3) format("opentype");font-weight:800;font-style:normal;font-display:auto;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/05ec1c/00000000000000003b9aec29/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3) format("woff2"),url(https://use.typekit.net/af/05ec1c/00000000000000003b9aec29/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3) format("woff"),url(https://use.typekit.net/af/05ec1c/00000000000000003b9aec29/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3) format("opentype");font-weight:600;font-style:normal;font-display:auto;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/b3b101/00000000000000003b9aec2a/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i6&v=3) format("woff2"),url(https://use.typekit.net/af/b3b101/00000000000000003b9aec2a/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i6&v=3) format("woff"),url(https://use.typekit.net/af/b3b101/00000000000000003b9aec2a/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i6&v=3) format("opentype");font-weight:600;font-style:italic;font-display:auto;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/702309/00000000000000003b9aec27/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3) format("woff2"),url(https://use.typekit.net/af/702309/00000000000000003b9aec27/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3) format("woff"),url(https://use.typekit.net/af/702309/00000000000000003b9aec27/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3) format("opentype");font-weight:400;font-style:normal;font-display:auto;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/59753e/00000000000000003b9aec28/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("woff2"),url(https://use.typekit.net/af/59753e/00000000000000003b9aec28/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("woff"),url(https://use.typekit.net/af/59753e/00000000000000003b9aec28/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("opentype");font-weight:400;font-style:italic;font-display:auto;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/d9ceed/00000000000000003b9aec25/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3) format("woff2"),url(https://use.typekit.net/af/d9ceed/00000000000000003b9aec25/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3) format("woff"),url(https://use.typekit.net/af/d9ceed/00000000000000003b9aec25/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3) format("opentype");font-weight:500;font-style:normal;font-display:auto;}</style>
+
+</head>
+
+
+<body class="" style="">
+
+    <div class="container">
+
+        <form method="post" action="./TES_publicview01.aspx?rid=200AB5D2-A95C-4895-9836-300D49A73FD1&amp;aid=CFC487EB-2770-451B-8B5D-A20C08DB6323" id="form1">
+<div class="aspNetHidden">
+
+
+
+
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=-1W_dGl0is4zmO_PRNw0tcKAWTCGJFEuPIZVHMCXw-FnVAztpEQztBWJRKEp95wM4J6-e4TbAQ7OnwsxQj2EvhL4rtP5A7vCouzJT867voE1&amp;t=637290505350350503" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=c1DgOxq-iVcj02Nc5g6Owr9vqFJBaxyE6mZvWrM6a8Lp3YWcDINt4DfRdUfM7e6eUHMVNNbX3zyILfIjpgzwWK3wQlueX8pQ1J2ZgSYOUUeTFukpdkEFUrdrt0jq7MyZ2uSjp1uSPFk0KwF71bpb-TxMgon9S_M6bp9SkODIB1U1&amp;t=ffffffffce034dab" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=gVNuRwJ43F46rVl-iDRDlwsFoq4Vjrm4vU68GcGp5U9HyXgzdpjqI618-CpEVHpFUMl1pcnjJzrZUqbY0dmMzlw4IwLM0acM3OvqRtPCViTNjHuSZd5bebCQ0HNQW_7VhBaeJzmoJnjYJClKyymwQp5fc97u0xYPTCK60t-CgYrTEcj__o-ImdLocoWtrZu-0&amp;t=ffffffffce034dab" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	
+	
+</div>
+
+            <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', ['tudpViewCourseEQDetail','udpViewCourseEQDetail','tudpAddCourseEQToMyList','udpAddCourseEQToMyList','tudpViewEQSearch','udpViewEQSearch','tudpPublicView','udpPublicView'], ['btnClearMyList','btnClearMyList','btnAddToMyEQList','btnAddToMyEQList','btnRefresh','btnRefresh'], ['btnExportToExcel','btnExportToExcel'], 90, '');
+//]]>
+</script>
+
+
+            
+            <div id="skip-nav" class="reveal" style="text-align: right; margin-right: 0px; margin-bottom: 0px;">
+                <a href="#main_content" title="Skip to page content">Skip to Page Content</a>
+            </div>
+
+            
+            <a name="main_content" id="main_content" tabindex="-1"></a>
+
+            <br>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div>
+                        <span id="lblPubViewHeader" class="publicview-pageheader">UNIVERSITY OF NORTH CAROLINA AT GREENSBORO</span>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+
+
+            
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div id="divBreadCrumb">
+
+                                
+
+                                <a id="btnSwitchView" title="Institution list" class="small-uppercase-bold" href="javascript:__doPostBack('btnSwitchView','')">Institution List</a>
+
+                                <img src="../img/TES-gray-arrow.jpg" width="9" height="11" alt="gray arrow" style="margin-bottom: 7px;">
+                                <span>EQUIVALENCY LIST</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    
+                    <div id="printCourseEQDetailModal">
+                        
+                        <div class="modal" id="viewCourseEQDetailModal" tabindex="-1" role="dialog" aria-labelledby="myViewCourseEQDetailModalLabel" aria-hidden="true" data-keyboard="true" data-backdrop="static">
+
+                            <div class="modal-dialog modal-lg">
+
+                                <div id="udpViewCourseEQDetail">
+
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" title="Close">×</button>
+                                                <div class="modal-title" id="myViewCourseEQDetailModalLabel" style="padding-bottom: 2px; float: left;">EQUIVALENCY DETAIL</div>
+                                            </div>
+
+                                            <div class="overflow-ceqproposal">
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="form-horizontal" style="margin-left: 15px; margin-right: 15px;">
+                                                            <div>
+                                                                <table style="width: 100%" border="0">
+                                                                    <tbody><tr>
+                                                                        <td style="vertical-align: top; width: 125px;">
+                                                                            <label class="small-uppercase-bold" for="lblBeginEffectiveDate">Begin Date:</label>
+                                                                        </td>
+                                                                        <td style="vertical-align: top;">
+                                                                            <span id="lblBeginEffectiveDate"></span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="vertical-align: top; width: 125px;">
+                                                                            <label class="small-uppercase-bold" for="lblEndEffectiveDate">End Date:</label>
+                                                                        </td>
+                                                                        <td style="vertical-align: top;">
+                                                                            <span id="lblEndEffectiveDate"></span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="vertical-align: top; width: 125px;">
+                                                                            <label class="small-uppercase-bold" for="lblCommentsPublic">Note:</label>
+                                                                        </td>
+                                                                        <td style="vertical-align: top;">
+                                                                            <span id="lblCommentsPublic"></span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody></table>
+                                                            </div>
+
+                                                            <br>
+                                                            <hr>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6" style="margin-bottom: 20px;">
+                                                                    <span id="lblSendInstitutionInfo" class="institution_name"></span>
+                                                                    <span id="lblSendCourseEQDetail"></span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <span id="lblReceiveInstitutionInfo" class="institution_name"></span>
+                                                                    <span id="lblReceiveCourseEQDetail"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    
+                    <div class="modal" id="addCourseEQToMyListModal" tabindex="-1" role="dialog" aria-labelledby="myAddCourseEQToMyListModalLabel" aria-hidden="true" data-keyboard="true" data-backdrop="static">
+
+                        <div class="modal-dialog modal-lg">
+
+                            <div id="udpAddCourseEQToMyList">
+
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" title="Close">×</button>
+
+                                            <div class="modal-title pageheader" id="myAddCourseEQToMyListModalLabel" style="padding-bottom: 2px; float: left;">MY LIST</div>
+
+                                            <div style="text-align: right;">
+                                                <a id="btnEmail" title="Email" class="btn-glyphicon-color" href="javascript:__doPostBack('btnEmail','')"><span class="glyphicon glyphicon-envelope"></span></a>&nbsp;&nbsp;
+                         
+                                                <a id="btnExportToExcel" title="Export to excel" class="btn-glyphicon-color" href="javascript:__doPostBack('btnExportToExcel','')"><span class="glyphicon glyphicon-export"></span></a>&nbsp;&nbsp;
+    
+                                                <a id="btnClearMyList" title="Clear my list" class="btn-glyphicon-color" href="javascript:__doPostBack('btnClearMyList','')"><span class="glyphicon glyphicon-refresh"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </div>
+                                        </div>
+
+
+                                        <div class="overflow-ceqproposal">
+
+                                            <div class="modal-body">
+
+                                                
+
+                                                <div style="clear: both;"></div>
+                                                <br>
+
+                                                <div id="divCourseEQInMyListContent" style="width: 100%;">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <span id="lblAddCourseEQToMyListMsg"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+
+                                                            <div>
+
+</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <br>
+                                                    <div class="modal-footer" style="text-align: center; font-size: 12px;">
+                                                        <div class="row">
+                                                            <div class="col-sm-12 publicview-footer">
+                                                                <p>
+                                                                    <b>DISCLAIMER:</b>
+                                                                    Transfer information on this site is provided by UNIVERSITY OF NORTH CAROLINA AT GREENSBORO.  CollegeSource® makes no claims or guarantees
+			                                                        regarding its use for student planning.  Further inquiries should be directed to UNIVERSITY OF NORTH CAROLINA AT GREENSBORO.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div style="margin-bottom: 10px; text-align: center;">
+                                                                    <div>Powered by:</div>
+                                                                    <div>
+                                                                        <img src="../img/TES-footer.png" alt="CSI logo" width="150">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    
+                    <div class="modal" id="viewEQSearchModal" tabindex="-1" role="dialog" aria-labelledby="myViewEQSearchModalLabel" aria-hidden="true" data-keyboard="true" data-backdrop="static" style="z-index: 99999; display: none;">
+                        <div class="modal-dialog modal-lg">
+                            <div id="udpViewEQSearch">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" title="Close">×</button>
+                                            <div style="padding-top: 0px; float: left;">
+                                                <img src="../img/TES-login.png" height="21" alt="TES login icon">&nbsp;&nbsp;
+                                            </div>
+                                            <div class="modal-title" id="myViewEQSearchModalLabel" style="padding-bottom: 2px; float: left;">EQUIVALENCY SEARCH</div>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-3" style="margin-top: 2px; padding-top: 0px;">Credits From:</label>
+                                                            <div class="col-sm-9">
+                                                                <span id="lblSendInstName" class="institution_name">ALAMANCE COMMUNITY COLLEGE</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-3" for="rblEffectiveDate">
+                                                                Effective Date:
+                                                            </label>
+                                                            <div class="col-sm-9">
+                                                                <table id="rblEffectiveDate" class="radio-inline-horizontal">
+	<tbody><tr>
+		<td><input id="rblEffectiveDate_0" type="radio" name="rblEffectiveDate" value="1" checked="checked"><label for="rblEffectiveDate_0">Active</label></td><td><input id="rblEffectiveDate_1" type="radio" name="rblEffectiveDate" value="2"><label for="rblEffectiveDate_1">In-Active</label></td><td><input id="rblEffectiveDate_2" type="radio" name="rblEffectiveDate" value="3"><label for="rblEffectiveDate_2">Both</label></td>
+	</tr>
+</tbody></table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-3" for="tbxCourseCode">
+                                                                Course Code:
+                                                            </label>
+                                                            <div class="col-sm-6">
+                                                                <div id="pnlCourseCode" onkeypress="javascript:return WebForm_FireDefaultButton(event, 'btnCourseEQSearch')">
+	
+                                                                    <input name="tbxCourseCode" type="text" maxlength="50" id="tbxCourseCode" class="form-control" placeholder="">
+                                                                
+</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-offset-3 col-sm-9">
+                                                                <table id="rblCourseCodeType" class="radio-inline-horizontal">
+	<tbody><tr>
+		<td><input id="rblCourseCodeType_0" type="radio" name="rblCourseCodeType" value="1" checked="checked"><label for="rblCourseCodeType_0">Transfer Course</label></td><td><input id="rblCourseCodeType_1" type="radio" name="rblCourseCodeType" value="2"><label for="rblCourseCodeType_1">Equivalent Course</label></td><td><input id="rblCourseCodeType_2" type="radio" name="rblCourseCodeType" value="3"><label for="rblCourseCodeType_2">Both</label></td>
+	</tr>
+</tbody></table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-3" for="ddlRecordsPerPage">
+                                                                Records Per Page:
+                                                            </label>
+                                                            <div class="col-sm-1">
+                                                                <select name="ddlRecordsPerPage" id="ddlRecordsPerPage" class="form-control" style="width:80px;">
+	<option value="25">25</option>
+	<option value="50">50</option>
+	<option value="100">100</option>
+	<option selected="selected" value="200">200</option>
+
+</select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-3" for="ddlSortListBy">
+                                                                Sort List By:
+                                                            </label>
+                                                            <div class="col-sm-4">
+                                                                <select name="ddlSortListBy" id="ddlSortListBy" class="form-control">
+	<option selected="selected" value="1">Transfer Course</option>
+	<option value="2">Equivalent Course</option>
+	<option value="3">Begin Date</option>
+	<option value="4">End Date</option>
+
+</select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-offset-3 col-sm-9" style="margin-top: 10px;">
+                                                                <a id="btnCourseEQSearch" title="Search" class="btn btn-primary btn-sm" href="javascript:__doPostBack('btnCourseEQSearch','')"><span class="glyphicon glyphicon-search"></span> Search</a>&nbsp;
+                                                                <a id="btnReset" title="Reset" class="btn btn-primary btn-sm" href="javascript:__doPostBack('btnReset','')"><span class="glyphicon glyphicon-refresh"></span> Reset</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div id="udpPublicView">
+
+                            <div class="row" style="margin-bottom: 5px;">
+                                <div class="col-sm-12" style="text-align: right;">
+
+                                    <a id="btnSearchEQ" title="Search equivalency" class="btn btn-primary btn-sm" href="javascript:__doPostBack('btnSearchEQ','')"><span class="glyphicon glyphicon-search"></span> Search</a>
+                                    <a id="btnRefresh" title="Refresh list" class="btn btn-primary btn-sm" href="javascript:__doPostBack('btnRefresh','')"><span class="glyphicon glyphicon-refresh"></span> Reset</a>
+
+                                    <a id="btnAddToMyEQList" title="Add/View my course equivalency list" class="btn btn-primary btn-sm" href="javascript:__doPostBack('btnAddToMyEQList','')"><span class="glyphicon glyphicon-plus"></span> Add/View My List</a>
+
+                                </div>
+                            </div>
+
+                            
+                            <div class="row">
+                                <div class="col-sm-12">
+
+                                    <span id="lblCourseEQPaginationInfo">PAGE 2 OF 2<br></span>
+
+                                    <div>
+	<table class="table table-condensed" cellspacing="0" currentsortfield="ActiveDateBegin" currentsortdirection="ASC" id="gdvCourseEQ" style="border-collapse:collapse;">
+		<tbody><tr class="pagination-tes" align="left">
+			<td colspan="7"><table>
+				<tbody><tr>
+					<td><a href="javascript:__doPostBack('gdvCourseEQ','Page$1')">1</a></td><td><span>2</span></td>
+				</tr>
+			</tbody></table></td>
+		</tr><tr>
+			<th scope="col">&nbsp;</th><th scope="col">ALAMANCE COMMUNITY COLLEGE</th><th scope="col">UNIVERSITY OF NORTH CAROLINA AT GREENSBORO</th><th title="Sort by Note?" scope="col"><a href="javascript:__doPostBack('gdvCourseEQ','Sort$CommentsPublic')">Note?</a></th><th title="Sort by Begin" align="left" scope="col"><a href="javascript:__doPostBack('gdvCourseEQ','Sort$ActiveDateBegin')">Begin</a></th><th title="Sort by End" align="left" scope="col"><a href="javascript:__doPostBack('gdvCourseEQ','Sort$ActiveDateEnd')">End</a></th><th align="center" scope="col">
+                                                    <div style="text-align: center;">
+                                                        <input id="gdvCourseEQ_cbxHeaderCheckAll" type="checkbox" name="gdvCourseEQ$ctl02$cbxHeaderCheckAll" onclick="toggleHeaderCheckAll(this);">
+                                                        <input type="hidden" name="gdvCourseEQ$ctl02$hdfHeaderCheckStatus" id="gdvCourseEQ_hdfHeaderCheckStatus">
+                                                    </div>
+                                                </th>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_0" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl03$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 111 ELEMENTARY SPANISH I (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 101 BEGINNING SPANISH I<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_0" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl03$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_0" type="checkbox" name="gdvCourseEQ$ctl03$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_1" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl04$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 112 ELEMENTARY SPANISH II (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 102 BEGINNING SPANISH II<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_1" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl04$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2001</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_1" type="checkbox" name="gdvCourseEQ$ctl04$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_2" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl05$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 141 CULTURE AND CIVILIZATION (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 000 SPANISH ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2011</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_2" type="checkbox" name="gdvCourseEQ$ctl05$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_3" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl06$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 181 SPANISH LAB 1 (1)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 000 SPANISH LAB<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2011</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_3" type="checkbox" name="gdvCourseEQ$ctl06$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_4" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl07$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 182 SPANISH LAB 2 (1)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 000 SPANISH LAB<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2011</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_4" type="checkbox" name="gdvCourseEQ$ctl07$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_5" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl08$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 211 INTERMEDIATE SPANISH I (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 203 INTERMEDIATE SPANISH I<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_5" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl08$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2001</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_5" type="checkbox" name="gdvCourseEQ$ctl08$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_6" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl09$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 212 INTERMEDIATE SPANISH II (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 204 INTERMEDIATE SPANISH II<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_6" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl09$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2001</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_6" type="checkbox" name="gdvCourseEQ$ctl09$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_7" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl10$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 221 SPANISH CONVERSATION (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 000 SPANISH ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_7" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl10$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2011</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_7" type="checkbox" name="gdvCourseEQ$ctl10$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_8" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl11$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 231 READING AND COMPOSITION (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 000 SPANISH ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_8" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl11$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2011</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_8" type="checkbox" name="gdvCourseEQ$ctl11$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr class="pagination-tes" align="left">
+			<td colspan="7"><table>
+				<tbody><tr>
+					<td><a href="javascript:__doPostBack('gdvCourseEQ','Page$1')">1</a></td><td><span>2</span></td>
+				</tr>
+			</tbody></table></td>
+		</tr>
+	</tbody></table>
+</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    <br>
+
+                    
+                
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <span id="lblSendUsEmail"><br><span class="alert_text_message">Question? Send us an email:<a href="mailto:transfercredit@uncg.edu" title="Send us an email" aria-label="Send us an email"></a></span><a href="mailto:transfercredit@uncg.edu" title="Send us an email" aria-label="Send us an email"><span class="btn btn-glyphicon-color btn-sm"><span class="glyphicon glyphicon-envelope"></span></span></a></span>
+                </div>
+            </div>
+
+        
+
+<script type="text/javascript">
+//<![CDATA[
+$('#viewEQSearchModal').modal('hide');//]]>
+</script>
+<span style="display: none !important;"><input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value=""></span><span style="display: none !important;"><input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value=""></span><span style="display: none !important;"><input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value=""></span><span style="display: none !important;"><input type="hidden" name="__SCROLLPOSITIONX" id="__SCROLLPOSITIONX" value="0"></span><span style="display: none !important;"><input type="hidden" name="__SCROLLPOSITIONY" id="__SCROLLPOSITIONY" value="0"></span><span style="display: none !important;"><input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="2N8KVgq50TE/b23DxUy76YeBXwR4AhUeWDQ1SmqBNAoC+OXyrJ9Q2S2oLSRp6JfQtq2pTTTtonyr1POSVY9my6SYP6EjdTxT35DGqFAOkSZXOq/VEEKgRerScNU0m6Qt41Cs7oHacaFewb/8Nh49Ygt5LntRnR+zwv9qjPzBxYWrMKZTYpxDvswE80qHxOw3x4WaFHdZvM2bhYprWDT9kRZDSG/8M2/ODis/PBsxXcNe44WGsaYB1xfubi2yZot2Zz9SN9l2SB7LEdB+bMWIrv6ddWIw7trf5zJDqUSDSJp/KhiqPgHYHSSKPvaG9MPzdAnreurMw3pL7IzQEb/lr/R+i9XpWqcBishX3KEYsSi6VNXGFyvW8G4qF9BOvY9MM8goNvMRwUZ2Z7snA5Kf+4oKIGUh7hrl01oKWWUrt39E6Rm3v+mVSdoNsOkfBa/9O5n9S2mWuUIDXp+fK9kH06wuFYmMKdpRzUU+W64/LOB/sMoFGLc1KKbYPslhreDrzJDYO2E2axMaFtNv573JsF2Ta0E6nsMjobeTWvJYtZWrl8f4GoGLEqR/bFyaVZqhphQcsTSaZlygqxl7/9ggf413flqPFvX9WYRRBK/yoAFN17pcWuDl2XBXdxQbVSCbC7bW6iCwtNlrjFtybPDiEsGb1PE46F602VmFdvpEm1iLX5VJYGnKO5MzkW/5odukTrYeBp9LU2a3OWZ/hAF1meb1cp3K6DGnOAaKcchveyG8xFaioK9j/zJtI2ClZyyIdBI0NTLM2QtqVF3Y03dKfLzxrKB7BKn5AEtvWT3zC3Xunr+/TldfTS6PjiSuGnmIIaUVK+uxmgTpn9OB+OOQXVzpqRd8vaa2yXEqXzeF5G0VWvk4K8dppncB2esTTWXuRM+D+HNa4Y/YUprajroVqYZ81NgkfIH2G0wLh2Ds5wedBRXFH3XW1SaYsOe3vyy0rKyxrCLPB7qxy6ahLhbi4k14HQvA+gYRjaqX1Ux23FlA+TD16QvIZTmHH2hkvxjefX2J1+N1/ujc3nxv0ULvFQfVs5ztpU++xsYWc6mTA8Cs05fbuTvwbYSX++HwZGhIVHh9AIOLvwX9kCa540K1cegbRu05GUictpTuU9Xxi57dB07zKEEkXsiiNtV4x1p/osFvHWqBrDK6z2YcLSrZ8Zs8+sejh694qS2mbJXmMp7SjAVxCgXtHaCisbdfv65fY55G3neUjGjQm3/gG2JYf353B4NZwxN1Fknsp/1oEoI3QzcbXU0067PUqYm7mIS2C5FHJkVoe1XgLccN7YNOcoiWtkWTYuOrOx2/+ztxkgE="></span><span style="display: none !important;"><input type="hidden" name="_VSTATE" id="_VSTATE" value="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"></span><span style="display: none !important;"><input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value=""></span></form>
+
+        <br>
+        <br>
+
+        <div id="divFooter">
+            <hr>
+            <footer>
+
+                <div class="row">
+                    <div class="col-sm-12 publicview-footer">
+                        <p>
+                            <b>DISCLAIMER:</b>
+                            Transfer information on this site is provided by UNIVERSITY OF NORTH CAROLINA AT GREENSBORO.  CollegeSource® makes no claims or guarantees
+			                regarding its use for student planning.  Further inquiries should be directed to UNIVERSITY OF NORTH CAROLINA AT GREENSBORO.
+                        </p>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div style="margin-bottom: 10px; text-align: center;">
+                            <div>Powered by:</div>
+                            <div>
+                                <img src="../img/TES-footer.png" alt="CSI logo" width="150">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+    </div>
+
+    
+    <script src="../js/jquery-2.2.1.min.js" type="text/javascript"></script>
+    <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+
+
+    
+    <script src="https://use.typekit.net/bxz8omf.js"></script>
+    <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
+
+
+
+
+
+
+</body></html>

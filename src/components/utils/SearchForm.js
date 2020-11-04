@@ -25,10 +25,10 @@ function SearchForm(props) {
             <div className="d-flex flex-column justify-content-center align-items-center px-2 px-sm-5">
 
                 <h2 className="text-center font-weight-bold">
-                    Search available course from NC community colleges.
+                    Search available course from NC community colleges
                 </h2>
 
-                <h5 className="text-center mb-3">Please enter the following information to get start</h5>
+                <h5 className="text-center mb-3">Please enter the following information to get started</h5>
 
                 <div className="form-group row w-75">
                     <label htmlFor="courseId" className="col-sm-4 col-form-label">Course ID</label>
@@ -66,7 +66,9 @@ function SearchForm(props) {
                         <select id="courseType" name="type" className="form-control" value={searchQuery.type} onChange={handleChange}>
                             <option value="All">All</option>
                             <option value="Online">Online</option>
-                            <option value="Ofline">Ofline</option>
+
+                            <option value="Offline">On Campus</option>
+
                         </select>
                     </div>
                 </div>
