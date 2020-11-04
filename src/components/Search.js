@@ -36,10 +36,10 @@ const Search = () => {
                             saveResults && saveResults.length > 0 ? saveResults.map (item => {
                                 return (
                                     <tr key={item._id}>
-                                        <th data-toggle="modal" data-target="#exampleModal" onClick={() => setSelectedCollege(item)}>{item.College}</th>
+                                        <th type="button" data-toggle="modal" data-target="#exampleModal" onClick={() => setSelectedCollege(item)}>{item.College}</th>
                                         <td>{`${item.CourseSubject} ${item.ClassID}`}</td>
                                         <td>{item.Credits}</td>
-                                        <td>Course Description</td>
+                                        <td>Course description</td>
                                         <td>${item.Credits * 76}</td>
                                     </tr>
 

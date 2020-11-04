@@ -40,12 +40,12 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData,setSe
             <h5 className="font-weight-bold text-center mb-3">Show search result for:</h5>
             <div className="row">
                 <div className="col-6 mb-3 mb-md-0 col-md-3">
-                    <p className="text-center">Course ID</p>
+                    <p className="text-center">Course id</p>
                     <input type="text" value={searchQuery.id} className="form-control" readOnly/>
                 </div>
 
                 <div className="col-6 mb-3 mb-md-0 col-md-3">
-                    <p className="text-center">Acedemic year</p>
+                    <p className="text-center">Acedemic Year</p>
                     <input type="text" value={searchQuery.year} className="form-control" readOnly/>
                 </div>
 
@@ -60,11 +60,8 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData,setSe
                 </div>
             </div>
 
-
-            
-            
             <div className="search-result-table table-responsive-lg my-4" ref={tableRef}>
-                <table  className="table">
+                <table className="table">
                     <thead>
                         <tr>
                             <th scope="col">Name of Community college</th>
@@ -80,10 +77,10 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData,setSe
                         searchData && searchData.length > 0 ? searchData.map (item => {
                             return (
                                 <tr key={item._id}>
-                                    <th>{item.College}</th>
+                                    <th >{item.College}</th>
                                     <td>{`${item.CourseSubject} ${item.ClassID}`}</td>
                                     <td>{item.Credits}</td>
-                                    <td data-toggle="modal" data-target="#exampleModal" onClick={() => setSelectedCollege(item)}> Click here for more information</td>
+                                    <td type="button" data-toggle="modal" data-target="#exampleModal" onClick={() => setSelectedCollege(item)}>Course Description</td>
                                     <td>${item.Credits * 76}</td>
                                 </tr>
 
@@ -115,8 +112,7 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData,setSe
                 <button className="btn text-light bg-primary-custom mr-2" onClick={handleSave}>Save Result</button>
                 <button className="btn text-light bg-primary-custom mr-2" onClick={handlePrint}>Download Pdf</button>
             </div>
-
-           
+            
             <Modal selectedCollege={selectedCollege}/>
         </div>
     );
