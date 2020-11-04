@@ -1,0 +1,1309 @@
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" class="wf-proximanova-n7-active wf-proximanova-i7-active wf-proximanova-n8-active wf-proximanova-n6-active wf-proximanova-i6-active wf-proximanova-n4-active wf-proximanova-i4-active wf-proximanova-n5-active wf-active"><head><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"><meta charset="iso-8859-1"><meta name="viewport" content="width=device-width, initial-scale=1"><title>TES: Public View Management 01</title><link rel="shortcut icon" href="../img/favicons/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="../img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" href="../img/favicons/favicon-32x32.png" sizes="32x32"><link rel="icon" type="image/png" href="../img/favicons/favicon-16x16.png" sizes="16x16"><link rel="manifest" href="../img/favicons/manifest.json"><link rel="mask-icon" href="../img/favicons/safari-pinned-tab.svg"><meta name="theme-color" content="#ffffff"><link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"><link rel="stylesheet" type="text/css" href="../css/tes_modified_bootstrap.css">
+
+
+    <script type="text/javascript">
+        function validateTextBox() {
+            if (document.getElementById('tbxSearchTransferCollege').value.trim() == "") {
+                alert("Please enter search criteria into text box.");
+                document.getElementById('tbxSearchTransferCollege').focus();
+                    return false;
+                }
+            }
+    </script>
+
+
+    <script type="text/javascript">
+        function toggleHeaderCheckAll(objRef) {
+            $("#gdvCourseEQ input[name$='cbxRowsSelect']").each(function () {
+                $(this).prop('checked', objRef.checked);
+            });
+        }
+
+        function toggleRowsCheck() {
+            if ($("#gdvCourseEQ input[name$='cbxRowsSelect']").length == $("#gdvCourseEQ input[name$='cbxRowsSelect']:checked").length) {
+                $("#gdvCourseEQ input[name$='cbxHeaderCheckAll']").first().prop('checked', true);
+            }
+            else {
+                $("#gdvCourseEQ input[name$='cbxHeaderCheckAll']").first().prop('checked', false);
+            }
+        }
+    </script>
+
+    
+    <style type="text/css">
+        .reveal a:link {color: white;}
+        .reveal a:active, .reveal a:focus {color:#434343; border-collapse:collapse; border-color:white;}
+    </style><style type="text/css">.tk-proxima-nova{font-family:"proxima-nova",sans-serif;}</style><style type="text/css">@font-face{font-family:tk-proxima-nova-n7;src:url(https://use.typekit.net/af/86cd00/00000000000000003b9aec1f/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3) format("woff2"),url(https://use.typekit.net/af/86cd00/00000000000000003b9aec1f/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3) format("woff"),url(https://use.typekit.net/af/86cd00/00000000000000003b9aec1f/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3) format("opentype");font-weight:700;font-style:normal;font-display:auto;}@font-face{font-family:tk-proxima-nova-i7;src:url(https://use.typekit.net/af/ff2186/00000000000000003b9aec20/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3) format("woff2"),url(https://use.typekit.net/af/ff2186/00000000000000003b9aec20/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3) format("woff"),url(https://use.typekit.net/af/ff2186/00000000000000003b9aec20/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3) format("opentype");font-weight:700;font-style:italic;font-display:auto;}@font-face{font-family:tk-proxima-nova-n8;src:url(https://use.typekit.net/af/a1bc14/00000000000000003b9aec21/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n8&v=3) format("woff2"),url(https://use.typekit.net/af/a1bc14/00000000000000003b9aec21/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n8&v=3) format("woff"),url(https://use.typekit.net/af/a1bc14/00000000000000003b9aec21/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n8&v=3) format("opentype");font-weight:800;font-style:normal;font-display:auto;}@font-face{font-family:tk-proxima-nova-n6;src:url(https://use.typekit.net/af/05ec1c/00000000000000003b9aec29/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3) format("woff2"),url(https://use.typekit.net/af/05ec1c/00000000000000003b9aec29/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3) format("woff"),url(https://use.typekit.net/af/05ec1c/00000000000000003b9aec29/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3) format("opentype");font-weight:600;font-style:normal;font-display:auto;}@font-face{font-family:tk-proxima-nova-i6;src:url(https://use.typekit.net/af/b3b101/00000000000000003b9aec2a/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i6&v=3) format("woff2"),url(https://use.typekit.net/af/b3b101/00000000000000003b9aec2a/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i6&v=3) format("woff"),url(https://use.typekit.net/af/b3b101/00000000000000003b9aec2a/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i6&v=3) format("opentype");font-weight:600;font-style:italic;font-display:auto;}@font-face{font-family:tk-proxima-nova-n4;src:url(https://use.typekit.net/af/702309/00000000000000003b9aec27/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3) format("woff2"),url(https://use.typekit.net/af/702309/00000000000000003b9aec27/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3) format("woff"),url(https://use.typekit.net/af/702309/00000000000000003b9aec27/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3) format("opentype");font-weight:400;font-style:normal;font-display:auto;}@font-face{font-family:tk-proxima-nova-i4;src:url(https://use.typekit.net/af/59753e/00000000000000003b9aec28/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("woff2"),url(https://use.typekit.net/af/59753e/00000000000000003b9aec28/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("woff"),url(https://use.typekit.net/af/59753e/00000000000000003b9aec28/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("opentype");font-weight:400;font-style:italic;font-display:auto;}@font-face{font-family:tk-proxima-nova-n5;src:url(https://use.typekit.net/af/d9ceed/00000000000000003b9aec25/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3) format("woff2"),url(https://use.typekit.net/af/d9ceed/00000000000000003b9aec25/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3) format("woff"),url(https://use.typekit.net/af/d9ceed/00000000000000003b9aec25/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3) format("opentype");font-weight:500;font-style:normal;font-display:auto;}</style><style type="text/css">@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/86cd00/00000000000000003b9aec1f/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3) format("woff2"),url(https://use.typekit.net/af/86cd00/00000000000000003b9aec1f/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3) format("woff"),url(https://use.typekit.net/af/86cd00/00000000000000003b9aec1f/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n7&v=3) format("opentype");font-weight:700;font-style:normal;font-display:auto;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/ff2186/00000000000000003b9aec20/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3) format("woff2"),url(https://use.typekit.net/af/ff2186/00000000000000003b9aec20/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3) format("woff"),url(https://use.typekit.net/af/ff2186/00000000000000003b9aec20/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i7&v=3) format("opentype");font-weight:700;font-style:italic;font-display:auto;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/a1bc14/00000000000000003b9aec21/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n8&v=3) format("woff2"),url(https://use.typekit.net/af/a1bc14/00000000000000003b9aec21/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n8&v=3) format("woff"),url(https://use.typekit.net/af/a1bc14/00000000000000003b9aec21/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n8&v=3) format("opentype");font-weight:800;font-style:normal;font-display:auto;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/05ec1c/00000000000000003b9aec29/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3) format("woff2"),url(https://use.typekit.net/af/05ec1c/00000000000000003b9aec29/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3) format("woff"),url(https://use.typekit.net/af/05ec1c/00000000000000003b9aec29/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n6&v=3) format("opentype");font-weight:600;font-style:normal;font-display:auto;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/b3b101/00000000000000003b9aec2a/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i6&v=3) format("woff2"),url(https://use.typekit.net/af/b3b101/00000000000000003b9aec2a/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i6&v=3) format("woff"),url(https://use.typekit.net/af/b3b101/00000000000000003b9aec2a/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i6&v=3) format("opentype");font-weight:600;font-style:italic;font-display:auto;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/702309/00000000000000003b9aec27/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3) format("woff2"),url(https://use.typekit.net/af/702309/00000000000000003b9aec27/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3) format("woff"),url(https://use.typekit.net/af/702309/00000000000000003b9aec27/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n4&v=3) format("opentype");font-weight:400;font-style:normal;font-display:auto;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/59753e/00000000000000003b9aec28/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("woff2"),url(https://use.typekit.net/af/59753e/00000000000000003b9aec28/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("woff"),url(https://use.typekit.net/af/59753e/00000000000000003b9aec28/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=i4&v=3) format("opentype");font-weight:400;font-style:italic;font-display:auto;}@font-face{font-family:proxima-nova;src:url(https://use.typekit.net/af/d9ceed/00000000000000003b9aec25/27/l?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3) format("woff2"),url(https://use.typekit.net/af/d9ceed/00000000000000003b9aec25/27/d?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3) format("woff"),url(https://use.typekit.net/af/d9ceed/00000000000000003b9aec25/27/a?primer=7cdcb44be4a7db8877ffa5c0007b8dd865b3bbc383831fe2ea177f62257a9191&fvd=n5&v=3) format("opentype");font-weight:500;font-style:normal;font-display:auto;}</style>
+
+</head>
+
+
+<body class="" style="">
+
+    <div class="container">
+
+        <form method="post" action="./TES_publicview01.aspx?rid=200AB5D2-A95C-4895-9836-300D49A73FD1&amp;aid=CFC487EB-2770-451B-8B5D-A20C08DB6323" id="form1">
+<div class="aspNetHidden">
+
+
+
+
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="/WebResource.axd?d=-1W_dGl0is4zmO_PRNw0tcKAWTCGJFEuPIZVHMCXw-FnVAztpEQztBWJRKEp95wM4J6-e4TbAQ7OnwsxQj2EvhL4rtP5A7vCouzJT867voE1&amp;t=637290505350350503" type="text/javascript"></script>
+
+
+<script src="/ScriptResource.axd?d=c1DgOxq-iVcj02Nc5g6Owr9vqFJBaxyE6mZvWrM6a8Lp3YWcDINt4DfRdUfM7e6eUHMVNNbX3zyILfIjpgzwWK3wQlueX8pQ1J2ZgSYOUUeTFukpdkEFUrdrt0jq7MyZ2uSjp1uSPFk0KwF71bpb-TxMgon9S_M6bp9SkODIB1U1&amp;t=ffffffffce034dab" type="text/javascript"></script>
+<script src="/ScriptResource.axd?d=gVNuRwJ43F46rVl-iDRDlwsFoq4Vjrm4vU68GcGp5U9HyXgzdpjqI618-CpEVHpFUMl1pcnjJzrZUqbY0dmMzlw4IwLM0acM3OvqRtPCViTNjHuSZd5bebCQ0HNQW_7VhBaeJzmoJnjYJClKyymwQp5fc97u0xYPTCK60t-CgYrTEcj__o-ImdLocoWtrZu-0&amp;t=ffffffffce034dab" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	
+	
+</div>
+
+            <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', ['tudpViewCourseEQDetail','udpViewCourseEQDetail','tudpAddCourseEQToMyList','udpAddCourseEQToMyList','tudpViewEQSearch','udpViewEQSearch','tudpPublicView','udpPublicView'], ['btnClearMyList','btnClearMyList','btnAddToMyEQList','btnAddToMyEQList','btnRefresh','btnRefresh'], ['btnExportToExcel','btnExportToExcel'], 90, '');
+//]]>
+</script>
+
+
+            
+            <div id="skip-nav" class="reveal" style="text-align: right; margin-right: 0px; margin-bottom: 0px;">
+                <a href="#main_content" title="Skip to page content">Skip to Page Content</a>
+            </div>
+
+            
+            <a name="main_content" id="main_content" tabindex="-1"></a>
+
+            <br>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div>
+                        <span id="lblPubViewHeader" class="publicview-pageheader">UNIVERSITY OF NORTH CAROLINA AT GREENSBORO</span>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+
+
+            
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div id="divBreadCrumb">
+
+                                
+
+                                <a id="btnSwitchView" title="Institution list" class="small-uppercase-bold" href="javascript:__doPostBack('btnSwitchView','')">Institution List</a>
+
+                                <img src="../img/TES-gray-arrow.jpg" width="9" height="11" alt="gray arrow" style="margin-bottom: 7px;">
+                                <span>EQUIVALENCY LIST</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    
+                    <div id="printCourseEQDetailModal">
+                        
+                        <div class="modal" id="viewCourseEQDetailModal" tabindex="-1" role="dialog" aria-labelledby="myViewCourseEQDetailModalLabel" aria-hidden="true" data-keyboard="true" data-backdrop="static">
+
+                            <div class="modal-dialog modal-lg">
+
+                                <div id="udpViewCourseEQDetail">
+
+                                        <div class="modal-content">
+
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" title="Close">×</button>
+                                                <div class="modal-title" id="myViewCourseEQDetailModalLabel" style="padding-bottom: 2px; float: left;">EQUIVALENCY DETAIL</div>
+                                            </div>
+
+                                            <div class="overflow-ceqproposal">
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="form-horizontal" style="margin-left: 15px; margin-right: 15px;">
+                                                            <div>
+                                                                <table style="width: 100%" border="0">
+                                                                    <tbody><tr>
+                                                                        <td style="vertical-align: top; width: 125px;">
+                                                                            <label class="small-uppercase-bold" for="lblBeginEffectiveDate">Begin Date:</label>
+                                                                        </td>
+                                                                        <td style="vertical-align: top;">
+                                                                            <span id="lblBeginEffectiveDate"></span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="vertical-align: top; width: 125px;">
+                                                                            <label class="small-uppercase-bold" for="lblEndEffectiveDate">End Date:</label>
+                                                                        </td>
+                                                                        <td style="vertical-align: top;">
+                                                                            <span id="lblEndEffectiveDate"></span>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="vertical-align: top; width: 125px;">
+                                                                            <label class="small-uppercase-bold" for="lblCommentsPublic">Note:</label>
+                                                                        </td>
+                                                                        <td style="vertical-align: top;">
+                                                                            <span id="lblCommentsPublic"></span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody></table>
+                                                            </div>
+
+                                                            <br>
+                                                            <hr>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6" style="margin-bottom: 20px;">
+                                                                    <span id="lblSendInstitutionInfo" class="institution_name"></span>
+                                                                    <span id="lblSendCourseEQDetail"></span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <span id="lblReceiveInstitutionInfo" class="institution_name"></span>
+                                                                    <span id="lblReceiveCourseEQDetail"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    
+                    <div class="modal" id="addCourseEQToMyListModal" tabindex="-1" role="dialog" aria-labelledby="myAddCourseEQToMyListModalLabel" aria-hidden="true" data-keyboard="true" data-backdrop="static">
+
+                        <div class="modal-dialog modal-lg">
+
+                            <div id="udpAddCourseEQToMyList">
+
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" title="Close">×</button>
+
+                                            <div class="modal-title pageheader" id="myAddCourseEQToMyListModalLabel" style="padding-bottom: 2px; float: left;">MY LIST</div>
+
+                                            <div style="text-align: right;">
+                                                <a id="btnEmail" title="Email" class="btn-glyphicon-color" href="javascript:__doPostBack('btnEmail','')"><span class="glyphicon glyphicon-envelope"></span></a>&nbsp;&nbsp;
+                         
+                                                <a id="btnExportToExcel" title="Export to excel" class="btn-glyphicon-color" href="javascript:__doPostBack('btnExportToExcel','')"><span class="glyphicon glyphicon-export"></span></a>&nbsp;&nbsp;
+    
+                                                <a id="btnClearMyList" title="Clear my list" class="btn-glyphicon-color" href="javascript:__doPostBack('btnClearMyList','')"><span class="glyphicon glyphicon-refresh"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            </div>
+                                        </div>
+
+
+                                        <div class="overflow-ceqproposal">
+
+                                            <div class="modal-body">
+
+                                                
+
+                                                <div style="clear: both;"></div>
+                                                <br>
+
+                                                <div id="divCourseEQInMyListContent" style="width: 100%;">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <span id="lblAddCourseEQToMyListMsg"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+
+                                                            <div>
+
+</div>
+                                                        </div>
+                                                    </div>
+
+                                                    <br>
+                                                    <div class="modal-footer" style="text-align: center; font-size: 12px;">
+                                                        <div class="row">
+                                                            <div class="col-sm-12 publicview-footer">
+                                                                <p>
+                                                                    <b>DISCLAIMER:</b>
+                                                                    Transfer information on this site is provided by UNIVERSITY OF NORTH CAROLINA AT GREENSBORO.  CollegeSource® makes no claims or guarantees
+			                                                        regarding its use for student planning.  Further inquiries should be directed to UNIVERSITY OF NORTH CAROLINA AT GREENSBORO.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <div style="margin-bottom: 10px; text-align: center;">
+                                                                    <div>Powered by:</div>
+                                                                    <div>
+                                                                        <img src="../img/TES-footer.png" alt="CSI logo" width="150">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    
+                    <div class="modal" id="viewEQSearchModal" tabindex="-1" role="dialog" aria-labelledby="myViewEQSearchModalLabel" aria-hidden="true" data-keyboard="true" data-backdrop="static" style="z-index: 99999; display: none;">
+                        <div class="modal-dialog modal-lg">
+                            <div id="udpViewEQSearch">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" title="Close">×</button>
+                                            <div style="padding-top: 0px; float: left;">
+                                                <img src="../img/TES-login.png" height="21" alt="TES login icon">&nbsp;&nbsp;
+                                            </div>
+                                            <div class="modal-title" id="myViewEQSearchModalLabel" style="padding-bottom: 2px; float: left;">EQUIVALENCY SEARCH</div>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-3" style="margin-top: 2px; padding-top: 0px;">Credits From:</label>
+                                                            <div class="col-sm-9">
+                                                                <span id="lblSendInstName" class="institution_name">ROWAN-CABARRUS COMMUNITY COLLEGE</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-3" for="rblEffectiveDate">
+                                                                Effective Date:
+                                                            </label>
+                                                            <div class="col-sm-9">
+                                                                <table id="rblEffectiveDate" class="radio-inline-horizontal">
+	<tbody><tr>
+		<td><input id="rblEffectiveDate_0" type="radio" name="rblEffectiveDate" value="1" checked="checked"><label for="rblEffectiveDate_0">Active</label></td><td><input id="rblEffectiveDate_1" type="radio" name="rblEffectiveDate" value="2"><label for="rblEffectiveDate_1">In-Active</label></td><td><input id="rblEffectiveDate_2" type="radio" name="rblEffectiveDate" value="3"><label for="rblEffectiveDate_2">Both</label></td>
+	</tr>
+</tbody></table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-3" for="tbxCourseCode">
+                                                                Course Code:
+                                                            </label>
+                                                            <div class="col-sm-6">
+                                                                <div id="pnlCourseCode" onkeypress="javascript:return WebForm_FireDefaultButton(event, 'btnCourseEQSearch')">
+	
+                                                                    <input name="tbxCourseCode" type="text" maxlength="50" id="tbxCourseCode" class="form-control" placeholder="">
+                                                                
+</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-offset-3 col-sm-9">
+                                                                <table id="rblCourseCodeType" class="radio-inline-horizontal">
+	<tbody><tr>
+		<td><input id="rblCourseCodeType_0" type="radio" name="rblCourseCodeType" value="1" checked="checked"><label for="rblCourseCodeType_0">Transfer Course</label></td><td><input id="rblCourseCodeType_1" type="radio" name="rblCourseCodeType" value="2"><label for="rblCourseCodeType_1">Equivalent Course</label></td><td><input id="rblCourseCodeType_2" type="radio" name="rblCourseCodeType" value="3"><label for="rblCourseCodeType_2">Both</label></td>
+	</tr>
+</tbody></table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-3" for="ddlRecordsPerPage">
+                                                                Records Per Page:
+                                                            </label>
+                                                            <div class="col-sm-1">
+                                                                <select name="ddlRecordsPerPage" id="ddlRecordsPerPage" class="form-control" style="width:80px;">
+	<option value="25">25</option>
+	<option value="50">50</option>
+	<option value="100">100</option>
+	<option selected="selected" value="200">200</option>
+
+</select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label col-sm-3" for="ddlSortListBy">
+                                                                Sort List By:
+                                                            </label>
+                                                            <div class="col-sm-4">
+                                                                <select name="ddlSortListBy" id="ddlSortListBy" class="form-control">
+	<option selected="selected" value="1">Transfer Course</option>
+	<option value="2">Equivalent Course</option>
+	<option value="3">Begin Date</option>
+	<option value="4">End Date</option>
+
+</select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-offset-3 col-sm-9" style="margin-top: 10px;">
+                                                                <a id="btnCourseEQSearch" title="Search" class="btn btn-primary btn-sm" href="javascript:__doPostBack('btnCourseEQSearch','')"><span class="glyphicon glyphicon-search"></span> Search</a>&nbsp;
+                                                                <a id="btnReset" title="Reset" class="btn btn-primary btn-sm" href="javascript:__doPostBack('btnReset','')"><span class="glyphicon glyphicon-refresh"></span> Reset</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div id="udpPublicView">
+
+                            <div class="row" style="margin-bottom: 5px;">
+                                <div class="col-sm-12" style="text-align: right;">
+
+                                    <a id="btnSearchEQ" title="Search equivalency" class="btn btn-primary btn-sm" href="javascript:__doPostBack('btnSearchEQ','')"><span class="glyphicon glyphicon-search"></span> Search</a>
+                                    <a id="btnRefresh" title="Refresh list" class="btn btn-primary btn-sm" href="javascript:__doPostBack('btnRefresh','')"><span class="glyphicon glyphicon-refresh"></span> Reset</a>
+
+                                    <a id="btnAddToMyEQList" title="Add/View my course equivalency list" class="btn btn-primary btn-sm" href="javascript:__doPostBack('btnAddToMyEQList','')"><span class="glyphicon glyphicon-plus"></span> Add/View My List</a>
+
+                                </div>
+                            </div>
+
+                            
+                            <div class="row">
+                                <div class="col-sm-12">
+
+                                    <span id="lblCourseEQPaginationInfo">PAGE 2 OF 2<br></span>
+
+                                    <div>
+	<table class="table table-condensed" cellspacing="0" currentsortfield="ActiveDateBegin" currentsortdirection="ASC" id="gdvCourseEQ" style="border-collapse:collapse;">
+		<tbody><tr class="pagination-tes" align="left">
+			<td colspan="7"><table>
+				<tbody><tr>
+					<td><a href="javascript:__doPostBack('gdvCourseEQ','Page$1')">1</a></td><td><span>2</span></td>
+				</tr>
+			</tbody></table></td>
+		</tr><tr>
+			<th scope="col">&nbsp;</th><th scope="col">ROWAN-CABARRUS COMMUNITY COLLEGE</th><th scope="col">UNIVERSITY OF NORTH CAROLINA AT GREENSBORO</th><th title="Sort by Note?" scope="col"><a href="javascript:__doPostBack('gdvCourseEQ','Sort$CommentsPublic')">Note?</a></th><th title="Sort by Begin" align="left" scope="col"><a href="javascript:__doPostBack('gdvCourseEQ','Sort$ActiveDateBegin')">Begin</a></th><th title="Sort by End" align="left" scope="col"><a href="javascript:__doPostBack('gdvCourseEQ','Sort$ActiveDateEnd')">End</a></th><th align="center" scope="col">
+                                                    <div style="text-align: center;">
+                                                        <input id="gdvCourseEQ_cbxHeaderCheckAll" type="checkbox" name="gdvCourseEQ$ctl02$cbxHeaderCheckAll" onclick="toggleHeaderCheckAll(this);">
+                                                        <input type="hidden" name="gdvCourseEQ$ctl02$hdfHeaderCheckStatus" id="gdvCourseEQ_hdfHeaderCheckStatus">
+                                                    </div>
+                                                </th>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_0" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl03$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PED 122 YOGA I (1)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    KIN 000 KINESIOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2004</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_0" type="checkbox" name="gdvCourseEQ$ctl03$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_1" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl04$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PED 123 YOGA II (1)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    KIN 000 KINESIOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2016</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_1" type="checkbox" name="gdvCourseEQ$ctl04$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_2" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl05$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PED 124 RUN, SWIM, CYCLE (1)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    KIN 120 CONDITIONING<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2014</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_2" type="checkbox" name="gdvCourseEQ$ctl05$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_3" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl06$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PED 128 GOLF-BEGINNING (1)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    KIN 127 BEGINNING GOLF<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1998</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_3" type="checkbox" name="gdvCourseEQ$ctl06$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_4" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl07$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PED 130 TENNIS-BEGINNING (1)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    KIN 175 BEGINNING TENNIS<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2014</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_4" type="checkbox" name="gdvCourseEQ$ctl07$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_5" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl08$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PED 137 BADMINTON (1)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    KIN 171 BEGINNING BADMINTON (1)<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1999</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_5" type="checkbox" name="gdvCourseEQ$ctl08$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_6" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl09$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PED 142 LIFETIME SPORTS (1)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    KIN 000 KINESIOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2004</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_6" type="checkbox" name="gdvCourseEQ$ctl09$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_7" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl10$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PED 143 VOLLEYBALL-BEGINNING (1)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    KIN 101 BEGINNING VOLLEYBALL (1)<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_7" type="checkbox" name="gdvCourseEQ$ctl10$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_8" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl11$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PED 145 BASKETBALL-BEGINNING (1)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    KIN 104 BEGINNING BASKETBALL (1)<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_8" type="checkbox" name="gdvCourseEQ$ctl11$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_9" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl12$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PED 147 SOCCER (1)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    KIN 106 BEGINNING SOCCER (1)<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1998</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_9" type="checkbox" name="gdvCourseEQ$ctl12$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_10" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl13$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PED 154 SWIMMING FOR FITNESS (1)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    KIN 000 KINESIOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2014</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_10" type="checkbox" name="gdvCourseEQ$ctl13$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_11" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl14$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PED 170 BACKPACKING (1)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    KIN 124 BACKPACKING (1)<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_11" type="checkbox" name="gdvCourseEQ$ctl14$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_12" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl15$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PED 217 PILATES I (1)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    KIN 000 KINESIOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2006</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_12" type="checkbox" name="gdvCourseEQ$ctl15$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_13" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl16$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PED 259 PREVENTION AND CARE OF ATHLETIC INJURIES (2)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    KIN 390 PREVENTION AND EMERGENCY CARE OF INJURIES I<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2014</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_13" type="checkbox" name="gdvCourseEQ$ctl16$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_14" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl17$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHI 210 HISTORY OF PHILOSOPHY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHI 000 PHILOSOPHY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_14" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl17$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_14" type="checkbox" name="gdvCourseEQ$ctl17$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_15" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl18$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHI 220 WESTERN PHILOSOPHY I (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHI 251 HISTORY OF ANCIENT PHILOSOPHY<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_15" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl18$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2006</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_15" type="checkbox" name="gdvCourseEQ$ctl18$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_16" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl19$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHI 230 INTRODUCTION TO LOGIC (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHI 310 INTRODUCTION TO FORMAL LOGIC (3)<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_16" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl19$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2004</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_16" type="checkbox" name="gdvCourseEQ$ctl19$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_17" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl20$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHI 240 INTRODUCTION TO ETHICS (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHI 119 INTRODUCTION TO ETHICS<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_17" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl20$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_17" type="checkbox" name="gdvCourseEQ$ctl20$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_18" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl21$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHY 110 CONCEPTUAL PHYSICS (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHY 205 CONCEPTUAL PHYSICS<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_18" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl21$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_18" type="checkbox" name="gdvCourseEQ$ctl21$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_19" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl22$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHY 110A CONCEPTUAL PHYSICS LAB (1)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHY 205L CONCEPTUAL PHYSICS LABORATORY<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_19" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl22$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_19" type="checkbox" name="gdvCourseEQ$ctl22$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_20" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl23$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHY 151 COLLEGE PHYSICS I (4)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHY 211 GENERAL PHYSICS I<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_20" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl23$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1994</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_20" type="checkbox" name="gdvCourseEQ$ctl23$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_21" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl24$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHY 152 COLLEGE PHYSICS II (4)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHY 212 GENERAL PHYSICS II<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_21" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl24$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1994</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_21" type="checkbox" name="gdvCourseEQ$ctl24$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_22" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl25$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHY 251 GENERAL PHYSICS I (4)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHY 291 GENERAL PHYSICS I WITH CALCULUS<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_22" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl25$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_22" type="checkbox" name="gdvCourseEQ$ctl25$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_23" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl26$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHY 252 GENERAL PHYSICS II (4)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PHY 292 GENERAL PHYSICS II WITH CALCULUS<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_23" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl26$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_23" type="checkbox" name="gdvCourseEQ$ctl26$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_24" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl27$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    POL 110 INTRODUCTION TO POLITICAL SCIENCE (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSC 105 EXPLORING POLITICAL ISSUES<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_24" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl27$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_24" type="checkbox" name="gdvCourseEQ$ctl27$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_25" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl28$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    POL 120 AMERICAN GOVERNMENT (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSC 200 AMERICAN POLITICS (3)<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_25" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl28$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_25" type="checkbox" name="gdvCourseEQ$ctl28$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_26" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl29$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    POL 130 STATE AND LOCAL GOVERNMENT (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSC 322 AMERICAN STATE POLITICS<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_26" type="checkbox" name="gdvCourseEQ$ctl29$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_27" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl30$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    POL 210 COMPARATIVE GOVERNMENT (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSC 260 INTRODUCTION TO COMPARATIVE POLITICS<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_27" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl30$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_27" type="checkbox" name="gdvCourseEQ$ctl30$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_28" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl31$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    POL 220 INTERNATIONAL RELATIONS (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSC 240 THE INTERNATIONAL SYSTEM<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_28" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl31$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_28" type="checkbox" name="gdvCourseEQ$ctl31$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_29" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl32$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 150 GENERAL PSYCHOLOGY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 121 GENERAL PSYCHOLOGY<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_29" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl32$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_29" type="checkbox" name="gdvCourseEQ$ctl32$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_30" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl33$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 211 PSYCHOLOGY OF ADJUSTMENT (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 000 PSYCHOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2005</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_30" type="checkbox" name="gdvCourseEQ$ctl33$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_31" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl34$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 215 POSITIVE PSYCHOLOGY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 000 PSYCHOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1995</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_31" type="checkbox" name="gdvCourseEQ$ctl34$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_32" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl35$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 231 FORENSIC PSYCHOLOGY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 000 PSYCHOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2005</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_32" type="checkbox" name="gdvCourseEQ$ctl35$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_33" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl36$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 237 SOCIAL PSYCHOLOGY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 260 PSYCHOLOGICAL PERSPECTIVES ON SOCIAL PSYCHOLOGY<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_33" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl36$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_33" type="checkbox" name="gdvCourseEQ$ctl36$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_34" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl37$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 239 PSYCHOLOGY OF PERSONALITY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 265 THEORIES OF PERSONALITY<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1998</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_34" type="checkbox" name="gdvCourseEQ$ctl37$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_35" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl38$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 241 DEVELOPMENTAL PSYCHOLOGY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 250 DEVELOPMENTAL PSYCHOLOGY<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_35" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl38$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_35" type="checkbox" name="gdvCourseEQ$ctl38$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_36" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl39$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 243 CHILD PSYCHOLOGY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 250 DEVELOPMENTAL PSYCHOLOGY<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_36" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl39$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_36" type="checkbox" name="gdvCourseEQ$ctl39$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_37" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl40$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 246 ADOLESCENT PSYCHOLOGY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 000 PSYCHOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_37" type="checkbox" name="gdvCourseEQ$ctl40$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_38" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl41$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 249 PSYCHOLOGY OF AGING (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 000 PSYCHOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2005</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_38" type="checkbox" name="gdvCourseEQ$ctl41$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_39" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl42$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 259 HUMAN SEXUALITY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 000 PSYCHOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2007</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_39" type="checkbox" name="gdvCourseEQ$ctl42$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_40" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl43$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 263 EDUCATIONAL PSYCHOLOGY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 000 PSYCHOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_40" type="checkbox" name="gdvCourseEQ$ctl43$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_41" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl44$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 271 SPORTS PSYCHOLOGY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 000 PSYCHOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2010</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_41" type="checkbox" name="gdvCourseEQ$ctl44$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_42" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl45$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 275 HEALTH PSYCHOLOGY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 000 PSYCHOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2010</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_42" type="checkbox" name="gdvCourseEQ$ctl45$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_43" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl46$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 281 ABNORMAL PSYCHOLOGY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    PSY 341 ABNORMAL PSYCHOLOGY (3)<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_43" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl46$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_43" type="checkbox" name="gdvCourseEQ$ctl46$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_44" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl47$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    REL 110 WORLD RELIGIONS (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    REL 101 INTRODUCTION TO RELIGIOUS STUDIES<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_44" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl47$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_44" type="checkbox" name="gdvCourseEQ$ctl47$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_45" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl48$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    REL 211 INTRODUCTION TO OLD TESTAMENT (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    REL 202 HEBREW BIBLE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_45" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl48$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_45" type="checkbox" name="gdvCourseEQ$ctl48$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_46" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl49$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    REL 212 INTRODUCTION TO NEW TESTAMENT (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    REL 204 NEW TESTAMENT AND THE ORIGINS OF CHRISTIANITY<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_46" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl49$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_46" type="checkbox" name="gdvCourseEQ$ctl49$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_47" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl50$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    REL 221 RELIGION IN AMERICA (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    REL 231 RELIGION IN AMERICA<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_47" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl50$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_47" type="checkbox" name="gdvCourseEQ$ctl50$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_48" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl51$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 210 INTRODUCTION TO SOCIOLOGY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 101 INTRODUCTION TO SOCIOLOGY<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_48" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl51$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_48" type="checkbox" name="gdvCourseEQ$ctl51$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_49" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl52$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 213 SOCIOLOGY OF THE FAMILY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 335 MARRIAGE AND THE FAMILY<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_49" type="checkbox" name="gdvCourseEQ$ctl52$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_50" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl53$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 215 GROUP PROCESSES (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 000 SOCIOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2014</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_50" type="checkbox" name="gdvCourseEQ$ctl53$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_51" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl54$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 220 SOCIAL PROBLEMS (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 201 SOCIAL PROBLEMS<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_51" type="checkbox" name="gdvCourseEQ$ctl54$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_52" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl55$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 225 SOCIAL DIVERSITY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 327 RACE AND ETHNIC RELATIONS<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_52" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl55$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_52" type="checkbox" name="gdvCourseEQ$ctl55$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_53" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl56$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 230 RACE AND ETHNIC RELATIONS (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 327 RACE AND ETHNIC RELATIONS<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_53" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl56$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2005</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_53" type="checkbox" name="gdvCourseEQ$ctl56$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_54" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl57$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 232 SOCIAL CONTEXT OF AGING (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 000 SOCIOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2014</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_54" type="checkbox" name="gdvCourseEQ$ctl57$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_55" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl58$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 234 SOCIOLOGY OF GENDER (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 000 SOCIOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2005</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_55" type="checkbox" name="gdvCourseEQ$ctl58$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_56" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl59$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 240 SOCIAL PSYCHOLOGY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 000 SOCIOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_56" type="checkbox" name="gdvCourseEQ$ctl59$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_57" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl60$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 242 SOCIOLOGY OF DEVIANCE (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 222 SOCIOLOGY OF DEVIANT BEHAVIOR<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_57" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl60$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2005</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_57" type="checkbox" name="gdvCourseEQ$ctl60$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_58" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl61$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 244 SOCIOLOGY OF DEATH AND DYING (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 000 SOCIOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2014</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_58" type="checkbox" name="gdvCourseEQ$ctl61$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_59" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl62$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 245 DRUGS AND SOCIETY (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 000 SOCIOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2010</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_59" type="checkbox" name="gdvCourseEQ$ctl62$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_60" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl63$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 250 SOCIOLOGY OF RELIGION (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SOC 000 SOCIOLOGY ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2000</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_60" type="checkbox" name="gdvCourseEQ$ctl63$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_61" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl64$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 111 ELEMENTARY SPANISH I (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 101 BEGINNING SPANISH I<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_61" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl64$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_61" type="checkbox" name="gdvCourseEQ$ctl64$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_62" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl65$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 112 ELEMENTARY SPANISH II (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 102 BEGINNING SPANISH II<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_62" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl65$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_62" type="checkbox" name="gdvCourseEQ$ctl65$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_63" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl66$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 141 CULTURE AND CIVILIZATION (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 000 SPANISH ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/1997</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_63" type="checkbox" name="gdvCourseEQ$ctl66$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_64" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl67$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 211 INTERMEDIATE SPANISH I (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 203 INTERMEDIATE SPANISH I<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_64" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl67$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2001</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_64" type="checkbox" name="gdvCourseEQ$ctl67$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr style="background-color:WhiteSmoke;">
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_65" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl68$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 212 INTERMEDIATE SPANISH II (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 204 INTERMEDIATE SPANISH II<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_65" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl68$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2001</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_65" type="checkbox" name="gdvCourseEQ$ctl68$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr>
+			<td style="width:2%;">
+                                                    <a id="gdvCourseEQ_btnViewCourseEQDetail_66" title="View course equivalency detail" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl69$btnViewCourseEQDetail','')"><span class="glyphicon glyphicon-play"></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 231 READING AND COMPOSITION (3)<br>
+                                                </td><td class="gdv_boundfield_uppercase" align="left" style="width:40%;">
+                                                    SPA 000 SPANISH ELECTIVE<br>
+                                                </td><td class="gdv_boundfield_normal" align="left" style="width:3%;">
+                                                    <a id="gdvCourseEQ_btnNote_66" title="View course equivalency note" class="btn btn-glyphicon-color btn-xs" href="javascript:__doPostBack('gdvCourseEQ$ctl69$btnNote','')"><span class="glyphicon-color"><span class="glyphicon glyphicon-ok"></span></span></a>
+                                                </td><td class="gdv_boundfield_uppercase" style="width:7%;">01/01/2013</td><td class="gdv_boundfield_uppercase" style="width:7%;">&nbsp;</td><td align="center" style="width:3%;">
+                                                    <input id="gdvCourseEQ_cbxRowsSelect_66" type="checkbox" name="gdvCourseEQ$ctl69$cbxRowsSelect" onclick="toggleRowsCheck(this);">
+                                                </td>
+		</tr><tr class="pagination-tes" align="left">
+			<td colspan="7"><table>
+				<tbody><tr>
+					<td><a href="javascript:__doPostBack('gdvCourseEQ','Page$1')">1</a></td><td><span>2</span></td>
+				</tr>
+			</tbody></table></td>
+		</tr>
+	</tbody></table>
+</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    <br>
+
+                    
+                
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <span id="lblSendUsEmail"><br><span class="alert_text_message">Question? Send us an email:<a href="mailto:transfercredit@uncg.edu" title="Send us an email" aria-label="Send us an email"></a></span><a href="mailto:transfercredit@uncg.edu" title="Send us an email" aria-label="Send us an email"><span class="btn btn-glyphicon-color btn-sm"><span class="glyphicon glyphicon-envelope"></span></span></a></span>
+                </div>
+            </div>
+
+        
+
+<script type="text/javascript">
+//<![CDATA[
+$('#viewEQSearchModal').modal('hide');//]]>
+</script>
+<span style="display: none !important;"><input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value=""></span><span style="display: none !important;"><input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value=""></span><span style="display: none !important;"><input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value=""></span><span style="display: none !important;"><input type="hidden" name="__SCROLLPOSITIONX" id="__SCROLLPOSITIONX" value="0"></span><span style="display: none !important;"><input type="hidden" name="__SCROLLPOSITIONY" id="__SCROLLPOSITIONY" value="0"></span><span style="display: none !important;"><input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="15KWk7xRbi0aDgFNouDEk5J5XNfJRiLlteR1hix+PTdDx+EP95CzI7NpOpR50fikD3zhlLNfnSJTf8Vf/r4o8LEavf6GTSNf422a5rTaSPNz4hUU1gWIxvuNXr8YbRCAZWWQh8o3g6XPp5n+YBG2CwgFgsTMww6ekxaEV/zaeTt7CCNO9zZVMrm84yDukO1X3OR9Jd5Z0aUwV08pisc7vDbA385or+lUopOr9RKrZQJgMB3ESzU6jgdvrkwmWGcdWjf1yNQH9wNMD+NzyHhXWTEh9ONSgzaks0IDgpQkyQCtdkvx/TmugClDjOjcpopumJrVbWM0g2BjKkxKCNB3M69qfAYoKPn+NLUmtEjUyD4IjHPFWaP/e7+8E3eNLRHQcrO2nCSEcIUHU8XbcOlIAnVnvKb3QrJcTDePvIl4ZXKcLZzuHnIDrv5IeKb3QNKsDYWfHRPIhiuxylRvNvj5Xvgokc3J0mGzkvc72ejyiPVhpW17Tgiuxeqs5eAj4qXo4JbWaWmv2nn0mGR7QJiWDmJhZ9mHpnoqKvplmWIiHjalK4An0XDNOFw68mmHRCmp8G2Sh1qOPsGDsV2cZ/fFhKEf5wWotulEZ7CqmAjYDeiTuFZgOJtnt0baFfr4bFUMgaf4LIdHvkKqnxH1SW/fSZBnY7IAyEQJufZ+u6FalpM7kad/MGd2ykg0ChONHkbdvLOcYvLG3iX5VZaHbkNMmiTyAs7bzMqT80NLMK7igbbTd+1wTvreohIX4SAoCmZypRjwXK7uVkULCJtPibccAYxCT8Q/xl9mmiYOaTbFYyxqh2YH8n1UCN+fgD1xT4RuOBQze2PIdCLkmnCm7plESnHTY1gjFJDQN15QuamddEzBSMTUMGQAdbQzZ6eTz3QbugdU8UcjXRvJTsM4qu5acfMHlfU2ua9PtL+akf390d/7Uaxu3tacEMPJeTdecqlpumz32XtCF9cabz8VYYpteAQVQUIaiwj+HaxwojJ2w1x5lEhdyMA2U24UFLTgHltnaZyFMIHJKs1ZqOLIUsv0G9VOt24RnzcF+b1Hm1DbmXBDzS5fc0oKnHQR2wjdR4Fg+37xLEktagzZj2SSdynxLW183RO5YCYcpnDoFeNYLjz/aWKYi2YRMqYrPNmbOv4uRVvgGlARmgkG2r+OhxwadXsxNPH5Y1ih/qAxHPuR9s15UHpGwYPCoxvx8078lncO5uV2KGSmOySmXpY+ZHKq3MYac2sW+lhwCoaSAPHLVn7kNBt95tEdWpLam4Mgfgu8Rjz1oIbeQrKV+9v9CUJBk210YEHWd8r3HNSSVp4ZZ2xXVL1EVbVHR3JH8Mqgdj4m9MpqJTKICpQw8b72zds1d3K13LNL2F3rm0H4iJ0kvYOh03II1QfYc6HFj36tdXYbnacMyWbGwaUn30RoJ1JXPJ10XMx+wMa87bclA529Qz6C6lgJOXHqdjngQgEKyA/VY+AAjcFcB1eA6zfI/fX0fucBv9NC22IunmeUBSmZZhBeDTAsQKbSA684EWUen36dlkuXxl+J8C4z40q4VKimN9CzPm853qiEgCgNVSUgNKhjG1q8l8NCrzxYziGuHyBwuIOx2cLwMfe3fdBgWS3glEgd7DCWfGCQo/KzQaHp98xRmWmcOiM7K0TQybtXzTht+ucirWqYWi8yKLyAF7YTCLBIDxwfb1x8ZYcxQcepb8AGOJkybc06HYSegM2MDdQgC2D2hgyVv0L8bkbFGzjM5E5jgzHI2vjbbM0j4qNz8pwmhQsNaB/ZoTp8idUIn6C0nfBMpu7r4eAGUX5BQ5Bm7UAel9FIZnKuJVbO/LsPTKx8PxsFLby/+3vGaelVHKVTc5CeOF7VJafL6w/tWZesZUnm+oL8x1F9xZi2yEEqbvUWg9ImZcaYzrzh+d0ptD2FayjufN57KtmGGWX0WVTbbnWw2KAjrZjEr2LZcjyTA54alVldJACSp4PAZEBkF3s06yhPGj7IT8kMtbyBbqN5dncJfBFA3yE0YkePYYD1KA9Fma0AT/N2Mp0RzuPoVLZhHPBl+8+tpZoNA4RPdaGlab++HZxiFybnjWg138NNpPM0zWk4JUcetC/N1r+LFFv8WkjRzZFKNWzR/ERlDdO+E/D3Xqs3EzDBszZNKYrTqaj0Or+gCFMbzwoEgzJlEx0TgGz08R+btL3YHyg1mCscUwmrxj8MkgJZWXaiaAtT2q9Yrr9mAtNdEJ0Stt5hL896AmLDdt/nRzfp8SgXxDT+Lziv/3nyby/gRRLK/FdWgm9+HxfX3qe/DLsg6dyyPWY/h6ljVxWldvdHlqL/ktQjRaVOjCURSwBaoQlWTuQ8X6nfiVn80RiFL1FbTZTI5xsB3Wy2BOoiZyUG2ARld8/9coev9JdO0FbmKA8SvesGHKJrIAyhkRNGj0Nk348tDAi4A2vFr41u/tKNKf2WPWLjjzqEdFY0R32YZVWQ8FDUGJnIqKKYbQYDxbgt962zuIh6q8HuE61LIP4iVOJdLAp5EpE1B7Fp2ED/qI0Q5ppr+BXndPknUrPzRiuv7N1Bw7/6DnrJxhoUFayjW5sJ4hPZVHEaQBJUGx6geNNMaurTm55kp/sKbm3Vc5lnV1An3xV4g2J4jn91lXskao/Ky/MeWbobkznIqwlrNaq8PqlLUkSEBECwphhBh5CJOkaKxieAVsZ6D0+j9b/4Sd+ewfLr0tIjQfzEWRnvpfOV8+r6X4HwAOdq58DopC176aNWS9AP59WDXQoxc0Gd+Ay1985Xca3ZR8QmsOWm52B/81vQVnfNobiYABEGsG4BwQACoQL6Kod+GnfvXuLmzKqt0xZahAmm1dxbfp9w2d588FM+/qqtx9+Z8Ddt8lRMbC49PymGR5GWxDa2EaX93c3+YEt3nIi/Rg937URoGJ1/7hhD2JqSDiEUmWQzuxMIdpjwLELtWfeLcH7TNcquxJnyA4Vd8ghZQhgH2K0tIxjdJvOdkVdWtt6RMkQNEJ7p0q3dYzl7uinGKsV2U5bd+/3wDwHLe0s08uWlOosI2dO+Pcxi5Y5cHuPb242Z65X4t+rUx0x9WgCkgcZvXhV+/hl5z5tJwR4egKUidmIDLp+Wol7NAxzGrYrOCMOHT7bI2lrxrjgXAfvNDeDV3QyXbmjkfQoxGFON8OF/jf87tK4kUvLIcpT3wiXS3Qh3Nc2nSALA/psqqcWAOI72aKfrgQQz0dDQAyffEFXs/k928MdxhlqhFcFK1sNSC0PcegCIBfqQON0WGg39JFS3K36+N1nTxjHqg35/Sdhqg768AokpYBUgigunZOJMVE5O3gJgRhTZQuXXQwodgr7m5MHNXHX2wXl/pqaDZI7ajRyBG6jQAPXIllazXOowfRC64tXkqO+FEOI6654X1iQ/XkGKf7A8snpXmNkGa7+hxeakgLmCZtksLAFeaHbgN3RuTSLU9h8tVR2SDay8MlQf3z60bLo//hQ3HWaTbAIIoKazQXvN9WG5jNPB7OksrvRJa+ug3YASijV8NY0ZOH3/yWmGbkbISN45vaw79BxSm7oPcclM7/mBpiQ3M0k4fjo2n0RfrS9d00dUdlNbfjkx4+9doJ9Z0xx9VDZ7QwGvWXI8TT+59HAS+pkUyHlyFKyngrLyqOmSvHpXiSIPlC5c/9ORBa5iy+xmNoJDgU3KYbkqozqJxJna2AqK/gspHxJxWtThVLbzFkHI1I5XlxMJo4LmrmofQwX42rp+gWLOu4eNKrGrPRvsUkJKUQ9GnYwksrZbUVSZywWrX3pm/cIR/bBs5QIYSbMzxizzsj8nX+A1wp9RyZADOi3ozGM43ywcVswIv6BtqRmEvMXWorrSB5DnV6NU8yI/ULiw7w+m+OftWHEcaaUrKDohHlYWBjmJ3FnOQK7sFt7e8vmD3lZlnni5gaWQwLr61SC36jG51E9aI849rkgq3GyTT5FyFQGL24K59ug/crdyaEWGNxjkkHg6u1BW/LenqqgZ7sxjx6m+LykyOyGK4gdBVncWltI7SmJTx/d9erFWnYL7uLsueusnnm2yFfxpJ/luCt5TJ84Zbbr1m5Oq5viNVEUsRq5NlH71JrnsQOI55ywOhrMu/XtEBewB4IVkOTEiMo730xJvB+dbZ9K7qdU4mMeyLkcsoDB10Sr2UuBJ9UbIbzg6PMwtOUdCrcWb7gfhznuz2YJk/cPCMQ3il+fjyLFvUDSoyh5W//+64VzPghAm6jgspB84EaByN5UoUcfcaPeN7r+zWpBXZSgG0pyn5X8CMDJkh2PG5gOrYkRdz3MQMAcXfqAbDLCTnltp5cj2qnO8vyEfPMg3zRzdUvkw7u5qfXLdebuvaIhbwgCK"></span><span style="display: none !important;"><input type="hidden" name="_VSTATE" id="_VSTATE" value="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"></span><span style="display: none !important;"><input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value=""></span></form>
+
+        <br>
+        <br>
+
+        <div id="divFooter">
+            <hr>
+            <footer>
+
+                <div class="row">
+                    <div class="col-sm-12 publicview-footer">
+                        <p>
+                            <b>DISCLAIMER:</b>
+                            Transfer information on this site is provided by UNIVERSITY OF NORTH CAROLINA AT GREENSBORO.  CollegeSource® makes no claims or guarantees
+			                regarding its use for student planning.  Further inquiries should be directed to UNIVERSITY OF NORTH CAROLINA AT GREENSBORO.
+                        </p>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div style="margin-bottom: 10px; text-align: center;">
+                            <div>Powered by:</div>
+                            <div>
+                                <img src="../img/TES-footer.png" alt="CSI logo" width="150">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+    </div>
+
+    
+    <script src="../js/jquery-2.2.1.min.js" type="text/javascript"></script>
+    <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+
+
+    
+    <script src="https://use.typekit.net/bxz8omf.js"></script>
+    <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
+
+
+
+
+
+
+</body></html>
