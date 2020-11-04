@@ -66,11 +66,8 @@ function SearchForm(props) {
                         <select id="courseType" name="type" className="form-control" value={searchQuery.type} onChange={handleChange}>
                             <option value="All">All</option>
                             <option value="Online">Online</option>
-<<<<<<< HEAD
-                            <option value="Ofline">Ofline</option>
-=======
                             <option value="Offline">On Campus</option>
->>>>>>> master
+
                         </select>
                     </div>
                 </div>
