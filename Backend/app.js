@@ -11,9 +11,10 @@ require('dotenv').config();
 
 var app = express();
 
-const uri = "mongodb+srv://Raiana:yqEQPonOwmJi3rNr@cluster0.vppgk.mongodb.net/ExerciseTracker?retryWrites=true&w=majority";
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true }
-);
+const URI = process.env.MONGODB_URI;
+
+mongoose.connect(URI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
+
 const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("Connected to MongoDB");
