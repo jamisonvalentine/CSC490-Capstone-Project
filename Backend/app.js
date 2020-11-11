@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 const uncgCourseRouter = require('./routes/uncgRoute');
 const ccCourseRouter = require('./routes/ccRoute');
+const contactUsRouter = require('./routes/contactUsRoute');
 
 require('dotenv').config();
 
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/uncgcourse', uncgCourseRouter);
 app.use('/cccourse', ccCourseRouter);
+app.use('/contactUs', contactUsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
