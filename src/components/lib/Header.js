@@ -24,11 +24,12 @@ function Header() {
                             <NavLink className="nav-link" to="/" exact={true}>Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/about">About</NavLink>
+                            <NavLink className="nav-link" to="/search">Saved Courses</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/search">Search Results</NavLink>
+                            <NavLink className="nav-link" to="/about">About</NavLink>
                         </li>
+
                     </ul>
                 </div>
             </div>
