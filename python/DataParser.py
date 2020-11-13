@@ -19,6 +19,29 @@ globalSemester = []
 globalYear = []
 globalWebsite = []
 globalCost = []
+globalUncgID = []
+globalUncgTitle = []
+
+
+def determineEquivalencies(iterator):
+
+    equivalencyDF = pd.read_csv("uncg_equivalencies.csv")
+
+    comColID = equivalencyDF["caa_id"].to_list()
+    uncgID = equivalencyDF["uncg_id"].to_list()
+    uncgTitle = equivalencyDF["uncg_title"].to_list()
+
+    fullComColCourse = globalSubject[iterator] + "-" + globalClassID[iterator]
+
+    if comColID.count(fullComColCourse) > 0:
+
+        equivalentIndex = comColID.index(fullComColCourse)
+
+        globalUncgID.append(uncgID[equivalentIndex])
+        globalUncgTitle.append(uncgTitle[equivalentIndex])
+    else:
+            globalUncgID.append("No equivalency found")
+            globalUncgTitle.append("No equivalency found")
 
 
 def printResults(iterator):
@@ -37,6 +60,8 @@ def printResults(iterator):
     print("Class location is:  " + globalLocations[iterator])
     print("Class website is:  " + globalWebsite[iterator])
     print("Class cost is:  " + globalCost[iterator])
+    print("UNCG course equivalent ID is: " + globalUncgID[iterator])
+    print("UNCG course equivalent name is: " + globalUncgTitle[iterator])
 
     print("\n")
 
@@ -80,7 +105,6 @@ def addWebsite(iterator):
 
     website = ""
 
-    
     if "Alamance Community College" in collegeName[iterator] :
         website = "https://www.alamancecc.edu/"
     elif "Blue Ridge Community College" in collegeName[iterator] :
@@ -329,7 +353,9 @@ if __name__ == '__main__':
         standardizeOnline(i)
         addWebsite(i)
         calculateCost(i)
+        determineEquivalencies(i)
         printResults(i)
+
 
     # construct new dataframe from old CSV and extracted values
     newDF = pd.DataFrame(
@@ -350,7 +376,9 @@ if __name__ == '__main__':
          'Semester': globalSemester,
          'Year': globalYear,
          'Location': globalLocations,
-         'Website': globalWebsite
+         'Website': globalWebsite,
+         'UncgID': globalUncgID,
+         'UncgTitle': globalUncgTitle
          })
 
     # save to CSV
