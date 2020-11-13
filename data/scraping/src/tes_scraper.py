@@ -68,7 +68,7 @@ for index in df.index:
         html = driver.page_source
         print('source scraped')
 
-        dir_ = "../output/tes/" + index
+        dir_ = "../input/tes/" + index
 
         if not os.path.isdir(dir_):
             os.makedirs(dir_)

@@ -1,11 +1,15 @@
 from bs4 import BeautifulSoup
 import pandas as pd
 import os
+import sys
+import re
 
+def rmws(x):
+    return s.sub(" ", x)
 
-courses = pd.DataFrame(columns=['college', 'section', 'seats', 'instructor', 'dates'])
+ss_courses = pd.DataFrame(columns=['college', 'section', 'credits', 'instructor', 'meeting_info', 'location'])
 
-for root, dirs, files in os.walk("output/ss", topdown=False):
+for root, dirs, files in os.walk("../input/2021/ss", topdown=False):
 #    print(len(files))
     parts = root.split("\\")
     college = parts[1] if len(parts) > 1 else ""
@@ -16,20 +20,56 @@ for root, dirs, files in os.walk("output/ss", topdown=False):
         soup = BeautifulSoup(open(file_path), 'html.parser')
         # section_blocks = list(soup.select("li.search-nestedaccordionitem"))
 
-        blocks = list(soup.select("table.esg-table.esg-table--no-mobile.esg-section--margin-bottom.search-sectiontable"))
-        # print(list(blocks[0].tbody.contents[3]))
-        for b in blocks:
-            section = b.select('a')[0].get_text()
-            seats = b.select("span.search-seatsavailabletext")[0].get_text()
-            dates = b.select("td.search-sectiondaystime")[0].select("div")[1].span.get_text()
-            i = b.select("td.search-sectioninstructors")
-            instructor = i[0].select("div")[0].select("span")[0].get_text()
-            location = b.select("td.search-sectionlocations").get_text()
-            row = college + "\t" + section + "\t" + seats + "\t" + dates + "\t" + instructor
-            print(row)
-            row = {'college': college, "section": section, "location:": location, "instructor":instructor, "dates": dates}
-            courses = courses.append(row, ignore_index=True)
+        courselist = soup.find(id="course-resultul")
+        courses = courselist.find_all("li", recursive=False)
 
 
-# courses.to_csv("ss_courses.csv")
-print('# of courses: ', len(courses))
+        for course in courses:
+
+            title = course.find("span", attrs = {"data-bind": re.compile("Ceus")}).get_text()
+
+            m = re.search("(.*) \((\d).*\)", title)
+            title = m.group(1)
+            credit = m.group(2)        
+
+
+            blocks = list(course.select("table.esg-table.esg-table--no-mobile.esg-section--margin-bottom.search-sectiontable"))
+            for b in blocks:
+                section = b.select('a')[0].get_text()
+
+                dates = list(b.select("td.search-sectiondaystime"))
+                loc = list(b.select("td.search-sectionlocations"))
+
+                s = re.compile("\s+")
+  
+                if len(dates) > 0:
+                    dates = list(map(lambda x: rmws(x.get_text()), dates))
+                    loc = list(map(lambda x: rmws(x.get_text()), loc))                    
+                        
+                    str1 = ""
+                    for i in range(len(dates)):
+                        str1 += dates[i] + loc[i]
+                    
+                    dates = str1
+                else:
+                    dates = "TBD"
+                    loc = "TBD"
+
+
+
+                instructor_tmp = b.select("td.search-sectioninstructors")
+
+                try:
+                    instructor = instructor_tmp[0].select("div")[0].select("span")[0].get_text()
+                except: instructor = "TBD"
+
+
+
+                row = {'college': college, "section": section + " " + title, "credits": credit, "instructor": instructor, "meeting_info": dates, "location": loc}            
+
+                print(row)
+                ss_courses = ss_courses.append(row, ignore_index=True)
+
+ss_courses.to_csv("ss_courses_sp2021.csv", index=False)
+ss_courses.to_csv("../../output/ss_courses_sp2021.csv", index=False)
+print(len(ss_courses))
