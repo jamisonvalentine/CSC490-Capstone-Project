@@ -32,23 +32,30 @@ const About = () => {
         setMessage(e.currentTarget.value);
     }
     const handleSubmit = (e) => {
-        console.log('submitted info: ' + name + email + message);
-        axios.post('http://localhost:3000/contactUs/', {
-            name: name,
-            email: email,
-            message: message
-        }).then(response => {
-            if(response.data === 'Success') {
-                window.confirm('Message sent');
-            }
-            else {
-                window.confirm('Error has occurred, please retry');
-            }
-          }).catch((error) => {
-            console.log(error);
-        });
-        
-        e.preventDefault();
+        if (name === '' || email === '' || message === '') {
+            window.confirm('Please fill out all fields before submitting');
+            e.preventDefault();
+        }
+        else {
+            console.log('submitted info: ' + name + email + message);
+            axios.post('http://localhost:3000/contactUs/', {
+                name: name,
+                email: email,
+                message: message
+            }).then(response => {
+                if (response.data === 'Success') {
+                    window.confirm('Message sent');
+                }
+                else {
+                    window.confirm('Error has occurred, please retry');
+                }
+            }).catch((error) => {
+                console.log(error);
+            });
+
+            e.preventDefault();
+        }
+
     }
 
     return (
