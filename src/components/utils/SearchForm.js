@@ -37,13 +37,13 @@ function SearchForm(props) {
                     Search available courses from NC community colleges
                 </h2>
 
-                <h5 className="text-center mb-3">Please enter the following information to get start</h5>
+                <h5 className="text-center mb-3">Please enter the following information to get started</h5>
 
                 <div className="form-group row w-75">
 
                     <select name="id_cat" className="col-md-4 form-control mb-3 mb-md-0 border-none" value={searchQuery.selectIdCat} onChange={handleChange}>
-                        <option value="courseId">Course ID</option>
-                        <option value="uncgId">Uncg ID</option>
+                        <option value="courseId">CC Course ID</option>
+                        <option value="uncgId">UNCG Course ID</option>
                     </select>
 
                     {/* <label htmlFor="courseId" className="col-md-4 col-form-label">Course ID</label> */}

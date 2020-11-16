@@ -26,7 +26,7 @@ const Search = () => {
                             <th scope="col">Name of Community college</th>
                             <th scope="col">Course ID</th>
                             <th scope="col">Credit</th>
-                            <th scope="col">Course description</th>
+                            <th scope="col">Course Description</th>
                             <th scope="col">Cost</th>
                             </tr>
                         </thead>
@@ -39,7 +39,7 @@ const Search = () => {
                                         <th type="button" data-toggle="modal" data-target="#exampleModal" onClick={() => setSelectedCollege(item)}>{item.College}</th>
                                         <td>{`${item.CourseSubject} ${item.ClassID}`}</td>
                                         <td>{item.Credits}</td>
-                                        <td>Course description</td>
+                                        <td>Course Description</td>
                                         <td>${item.Credits * 76}</td>
                                     </tr>
 
@@ -47,7 +47,7 @@ const Search = () => {
                             }):
                             (
                                 <tr>
-                                    <th>No Save Data</th>
+                                    <th>No Saved Data</th>
                                 </tr>
                             )
                         }

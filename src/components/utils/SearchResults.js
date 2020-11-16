@@ -68,7 +68,7 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData,setSe
                             <th scope="col">Name of Community College</th>
                             <th scope="col">Course ID</th>
                             <th scope="col">Credit</th>
-                            <th scope="col">Course description</th>
+                            <th scope="col">Course Description</th>
                             <th scope="col">Cost</th>
                         </tr>
                     </thead>
@@ -81,7 +81,7 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData,setSe
                                     <th type="button" data-toggle="modal" data-target="#exampleModal" onClick={() => setSelectedCollege(item)}>{item.College}</th>
                                     <td>{`${item.CourseSubject} ${item.ClassID}`}</td>
                                     <td>{item.Credits}</td>
-                                    <td>Course description</td>
+                                    <td>Course Description</td>
                                     <td>${item.Credits * 76}</td>
                                 </tr>
 
