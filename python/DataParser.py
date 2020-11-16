@@ -145,6 +145,8 @@ def addWebsite(iterator):
         website = "https://www.sandhills.edu/"
     elif "Wayne Community College" in collegeName[iterator]:
         website = "https://www.waynecc.edu/"
+    elif "Wake Technical Community College" in collegeName[iterator]:
+        website = "https://www.waketech.edu/"
 
 
     globalWebsite.append(website)
