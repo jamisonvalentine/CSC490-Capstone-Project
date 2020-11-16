@@ -23,10 +23,10 @@ const Search = () => {
                     <table className="table">
                         <thead>
                             <tr>
-                            <th scope="col">Name of Community College</th>
+                            <th scope="col">Name of Community college</th>
                             <th scope="col">Course ID</th>
                             <th scope="col">Credit</th>
-                            <th scope="col">Course Description</th>
+                            <th scope="col">Course description</th>
                             <th scope="col">Cost</th>
                             </tr>
                         </thead>

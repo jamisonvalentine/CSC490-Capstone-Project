@@ -9,7 +9,8 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData,setSe
 
     let handleClick = () => {
         setSearchQuery({
-            id : '',
+            id_cat : 'courseId',
+            id : [],
             year : '2020',
             semester : 'Fall',
             type : 'Online'
@@ -45,7 +46,7 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData,setSe
                 </div>
 
                 <div className="col-6 mb-3 mb-md-0 col-md-3">
-                    <p className="text-center">Acedemic Year</p>
+                    <p className="text-center">Acedemic year</p>
                     <input type="text" value={searchQuery.year} className="form-control" readOnly/>
                 </div>
 
@@ -67,7 +68,7 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData,setSe
                             <th scope="col">Name of Community college</th>
                             <th scope="col">Course ID</th>
                             <th scope="col">Credit</th>
-                            <th scope="col">Course Description</th>
+                            <th scope="col">Course description</th>
                             <th scope="col">Cost</th>
                         </tr>
                     </thead>
@@ -77,10 +78,10 @@ function SearchResult({searchQuery,setSearchQuery,setResultPage,searchData,setSe
                         searchData && searchData.length > 0 ? searchData.map (item => {
                             return (
                                 <tr key={item._id}>
-                                    <th >{item.College}</th>
+                                    <th type="button" data-toggle="modal" data-target="#exampleModal" onClick={() => setSelectedCollege(item)}>{item.College}</th>
                                     <td>{`${item.CourseSubject} ${item.ClassID}`}</td>
                                     <td>{item.Credits}</td>
-                                    <td type="button" data-toggle="modal" data-target="#exampleModal" onClick={() => setSelectedCollege(item)}>Course Description</td>
+                                    <td>Course description</td>
                                     <td>${item.Credits * 76}</td>
                                 </tr>
 
