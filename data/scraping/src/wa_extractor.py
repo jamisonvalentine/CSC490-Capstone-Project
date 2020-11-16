@@ -5,7 +5,7 @@ import os
 courses = pd.DataFrame(
     columns=['college', 'section', 'credits', 'instructor', 'dates', 'location'])
 
-for root, dirs, files in os.walk("output/wa", topdown=False):
+for root, dirs, files in os.walk("../input/2021/wa", topdown=False):
     #    print(len(files))
     parts = root.split("\\")
     college = parts[1] if len(parts) > 1 else ""
@@ -65,5 +65,5 @@ for root, dirs, files in os.walk("output/wa", topdown=False):
                     "credits": credit, "instructor": instructor, "dates": dates, "location": loc}
             courses = courses.append(entry, ignore_index=True)
 
-# courses.to_csv("wa_courses.csv")
+courses.to_csv("wa_courses_sp2021.csv")
 print('# of courses: ', len(courses))

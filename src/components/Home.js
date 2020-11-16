@@ -7,7 +7,8 @@ import axios from "axios";
 
 const Home = () => {
     let [searchQuery, setSearchQuery] = useState({
-        id : '',
+        id_cat : 'courseId',
+        id : [],
         year : '2020',
         semester : 'Fall',
         type : 'Online'
@@ -18,21 +19,21 @@ const Home = () => {
     // Fetching data
     useEffect(() => {
         if(resultPage){
-            let course = searchQuery.id.toUpperCase();
             axios.get("http://localhost:3000/cccourse/find",{
                 params : {
-                    "CourseSubject" : course,
+                    "id_cat" : searchQuery.id_cat,
+                    "CourseSubject" : searchQuery.id,
                     "classType" : searchQuery.type,
                     "year" : searchQuery.year,
                     "semester" : searchQuery.semester
                 }
             })
-                .then(res => {
-                    setSearchData(res.data);
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+            .then(res => {
+                setSearchData(res.data);
+            })
+            .catch(err => {
+                console.log(err)
+            })
         }
     },[resultPage])
 

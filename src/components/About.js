@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React,{useEffect, useState} from 'react';
 import Header from './lib/Header';
 import Footer from './lib/Footer';
 import axios from 'axios'
@@ -16,11 +16,11 @@ const About = () => {
 
     useEffect(() => {
         axios.get('http://localhost:3000/cccourse/college')
-            .then(res => {
-                setCollege(res.data);
-            })
-            .catch(err => console.log(err))
-    }, [])
+        .then(res => {
+            setCollege(res.data);
+        })
+        .catch(err => console.log(err))
+    },[])
 
     const handleNameChange = (e) => {
         setName(e.currentTarget.value);
@@ -53,18 +53,12 @@ const About = () => {
 
     return (
         <>
-            <Header />
+            <Header/>
+
             <div className="container px-2 px-sm-5 py-5">
-                <p>
-                    This application was developed to help UNCG students save time and money by helping them find transferrable courses at local community colleges.
-                    If you find a course you need you can sign up at that community college's website. Contact your advisor before you register for courses at another college.
+                <p className="text-center">
+                    If you find a couse you need, you can sign up at the NC community college offering it and have the credits transferred to yout community colege or university. Contact your advisor before you register for courses at another college
                 </p>
-                <div>
-                    <p>The Comprehensive Articulation Agreement (CAA) is a statewide agreement that governs the
-                    transfer of credits between NC community colleges and NC public universities. This application was created using courses in the CAA.
-                For more information click <a href={"https://www.nccommunitycolleges.edu/academic-programs/college-transferarticulation-agreements/comprehensive-articulation-agreement-caa"}> here</a>
-                    </p>
-                </div>
 
                 <div>
                     <Accordion>
@@ -138,8 +132,9 @@ const About = () => {
                     </Accordion>
                 </div>
             </div>
-            <Footer />
 
+            <Footer/>
+            
         </>
     );
 }

@@ -42,14 +42,16 @@ def click_course_bnts(_courselist):
     time.sleep(2)
     # print("# of courses: ", len(collapsed))
     for button in collapsed:
+        time.sleep(1)
         button.click()
 
-def click_term_btns(_courselist):
-    collapsed = _courselist.find_elements_by_css_selector(
-        "div[class='esg-collapsible-group__body esg-is-open']")
-    time.sleep(2)
-    for button in collapsed:
-        button.click()
+# def click_term_btns(_courselist):
+#     collapsed = _courselist.find_elements_by_css_selector(
+#         "div[class='esg-collapsible-group__body esg-is-open']")
+#     time.sleep(2)
+#     for button in collapsed:
+#         time.sleep(1)
+#         button.click()
 
 
 def get_ss_school_data(dir_name, url, filt):
@@ -61,7 +63,7 @@ def get_ss_school_data(dir_name, url, filt):
     time.sleep(1)
 
     term = Select(driver.find_elements_by_id("term-label-id")[1])
-    term.select_by_value("2020FA")
+    term.select_by_value("2021SP")
 
     search_btn = driver.find_element_by_css_selector("input[value='Search']")
     search_btn.click()
@@ -84,7 +86,7 @@ def get_ss_school_data(dir_name, url, filt):
         print('current page: ', i)
         # click all buttons on page
         courselist = driver.find_element_by_id("course-resultul")
-        time.sleep(2)
+        time.sleep(3)
         click_course_bnts(courselist)
 
         if url == "https://selfserve.waketech.edu/Student/Courses":
@@ -95,7 +97,7 @@ def get_ss_school_data(dir_name, url, filt):
         time.sleep(8)
         html = driver.page_source
 
-        dir_ = "output/ss/" + dir_name
+        dir_ = "../input/2021/ss/" + dir_name
 
         if not os.path.isdir(dir_):
             os.makedirs(dir_)
