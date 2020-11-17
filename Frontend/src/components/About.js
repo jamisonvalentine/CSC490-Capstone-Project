@@ -32,28 +32,36 @@ const About = () => {
         setMessage(e.currentTarget.value);
     }
     const handleSubmit = (e) => {
-        console.log('submitted info: ' + name + email + message);
-        axios.post('http://localhost:3000/contactUs/', {
-            name: name,
-            email: email,
-            message: message
-        }).then(response => {
-            if(response.data === 'Success') {
-                window.confirm('Message sent');
-            }
-            else {
-                window.confirm('Error has occurred, please retry');
-            }
-          }).catch((error) => {
-            console.log(error);
-        });
-        
-        e.preventDefault();
+        if (name === '' || email === '' || message === '') {
+            window.confirm('Please fill out all fields before submitting');
+            e.preventDefault();
+        }
+        else {
+            console.log('submitted info: ' + name + email + message);
+            axios.post('http://localhost:3000/contactUs/', {
+                name: name,
+                email: email,
+                message: message
+            }).then(response => {
+                if (response.data === 'Success') {
+                    window.confirm('Message sent');
+                }
+                else {
+                    window.confirm('Error has occurred, please retry');
+                }
+            }).catch((error) => {
+                console.log(error);
+            });
+
+            e.preventDefault();
+        }
+
     }
 
     return (
         <>
             <Header />
+
             <div className="container px-2 px-sm-5 py-5">
                 <p>
                     This application was developed to help UNCG students save time and money by helping them find transferrable courses at local community colleges.
@@ -68,7 +76,7 @@ const About = () => {
 
                 <div>
                     <Accordion>
-                        <Card>
+                    <Card>
                             <Card.Header>
                                 <Accordion.Toggle as={Button} variant="link" eventKey="2">
                                     Contact Us
@@ -113,7 +121,7 @@ const About = () => {
                                     {
                                         college.length > 0 ? college.map((item, index) => {
                                             return (
-                                                <p className="list-group-item list-group-item-action" key={index}>{item}</p>
+                                                <p className="list-group-item list-group-item-action" key={index + 1}>{item}</p>
                                             )
                                         }) :
                                             (
@@ -127,7 +135,7 @@ const About = () => {
                             <Card.Header>
                                 <Accordion.Toggle as={Button} variant="link" eventKey="1">
                                     Cost Calculation Disclaimer
-                                </Accordion.Toggle>
+                    </Accordion.Toggle>
                             </Card.Header>
                             <Accordion.Collapse eventKey="1">
                                 <Card.Body>In the state of North Carolina, the cost per credit hour of a course taken at a community college is $76. The prices displayed do not
@@ -138,6 +146,7 @@ const About = () => {
                     </Accordion>
                 </div>
             </div>
+
             <Footer />
 
         </>
