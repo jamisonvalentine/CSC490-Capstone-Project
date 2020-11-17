@@ -56,6 +56,7 @@ function SearchResult({ searchQuery, setSearchQuery, setResultPage, searchData, 
     let handleClick = () => {
         setSearchQuery({
             id: '',
+            selectIdCat: 'Course ID',
             year: '2020',
             semester: 'Fall',
             type: 'Online'

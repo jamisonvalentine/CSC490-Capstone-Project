@@ -1,10 +1,11 @@
-import React,{useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './lib/Header';
 import Footer from './lib/Footer';
 import axios from 'axios'
 import Accordion from 'react-bootstrap/Accordion';
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import Form from 'react-bootstrap/Form';
 
 const About = () => {
     const [college, setCollege] = useState([]);
@@ -15,11 +16,11 @@ const About = () => {
 
     useEffect(() => {
         axios.get('http://localhost:3000/cccourse/college')
-        .then(res => {
-            setCollege(res.data);
-        })
-        .catch(err => console.log(err))
-    },[])
+            .then(res => {
+                setCollege(res.data);
+            })
+            .catch(err => console.log(err))
+    }, [])
 
     const handleNameChange = (e) => {
         setName(e.currentTarget.value);
@@ -59,15 +60,56 @@ const About = () => {
 
     return (
         <>
-            <Header/>
+            <Header />
 
             <div className="container px-2 px-sm-5 py-5">
-                <p className="text-center">
-                    If you find a couse you need, you can sign up at the NC community college offering it and have the credits transferred to yout community colege or university. Contact your advisor before you register for courses at another college
+                <p>
+                    This application was developed to help UNCG students save time and money by helping them find transferrable courses at local community colleges.
+                    If you find a course you need you can sign up at that community college's website. Contact your advisor before you register for courses at another college.
                 </p>
+                <div>
+                    <p>The Comprehensive Articulation Agreement (CAA) is a statewide agreement that governs the
+                    transfer of credits between NC community colleges and NC public universities. This application was created using courses in the CAA.
+                For more information click <a href={"https://www.nccommunitycolleges.edu/academic-programs/college-transferarticulation-agreements/comprehensive-articulation-agreement-caa"}> here</a>
+                    </p>
+                </div>
 
                 <div>
                     <Accordion>
+                    <Card>
+                            <Card.Header>
+                                <Accordion.Toggle as={Button} variant="link" eventKey="2">
+                                    Contact Us
+                                </Accordion.Toggle>
+                            </Card.Header>
+                            <Accordion.Collapse eventKey="2">
+                                <Card.Body>
+                                    <p>Feel free to contact us if you have any questions, concerns, or comments and we will get back to you as soon as possible.</p>
+
+                                    <Form onSubmit={handleSubmit} style={{ width: '600px' }}>
+                                        <Form.Group controlId="nameField">
+                                            <Form.Label>Name</Form.Label>
+                                            <Form.Control type="name" placeholder="Enter first and last name" onChange={handleNameChange} />
+                                        </Form.Group>
+
+                                        <Form.Group controlId="emailField"  >
+                                            <Form.Label>Email address</Form.Label>
+                                            <Form.Control type="email" placeholder="Enter email" onChange={handleEmailChange} />
+
+                                        </Form.Group >
+
+                                        <Form.Group controlId="messageField" >
+                                            <Form.Label>Message</Form.Label>
+                                            <Form.Control as="textarea" rows={3} onChange={handleMessageChange} />
+                                        </Form.Group>
+
+                                        <Button variant="primary" type="submit">
+                                            Submit
+                                        </Button>
+                                    </Form>
+                                </Card.Body>
+                            </Accordion.Collapse>
+                        </Card>
                         <Card>
                             <Card.Header>
                                 <Accordion.Toggle as={Button} variant="link" eventKey="0">
@@ -79,7 +121,7 @@ const About = () => {
                                     {
                                         college.length > 0 ? college.map((item, index) => {
                                             return (
-                                                <p className="list-group-item list-group-item-action" key={index+1}>{item}</p>
+                                                <p className="list-group-item list-group-item-action" key={index + 1}>{item}</p>
                                             )
                                         }) :
                                             (
@@ -105,8 +147,8 @@ const About = () => {
                 </div>
             </div>
 
-            <Footer/>
-            
+            <Footer />
+
         </>
     );
 }

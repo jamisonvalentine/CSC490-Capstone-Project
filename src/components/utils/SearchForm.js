@@ -49,7 +49,7 @@ function SearchForm(props) {
                     {/* <label htmlFor="courseId" className="col-md-4 col-form-label">Course ID</label> */}
                     <div className="col-md-8">
                         <TagsInput inputProps={{placeholder : " "}} value={searchQuery.id} onChange={onCourseChanged} />
-                        {/* <input className="form-control" id="courseId" name="id" value={searchQuery.id} onChange={handleChange}/> */}
+                         {/*<input className="form-control" id="courseId" name="id" value={searchQuery.id} onChange={handleChange}/>*/}
                     </div>
                 </div>
 
@@ -72,6 +72,7 @@ function SearchForm(props) {
                             <option value="Summer">Summer</option>
                             <option value="Fall">Fall</option>
                             <option value="Winter">Winter</option>
+                            <option value="Spring">Spring</option>
                         </select>
                     </div>
                 </div>
