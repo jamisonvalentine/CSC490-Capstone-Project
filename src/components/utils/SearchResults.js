@@ -35,16 +35,17 @@ function SearchResult({ searchQuery, setSearchQuery, setResultPage, searchData, 
 
     //state variable that lets up keep track of course dialog info
     const [open, setOpen] = useState(false);
-    
+
     const columns = [
         { title: "Subject", field: "CourseSubject" },
         { title: "Course Number", field: "ClassID" },
+        { title: "Course Name", field: "CourseName" },
         { title: "College", field: "College" },
-        { title: "Instructor", field: "Instructor" },
         { title: "Section", field: "SectionNumber" },
         { title: "Dates", field: "Dates" },
         { title: "Location", field: "Location" },
-        { title: "Cost", field: "Cost" }
+        { title: "Cost", field: "Cost" },
+        { title: "UNCG ID", field: "UncgID"}
     ];
 
     //Place holder while table data loads
@@ -55,8 +56,8 @@ function SearchResult({ searchQuery, setSearchQuery, setResultPage, searchData, 
 
     let handleClick = () => {
         setSearchQuery({
-            id: '',
-            selectIdCat: 'Course ID',
+            id_cat: 'courseId',
+            id: [],
             year: '2020',
             semester: 'Fall',
             type: 'Online'
@@ -87,7 +88,7 @@ function SearchResult({ searchQuery, setSearchQuery, setResultPage, searchData, 
         setSelectedCollege(row);
         setOpen(true);
     };
-    
+
     //close dialog
     let handleClose = () => {
         setOpen(false);
@@ -100,7 +101,7 @@ function SearchResult({ searchQuery, setSearchQuery, setResultPage, searchData, 
         localStorage.setItem("saveTableData", JSON.stringify(saveData));
         window.alert("Search Result Saved");
     };
-    
+
 
 
 
@@ -113,7 +114,7 @@ function SearchResult({ searchQuery, setSearchQuery, setResultPage, searchData, 
                 </div>
 
                 <div className="col-6 mb-3 mb-md-0 col-md-3">
-                    <p className="text-center">Acedemic year</p>
+                    <p className="text-center">Academic year</p>
                     <input type="text" value={searchQuery.year} className="form-control" readOnly />
                 </div>
 
@@ -140,8 +141,8 @@ function SearchResult({ searchQuery, setSearchQuery, setResultPage, searchData, 
                     pageSize: 10,
                     pageSizeOptions: [10, 20, 50],
                     exportButton: true,
-                    rowStyle: {height: 5, fontSize: "14px"},
-                    headerStyle: {height: 10},
+                    rowStyle: { height: 5, fontSize: "14px" },
+                    headerStyle: { height: 10 },
                     maxBodyHeight: 500
                 }}
                 icons={{
@@ -175,7 +176,7 @@ function SearchResult({ searchQuery, setSearchQuery, setResultPage, searchData, 
             />
             </div>
 
-            
+
             <div className="d-flex mb-5">
                 <button className="btn text-light bg-primary-custom mr-2" onClick={handleClick}>Search Again</button>
                 <button className="btn text-light bg-primary-custom mr-2" onClick={handleSaveAll}>Save All</button>
@@ -230,6 +231,12 @@ function SearchResult({ searchQuery, setSearchQuery, setResultPage, searchData, 
                     </DialogContentText>
                     <DialogContentText>
                         Dates : {selectedCollege.Dates}
+                    </DialogContentText>
+                    <DialogContentText>
+                        UNCG ID : {selectedCollege.UncgID}
+                    </DialogContentText>
+                    <DialogContentText>
+                        UNCG Course Title : {selectedCollege.UncgTitle}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
