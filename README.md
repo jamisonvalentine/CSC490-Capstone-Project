@@ -1,6 +1,11 @@
 # Senior Capstone Project
 This repo was created for the CSC490 Senior Capstone Project at The University of North Carolina Greensboro
 
+## Website Link
+The following link leads to the deployed version of our finished product, hosted on Heroku: 
+
+https://uncgtransfer.herokuapp.com/
+
 ## Project Idea:
 A tool that gives UNCG students the ability to view transferable classes that they can take at an NC Community College in order to save money or take a class that is not available at UNCG.
 
@@ -8,7 +13,7 @@ A tool that gives UNCG students the ability to view transferable classes that th
 - [Project Proposal](https://docs.google.com/document/d/1IWOf410y59I2bMbVW4vWyZdeBoQwfgHsUXxvymNv-0Y/edit)
 - [Project Report](https://docs.google.com/document/d/1Y1EDR5n7cXMdC7oxlltVKkS5DQMsasxhROFsvEqygnI/edit?pli=1)
 
-## Resouces:
+## Resources:
 - [UNCG Transfer Equivalencies](https://tes.collegesource.com/publicview/TES_publicview01.aspx?rid=200AB5D2-A95C-4895-9836-300D49A73FD1&aid=CFC487EB-2770-451B-8B5D-A20C08DB6323)
 - [VLC Community College Course Search](https://vlc.nccommunitycolleges.edu/students/find-a-course/)
 - [UNC Online Equivalency Finder](https://online.northcarolina.edu/courses/equivs.php)
