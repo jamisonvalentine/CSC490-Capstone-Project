@@ -26,3 +26,7 @@ yarn-error.log*
 
 # ide
 /.vscode
+
+debug.log
+
+data/scraping/input/

@@ -33,16 +33,20 @@ def get_wa_school_data(dir_name, url, filt):
     driver.get(url)
     time.sleep(1)
 
-    tab = driver.find_element_by_xpath("//span[contains(text(), 'Search for Sections')]")
+    if "Wake Tech" in dir_name:
+        first_link = driver.find_element_by_xpath("//*[contains(text(), 'Admission')]")
+        first_link.click()
+
+    tab = driver.find_element_by_xpath("//span[contains(text(), 'Search for')]")
     tab.click()
     time.sleep(1)
 
     term = Select(driver.find_element_by_id("VAR1"))
 
     try:
-        term.select_by_value("2020FA")
+        term.select_by_value("2021SP")
     except:
-        term.select_by_value("20/FA")
+        term.select_by_value("21/SP")
 
 
     try:
@@ -69,7 +73,7 @@ def get_wa_school_data(dir_name, url, filt):
         time.sleep(3)
         html = driver.page_source
 
-        dir_ = "output/wa/" + dir_name
+        dir_ = "../input/2021/wa/" + dir_name
 
         if not os.path.isdir(dir_):
             os.makedirs(dir_)
