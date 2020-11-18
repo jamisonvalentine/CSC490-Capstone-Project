@@ -22,6 +22,8 @@ globalCost = []
 globalUncgID = []
 globalUncgTitle = []
 
+globalCounter = []
+
 
 def determineEquivalencies(iterator):
 
@@ -35,6 +37,8 @@ def determineEquivalencies(iterator):
 
     # check if course exists in equivalencies
     if comColID.count(fullComColCourse) > 0:
+
+        globalCounter.append(fullComColCourse)
 
         # get the index of the equivalency
         equivalentIndex = comColID.index(fullComColCourse)
@@ -71,7 +75,7 @@ def printResults(iterator):
 
 
 def standardizeOnline(iterator):
-    location = str(df.iloc[iterator, 5])
+    location = str(df.iloc[iterator, 6])
 
     standardOnline = "Online"
 
@@ -100,6 +104,8 @@ def standardizeOnline(iterator):
     elif "Internet Courses" in location:
         location = standardOnline
     elif "Virtual Learning" in location:
+        location = standardOnline
+    elif "On Line" in location:
         location = standardOnline
 
     globalLocations.append(location)
@@ -154,7 +160,7 @@ def addWebsite(iterator):
 
 
 def extractSubIDandNum(iterator):
-    section = df.iloc[iterator, 1]
+    section = df.iloc[iterator, 2]
 
     # split section on -
     splitSection = str(section).split("-")
@@ -180,7 +186,7 @@ def extractSubIDandNum(iterator):
 
 
 def extractCourseName(iterator):
-    section = df.iloc[iterator, 1]
+    section = df.iloc[iterator, 2]
 
     nameOfCourse = ""
 
@@ -194,7 +200,7 @@ def extractCourseName(iterator):
 
 
 def extractTime(iterator):
-    dates = df.iloc[iterator, 4]
+    dates = df.iloc[iterator, 5]
 
     # find time by locating : value and getting left and right sides
     time = dates[dates.find(':') - 2: dates.find(':') + 15]
@@ -215,7 +221,7 @@ def extractTime(iterator):
 
 
 def extractBuilding(iterator):
-    dates = df.iloc[iterator, 4]
+    dates = df.iloc[iterator, 5]
 
     try:
         daysToFilter = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -246,7 +252,7 @@ def extractBuilding(iterator):
 
 
 def extractDays(iterator):
-    dates = df.iloc[iterator, 4]
+    dates = df.iloc[iterator, 5]
     days = ""
 
     acceptableDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -267,7 +273,7 @@ def extractDays(iterator):
 
 
 def extractDateRange(iterator):
-    dates = df.iloc[iterator, 4]
+    dates = df.iloc[iterator, 5]
 
     # extract left side after split on space to get date range
     dateRange = dates.split()[0].strip()
@@ -277,7 +283,7 @@ def extractDateRange(iterator):
 
 def extractRoom(iterator):
     try:
-        dates = df.iloc[iterator, 4]
+        dates = df.iloc[iterator, 5]
 
         # split right on Room to get everything after
         room = dates.rsplit("Room")[1]
@@ -298,7 +304,7 @@ def extractRoom(iterator):
 
 
 def extractSemesterLength(iterator):
-    dates = df.iloc[iterator, 4]
+    dates = df.iloc[iterator, 5]
 
     # extract left side after split on space to get date range
     dateRange = dates.split()[0].strip()
@@ -331,11 +337,11 @@ def calculateCost(iterator):
 
 
 def extractSemester():
-    globalSemester.append("Spring")
+    globalSemester.append("Fall")
 
 
 def extractYear():
-    globalYear.append("2021")
+    globalYear.append("2020")
 
 
 def splitSection(iterator):
@@ -363,7 +369,7 @@ def splitDates(iterator):
 
 if __name__ == '__main__':
 
-    df = pd.read_csv("wa_courses_sp2021.csv")
+    df = pd.read_csv("wa_courses.csv")
 
     collegeName = df["college"].to_list()
     collegeCredits = df["credits"].to_list()
@@ -406,4 +412,4 @@ if __name__ == '__main__':
          })
 
     # save to CSV
-    newDF.to_csv("Parsed Wa Courses.csv")
+    newDF.to_csv("Parsed Wa Courses Two.csv")
