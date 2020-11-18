@@ -30,6 +30,7 @@ const Home = () => {
             })
             .then(res => {
                 setSearchData(res.data);
+                console.log(res.data);
             })
             .catch(err => {
                 console.log(err)

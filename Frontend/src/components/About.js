@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './lib/Header';
 import Footer from './lib/Footer';
 import axios from 'axios'
@@ -16,11 +16,11 @@ const About = () => {
 
     useEffect(() => {
         axios.get('http://localhost:3000/cccourse/college')
-        .then(res => {
-            setCollege(res.data);
-        })
-        .catch(err => console.log(err))
-    },[])
+            .then(res => {
+                setCollege(res.data);
+            })
+            .catch(err => console.log(err))
+    }, [])
 
     const handleNameChange = (e) => {
         setName(e.currentTarget.value);
@@ -32,37 +32,51 @@ const About = () => {
         setMessage(e.currentTarget.value);
     }
     const handleSubmit = (e) => {
-        console.log('submitted info: ' + name + email + message);
-        axios.post('http://localhost:3000/contactUs/', {
-            name: name,
-            email: email,
-            message: message
-        }).then(response => {
-            if(response.data === 'Success') {
-                window.confirm('Message sent');
-            }
-            else {
-                window.confirm('Error has occurred, please retry');
-            }
-          }).catch((error) => {
-            console.log(error);
-        });
-        
-        e.preventDefault();
+        if (name === '' || email === '' || message === '') {
+            window.confirm('Please fill out all fields before submitting');
+            e.preventDefault();
+        }
+        else {
+            console.log('submitted info: ' + name + email + message);
+            axios.post('http://localhost:3000/contactUs/', {
+                name: name,
+                email: email,
+                message: message
+            }).then(response => {
+                if (response.data === 'Success') {
+                    window.confirm('Message sent');
+                }
+                else {
+                    window.confirm('Error has occurred, please retry');
+                }
+            }).catch((error) => {
+                console.log(error);
+            });
+
+            e.preventDefault();
+        }
+
     }
 
     return (
         <>
-            <Header/>
+            <Header />
 
             <div className="container px-2 px-sm-5 py-5">
-                <p className="text-center">
-                    If you find a couse you need, you can sign up at the NC community college offering it and have the credits transferred to yout community colege or university. Contact your advisor before you register for courses at another college
+                <p>
+                    This application was developed to help UNCG students save time and money by helping them find transferrable courses at local community colleges.
+                    If you find a course you need you can sign up at that community college's website. Contact your advisor before you register for courses at another college.
                 </p>
+                <div>
+                    <p>The Comprehensive Articulation Agreement (CAA) is a statewide agreement that governs the
+                    transfer of credits between NC community colleges and NC public universities. This application was created using courses in the CAA.
+                For more information click <a href={"https://www.nccommunitycolleges.edu/academic-programs/college-transferarticulation-agreements/comprehensive-articulation-agreement-caa"}> here</a>
+                    </p>
+                </div>
 
                 <div>
                     <Accordion>
-                        <Card>
+                    <Card>
                             <Card.Header>
                                 <Accordion.Toggle as={Button} variant="link" eventKey="2">
                                     Contact Us
@@ -107,7 +121,7 @@ const About = () => {
                                     {
                                         college.length > 0 ? college.map((item, index) => {
                                             return (
-                                                <p className="list-group-item list-group-item-action" key={index}>{item}</p>
+                                                <p className="list-group-item list-group-item-action" key={index + 1}>{item}</p>
                                             )
                                         }) :
                                             (
@@ -121,7 +135,7 @@ const About = () => {
                             <Card.Header>
                                 <Accordion.Toggle as={Button} variant="link" eventKey="1">
                                     Cost Calculation Disclaimer
-                                </Accordion.Toggle>
+                    </Accordion.Toggle>
                             </Card.Header>
                             <Accordion.Collapse eventKey="1">
                                 <Card.Body>In the state of North Carolina, the cost per credit hour of a course taken at a community college is $76. The prices displayed do not
@@ -133,8 +147,8 @@ const About = () => {
                 </div>
             </div>
 
-            <Footer/>
-            
+            <Footer />
+
         </>
     );
 }

@@ -34,7 +34,7 @@ function SearchForm(props) {
             <div className="d-flex flex-column justify-content-center align-items-center px-2 px-sm-5">
 
                 <h2 className="text-center font-weight-bold">
-                    Search available courses from NC community colleges
+                    Search available courses from NC community colleges.
                 </h2>
 
                 <h5 className="text-center mb-3">Please enter the following information to get started</h5>
@@ -42,14 +42,14 @@ function SearchForm(props) {
                 <div className="form-group row w-75">
 
                     <select name="id_cat" className="col-md-4 form-control mb-3 mb-md-0 border-none" value={searchQuery.selectIdCat} onChange={handleChange}>
-                        <option value="courseId">CC Course ID</option>
+                        <option value="courseId">Community College Course ID</option>
                         <option value="uncgId">UNCG Course ID</option>
                     </select>
 
                     {/* <label htmlFor="courseId" className="col-md-4 col-form-label">Course ID</label> */}
                     <div className="col-md-8">
                         <TagsInput inputProps={{placeholder : " "}} value={searchQuery.id} onChange={onCourseChanged} />
-                        {/* <input className="form-control" id="courseId" name="id" value={searchQuery.id} onChange={handleChange}/> */}
+                         {/*<input className="form-control" id="courseId" name="id" value={searchQuery.id} onChange={handleChange}/>*/}
                     </div>
                 </div>
 
@@ -57,10 +57,11 @@ function SearchForm(props) {
                     <label htmlFor="academicYear" className="col-md-4 col-form-label">Academic year</label>
                     <div className="col-md-8">
                         <select id="academicYear" name="year" className="form-control" value={searchQuery.year} onChange={handleChange}>
+                            <option value="2021">2021</option>
                             <option value="2020">2020</option>
                             <option value="2019">2019</option>
                             <option value="2018">2018</option>
-                            <option value="2017">2017</option>
+                            
                         </select>
                     </div>
                 </div>
@@ -72,6 +73,7 @@ function SearchForm(props) {
                             <option value="Summer">Summer</option>
                             <option value="Fall">Fall</option>
                             <option value="Winter">Winter</option>
+                            <option value="Spring">Spring</option>
                         </select>
                     </div>
                 </div>
@@ -82,7 +84,7 @@ function SearchForm(props) {
                         <select id="courseType" name="type" className="form-control" value={searchQuery.type} onChange={handleChange}>
                             <option value="All">All</option>
                             <option value="Online">Online</option>
-                            <option value="Ofline">Ofline</option>
+                            <option value="Ofline">Offline</option>
                         </select>
                     </div>
                 </div>
