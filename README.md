@@ -6,7 +6,7 @@ The following link leads to the deployed version of our finished product, hosted
 
 https://uncgtransfer.herokuapp.com/
 
-## Description:
+## Description
 A tool that gives UNCG students the ability to view transferable classes that they can take at an NC Community College in order to save money or take a class that is not available at UNCG.
 
 ## Documentation
